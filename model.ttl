@@ -1,0 +1,106 @@
+<http://data.ontotext.com/resource/leaks/address-(node1)> a leak:Address;
+    leak:address        "(address)";
+    leak:icij_id        "(icij_id)";
+    leak:valid_until    "(valid_until)";
+    leak:country_codes  "(country_code1)";
+    leak:countries      "(country1)";
+    leak:node_id        "(node1)";
+    leak:sourceID       "(sourceID)";
+    leak:hasCountry     <http://data.ontotext.com/resource/leaks/country-(country_code1)>.
+
+<http://data.ontotext.com/resource/leaks/entity-(node2)> a leak:Entity;
+    leak:name                     "(name)";
+    leak:original_name            "(original_name)";
+    leak:former_name              "(former_name)";
+    leak:jurisdiction             "(jurisdiction)";
+    leak:jurisdiction_description "(jurisdiction_description)";
+    leak:company_type             "(company_type)";
+    leak:address                  "(address)";
+    leak:internal_id              "(internal_id)";
+    leak:incorporation_date       "(incorporation_date)";
+    leak:inactivation_date        "(inactivation_date)";
+    leak:struck_off_date          "(struck_off_date)";
+    leak:dorm_date                "(dorm_date)";
+    leak:status                   "(status)";
+    leak:service_provider         "(service_provider)";
+    leak:ibcRUC                   "(ibcRUC)";
+    leak:country_codes            "(country_code1;country_code2)";
+    leak:countries                "(country1;country2)";
+    leak:note                     "(note)";
+    leak:valid_until              "(valid_until)";
+    leak:node_id                  "(node2)";
+    leak:sourceID                 "(sourceID)";
+    leak:hasCountry               <http://data.ontotext.com/resource/leaks/country-(country_code1)>;
+    leak:hasCountry               <http://data.ontotext.com/resource/leaks/country-(country_code2)>;
+    leak:hasJurisdiction          <http://data.ontotext.com/resource/leaks/offshore-(jurisdiction)>.
+
+<http://data.ontotext.com/resource/leaks/intermediary-(node4)> a leak:Intermediary;
+    leak:name           "(name)";
+    leak:internal_id    "(internal_id)";
+    leak:address        "(address)";
+    leak:valid_until    "(valid_until)";
+    leak:country_codes  "(country_code2)";
+    leak:countries      "(country2)";
+    leak:status         "(status)";
+    leak:node_id        "(node3)";
+    leak:sourceID       "(sourceID)";
+    leak:hasCountry     <http://data.ontotext.com/resource/leaks/country-(country_code2)>.
+
+<http://data.ontotext.com/resource/leaks/officer-(node5)> a leak:Officer;
+    leak:name           "(name)";
+    leak:icij_id        "(icij_id)";
+    leak:valid_until    "(valid_until)";
+    leak:country_codes  "(country_code1)";
+    leak:countries      "(country1)";
+    leak:node_id        "(node5)";
+    leak:sourceID       "(sourceID)";
+    leak:hasCountry     <http://data.ontotext.com/resource/leaks/country-(country_code1)>.
+
+# Countries
+
+<http://data.ontotext.com/resource/leaks/country-(country_code1)> a leak:Country;
+  leak:name "(country1)";
+  leak:code "(country_code1)";
+  owl:sameAs <http://dbpedia.org/resource/(country1)>.
+
+<http://data.ontotext.com/resource/leaks/country-(country_code2)> a leak:Country;
+  leak:name "(country2)";
+  leak:code "(country_code2)";
+  owl:sameAs <http://dbpedia.org/resource/(country2)>.
+
+<http://data.ontotext.com/resource/leaks/offshore-(jurisdiction)> a leak:OffshoreJurisdiction;
+    leak:code "(jurisdiction)";
+    leak:name "(jurisdiction_description)".
+    
+# Edges
+
+<http://data.ontotext.com/resource/leaks/edge-(uuid1)> a leak:Edge;
+    leak:node_1    "(node2)";
+    leak:rel_type  "registered address";
+    leak:node_2    "(node1)";
+    leak:hasSource <http://data.ontotext.com/resource/leaks/entity-(node2)>;
+    leak:hasTarget <http://data.ontotext.com/resource/leaks/address-(node1)>.
+
+<http://data.ontotext.com/resource/leaks/entity-(node2)> leak:hasRegisteredAddress <http://data.ontotext.com/resource/leaks/address-(node1)>.
+
+<http://data.ontotext.com/resource/leaks/edge-(uuid2)> a leak:Edge;
+    leak:node_1    "(node4)";
+    leak:rel_type  "intermediary of";
+    leak:node_2    "(node2)";
+    leak:hasSource <http://data.ontotext.com/resource/leaks/intermediary-(node4)>;
+    leak:hasTarget <http://data.ontotext.com/resource/leaks/entity-(node2)>.
+<http://data.ontotext.com/resource/leaks/intermediary-(node4)> leak:isIntermediaryOf <http://data.ontotext.com/resource/leaks/entity-(node2)>.
+
+<http://data.ontotext.com/resource/leaks/edge-(uuid3)> a leak:Edge;
+    leak:node_1    "(node5)";
+    leak:rel_type  "Owner, director and shareholder of";
+    leak:node_2    "(node2)";
+    leak:hasSource <http://data.ontotext.com/resource/leaks/officer-(node5)>;
+    leak:hasTarget <http://data.ontotext.com/resource/leaks/entity-(node2)>.
+<http://data.ontotext.com/resource/leaks/officer-(node5)> leak:isOfficerOf     <http://data.ontotext.com/resource/leaks/entity-(node2)>.
+<http://data.ontotext.com/resource/leaks/officer-(node5)> leak:isOwnerOf       <http://data.ontotext.com/resource/leaks/entity-(node2)>.
+<http://data.ontotext.com/resource/leaks/officer-(node5)> leak:isDirectorOf    <http://data.ontotext.com/resource/leaks/entity-(node2)>.
+<http://data.ontotext.com/resource/leaks/officer-(node5)> leak:isShareholderOf <http://data.ontotext.com/resource/leaks/entity-(node2)>.
+
+############
+owl:sameAs puml:arrow puml:dashed-none.

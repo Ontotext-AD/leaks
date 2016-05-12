@@ -1,0 +1,19 @@
+prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix leak:  <http://data.ontotext.com/resource/leaks#> # ontology
+prefix leaks: <http://data.ontotext.com/resource/leaks/> # data
+
+construct {
+  ?node a leak:Officer;
+    leak:name           ?name;
+    leak:icij_id        ?icij_id;
+    leak:valid_until    ?valid_until;
+    leak:country_codes  ?country_codes;
+    leak:countries      ?countries;
+    leak:node_id        ?node_id;
+    leak:sourceID       ?sourceID
+  }
+from <file:../Officers.csv#encoding=utf-8>
+where {
+  bind(uri(concat(str(leaks:),"officer-",?node_id)) as ?node)
+}
+

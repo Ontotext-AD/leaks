@@ -1,0 +1,39 @@
+leaks:offshore-BVI    a leak:OffshoreJurisdiction; leak:code "BVI";   leak:name "British Virgin Islands";   skos:exactMatch dbr:British_Virgin_Islands . # 151588
+leaks:offshore-XXX    a leak:OffshoreJurisdiction; leak:code "XXX";   leak:name "Undetermined";             skos:exactMatch dbr:Undetermined           . # 55645
+leaks:offshore-PMA    a leak:OffshoreJurisdiction; leak:code "PMA";   leak:name "Panama";                   skos:exactMatch dbr:Panama                 . # 48373
+leaks:offshore-BAH    a leak:OffshoreJurisdiction; leak:code "BAH";   leak:name "Bahamas";                  skos:exactMatch dbr:Bahamas                . # 15946
+leaks:offshore-SEY    a leak:OffshoreJurisdiction; leak:code "SEY";   leak:name "Seychelles";               skos:exactMatch dbr:Seychelles             . # 15580
+leaks:offshore-SAM    a leak:OffshoreJurisdiction; leak:code "SAM";   leak:name "Samoa";                    skos:exactMatch dbr:Samoa                  . # 13418
+leaks:offshore-NIUE   a leak:OffshoreJurisdiction; leak:code "NIUE";  leak:name "Niue";                     skos:exactMatch dbr:Niue                   . # 9611
+leaks:offshore-ANG    a leak:OffshoreJurisdiction; leak:code "ANG";   leak:name "British Anguilla";         skos:exactMatch dbr:Anguilla               . # 3253
+leaks:offshore-HK     a leak:OffshoreJurisdiction; leak:code "HK";    leak:name "Hong Kong";                skos:exactMatch dbr:Hong_Kong              . # 1331
+leaks:offshore-NEV    a leak:OffshoreJurisdiction; leak:code "NEV";   leak:name "Nevada";                   skos:exactMatch dbr:Nevada                 . # 1260
+leaks:offshore-SGP    a leak:OffshoreJurisdiction; leak:code "SGP";   leak:name "Singapore";                skos:exactMatch dbr:Singapore              . # 668
+leaks:offshore-CAYMN  a leak:OffshoreJurisdiction; leak:code "CAYMN"; leak:name "Cayman";                   skos:exactMatch dbr:Cayman                 . # 668
+leaks:offshore-COOK   a leak:OffshoreJurisdiction; leak:code "COOK";  leak:name "Cook Islands";             skos:exactMatch dbr:Cook_Islands           . # 547
+leaks:offshore-LABUA  a leak:OffshoreJurisdiction; leak:code "LABUA"; leak:name "Labuan";                   skos:exactMatch dbr:Labuan                 . # 421
+leaks:offshore-UK     a leak:OffshoreJurisdiction; leak:code "UK";    leak:name "United Kingdom";           skos:exactMatch dbr:United_Kingdom         . # 151
+leaks:offshore-BLZ    a leak:OffshoreJurisdiction; leak:code "BLZ";   leak:name "Belize";                   skos:exactMatch dbr:Belize                 . # 130
+leaks:offshore-CYP    a leak:OffshoreJurisdiction; leak:code "CYP";   leak:name "Cyprus";                   skos:exactMatch dbr:Cyprus                 . # 79
+leaks:offshore-CRI    a leak:OffshoreJurisdiction; leak:code "CRI";   leak:name "Costa Rica";               skos:exactMatch dbr:Costa_Rica             . # 78
+leaks:offshore-MAURI  a leak:OffshoreJurisdiction; leak:code "MAURI"; leak:name "Mauritius";                skos:exactMatch dbr:Mauritius              . # 75
+leaks:offshore-MALAY  a leak:OffshoreJurisdiction; leak:code "MALAY"; leak:name "Malaysia";                 skos:exactMatch dbr:Malaysia               . # 71
+leaks:offshore-UY     a leak:OffshoreJurisdiction; leak:code "UY";    leak:name "Uruguay";                  skos:exactMatch dbr:Uruguay                . # 52
+leaks:offshore-NZL    a leak:OffshoreJurisdiction; leak:code "NZL";   leak:name "New Zealand";              skos:exactMatch dbr:New_Zealand            . # 47
+leaks:offshore-JSY    a leak:OffshoreJurisdiction; leak:code "JSY";   leak:name "Jersey";                   skos:exactMatch dbr:Jersey                 . # 39
+leaks:offshore-WYO    a leak:OffshoreJurisdiction; leak:code "WYO";   leak:name "Wyoming";                  skos:exactMatch dbr:Wyoming                . # 37
+leaks:offshore-MLT    a leak:OffshoreJurisdiction; leak:code "MLT";   leak:name "Malta";                    skos:exactMatch dbr:Malta                  . # 28
+leaks:offshore-LIBER  a leak:OffshoreJurisdiction; leak:code "LIBER"; leak:name "Liberia";                  skos:exactMatch dbr:Liberia                . # 11
+leaks:offshore-IOM    a leak:OffshoreJurisdiction; leak:code "IOM";   leak:name "Isle Of Man";              skos:exactMatch dbr:Isle_Of_Man            . # 8
+leaks:offshore-MARSH  a leak:OffshoreJurisdiction; leak:code "MARSH"; leak:name "Marshall Islands";         skos:exactMatch dbr:Marshall_Islands       . # 6
+leaks:offshore-BERMU  a leak:OffshoreJurisdiction; leak:code "BERMU"; leak:name "Bermuda";                  skos:exactMatch dbr:Bermuda                . # 6
+leaks:offshore-VANU   a leak:OffshoreJurisdiction; leak:code "VANU";  leak:name "Vanuatu";                  skos:exactMatch dbr:Vanuatu                . # 5
+leaks:offshore-STLU   a leak:OffshoreJurisdiction; leak:code "STLU";  leak:name "St. Lucia";                skos:exactMatch dbr:Saint_Lucia            . # 4
+leaks:offshore-USA    a leak:OffshoreJurisdiction; leak:code "USA";   leak:name "United States Of America"; skos:exactMatch dbr:United_States          . # 2
+leaks:offshore-THAIL  a leak:OffshoreJurisdiction; leak:code "THAIL"; leak:name "Thailand";                 skos:exactMatch dbr:Thailand               . # 2
+leaks:offshore-RAK    a leak:OffshoreJurisdiction; leak:code "RAK";   leak:name "Ras Al Khaimah";           skos:exactMatch dbr:Ras_al-Khaimah         . # 2
+leaks:offshore-NETH   a leak:OffshoreJurisdiction; leak:code "NETH";  leak:name "Netherlands";              skos:exactMatch dbr:Netherlands            . # 2
+leaks:offshore-DUBAI  a leak:OffshoreJurisdiction; leak:code "DUBAI"; leak:name "Dubai";                    skos:exactMatch dbr:Dubai                  . # 2
+leaks:offshore-BRUN   a leak:OffshoreJurisdiction; leak:code "BRUN";  leak:name "Brunei";                   skos:exactMatch dbr:Brunei                 . # 2
+leaks:offshore-IRELD  a leak:OffshoreJurisdiction; leak:code "IRELD"; leak:name "Ireland";                  skos:exactMatch dbr:Ireland                . # 1
+leaks:offshore-CHINA  a leak:OffshoreJurisdiction; leak:code "CHINA"; leak:name "China";                    skos:exactMatch dbr:China                  . # 1

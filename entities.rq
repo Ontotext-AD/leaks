@@ -1,0 +1,32 @@
+prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix leak:  <http://data.ontotext.com/resource/leaks#> # ontology
+prefix leaks: <http://data.ontotext.com/resource/leaks/> # data
+
+construct {
+  ?node a leak:Entity;
+    leak:name                     ?name;
+    leak:original_name            ?original_name;
+    leak:former_name              ?former_name;
+    leak:jurisdiction             ?jurisdiction;
+    leak:jurisdiction_description ?jurisdiction_description;
+    leak:company_type             ?company_type;
+    leak:address                  ?address;
+    leak:internal_id              ?internal_id;
+    leak:incorporation_date       ?incorporation_date;
+    leak:inactivation_date        ?inactivation_date;
+    leak:struck_off_date          ?struck_off_date;
+    leak:dorm_date                ?dorm_date;
+    leak:status                   ?status;
+    leak:service_provider         ?service_provider;
+    leak:ibcRUC                   ?ibcRUC;
+    leak:country_codes            ?country_codes;
+    leak:countries                ?countries;
+    leak:note                     ?note;
+    leak:valid_until              ?valid_until;
+    leak:node_id                  ?node_id;
+    leak:sourceID                 ?sourceID                
+  }
+from <file:../Entities-dated.csv#encoding=utf-8>
+where {
+  bind(uri(concat(str(leaks:),"entity-",?node_id)) as ?node)
+}

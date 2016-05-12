@@ -1,0 +1,15 @@
+prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix leak:  <http://data.ontotext.com/resource/leaks#> # ontology
+prefix leaks: <http://data.ontotext.com/resource/leaks/> # data
+
+construct {
+  ?node a leak:Edge;
+    leak:node_1    ?node_1;
+    leak:rel_type  ?rel_type;
+    leak:node_2    ?node_2;
+  }
+from <file:../all_edges.csv#encoding=utf-8>
+where {
+  # ?ROWNUM doesn't work: returns null
+  bind(uri(concat(str(leaks:),"edge-",STRUUID())) as ?node)
+}

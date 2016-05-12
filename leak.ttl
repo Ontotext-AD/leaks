@@ -1,0 +1,257 @@
+## Ontology
+
+leak: a owl:Ontology;
+  rdfs:label "Offshore Leaks ontology";
+  rdfs:comment "Describes the ICIJ Offshore Leaks database released on 2016-05-10";
+  dct:subject dbr:Offshore_company, dbr:Money_laundering, dbr:Tax_evasion;
+  dct:created "2016-05-12"^^xsd:date;
+  rdfs:seeAlso
+    <https://offshoreleaks.icij.org/>,
+    <http://data.ontotext.com/resource/leaks>,
+    <https://github.com/Ontotext-AD/leaks>;
+  dct:source <https://offshoreleaks.icij.org/pages/database>;
+  dct:creator <http://www.ontotext.com>;
+  void:sparqlEndpoint <http://data.ontotext.com/sparql>.  
+
+## Classes
+
+leak:Node a owl:Class;
+  rdfs:isDefinedBy leak:;
+  rdfs:label "Node";
+  rdfs:comment "Any kind of node".
+
+leak:Address a owl:Class;
+  rdfs:subClassOf leak:Node;
+  rdfs:isDefinedBy leak:;
+  rdfs:label "Address";
+  rdfs:comment "Address of an entity, intermediary or officer".
+
+leak:Entity a owl:Class;
+  rdfs:subClassOf leak:Node;
+  rdfs:isDefinedBy leak:;
+  rdfs:label "Entity";
+  rdfs:comment "Legal body such as company, foundation, trust...".
+
+leak:Intermediary a owl:Class;
+  rdfs:subClassOf leak:Node;
+  rdfs:isDefinedBy leak:;
+  rdfs:label "Intermediary";
+  rdfs:comment "Agent that helps beneficiaries setup or manage offshore companies".
+
+leak:Officer a owl:Class;
+  rdfs:subClassOf leak:Node;
+  rdfs:isDefinedBy leak:;
+  rdfs:label "Officer";
+  rdfs:comment "Agent (person, group of people, company) that serves as company officer and/or beneficiary, either formal and real".
+
+leak:Edge a owl:Class;
+  rdfs:isDefinedBy leak:;
+  rdfs:label "Edge";
+  rdfs:comment "Relation between two Nodes. Since node_id is unique across node types, there's no need to mention the entity types".
+
+## raw properties, correspond to columns in the CSV files
+
+leak:address a owl:DatatypeProperty;
+  rdfs:isDefinedBy leak:;
+  rdfs:label "address";
+  rdfs:domain leak:Node;
+  rdfs:comment "Textual address".
+
+leak:company_type a owl:DatatypeProperty;
+  rdfs:isDefinedBy leak:;
+  rdfs:label "company_type";
+  rdfs:domain leak:Entity;
+  rdfs:comment "Formal company type".
+
+leak:countries a owl:DatatypeProperty;
+  rdfs:isDefinedBy leak:;
+  rdfs:label "countries";
+  rdfs:domain leak:Node;
+  rdfs:comment "Semicolon-separated list of countries".
+
+leak:country_codes a owl:DatatypeProperty;
+  rdfs:isDefinedBy leak:;
+  rdfs:label "country_codes";
+  rdfs:domain leak:Node;
+  rdfs:comment "Semicolon-separated list of ISO alpha3 country codes".
+
+leak:dorm_date a owl:DatatypeProperty;
+  rdfs:isDefinedBy leak:;
+  rdfs:label "dorm_date";
+  rdfs:domain leak:Entity;
+  rdfs:comment "When entity became dormant".
+
+leak:former_name a owl:DatatypeProperty;
+  rdfs:isDefinedBy leak:;
+  rdfs:label "former_name";
+  rdfs:domain leak:Entity;
+  rdfs:comment "Former name".
+
+leak:ibcRUC a owl:DatatypeProperty;
+  rdfs:isDefinedBy leak:;
+  rdfs:label "ibcRUC";
+  rdfs:domain leak:Entity;
+  rdfs:comment "???".
+
+leak:icij_id a owl:DatatypeProperty;
+  rdfs:isDefinedBy leak:;
+  rdfs:label "icij_id";
+  rdfs:domain leak:Node;
+  rdfs:comment "ICIJ identifier".
+
+leak:inactivation_date a owl:DatatypeProperty;
+  rdfs:isDefinedBy leak:;
+  rdfs:label "inactivation_date";
+  rdfs:domain leak:Entity;
+  rdfs:comment "When entity was deactivated".
+
+leak:incorporation_date a owl:DatatypeProperty;
+  rdfs:isDefinedBy leak:;
+  rdfs:label "incorporation_date";
+  rdfs:domain leak:Entity;
+  rdfs:comment "When entity was created".
+
+leak:internal_id a owl:DatatypeProperty;
+  rdfs:isDefinedBy leak:;
+  rdfs:label "internal_id";
+  rdfs:domain leak:Node;
+  rdfs:comment "???".
+
+leak:jurisdiction a owl:DatatypeProperty;
+  rdfs:isDefinedBy leak:;
+  rdfs:label "jurisdiction";
+  rdfs:domain leak:Entity;
+  rdfs:comment "Semicolon-separated list of offshore destination codes (*not* alpha3)".
+
+leak:jurisdiction_description a owl:DatatypeProperty;
+  rdfs:isDefinedBy leak:;
+  rdfs:label "jurisdiction_description";
+  rdfs:domain leak:Entity;
+  rdfs:comment "Semicolon-separated list of offshore destination names".
+
+leak:name a owl:DatatypeProperty;
+  rdfs:isDefinedBy leak:;
+  rdfs:label "name";
+  #rdfs:domain leak:Node;
+  rdfs:comment "Name".
+
+leak:node_1 a owl:DatatypeProperty;
+  rdfs:isDefinedBy leak:;
+  rdfs:label "node_1";
+  rdfs:domain leak:Edge;
+  rdfs:comment "Source node_id".
+
+leak:node_2 a owl:DatatypeProperty;
+  rdfs:isDefinedBy leak:;
+  rdfs:label "node_2";
+  rdfs:domain leak:Edge;
+  rdfs:comment "Target node_id".
+
+leak:node_id a owl:DatatypeProperty;
+  rdfs:isDefinedBy leak:;
+  rdfs:label "node_id";
+  rdfs:domain leak:Node;
+  rdfs:comment "Unique amongst all node types".
+
+leak:note a owl:DatatypeProperty;
+  rdfs:isDefinedBy leak:;
+  rdfs:label "note";
+  rdfs:domain leak:Node;
+  rdfs:comment "Note (currently only for Entities, often empty)".
+
+leak:original_name a owl:DatatypeProperty;
+  rdfs:isDefinedBy leak:;
+  rdfs:label "original_name";
+  rdfs:domain leak:Entity;
+  rdfs:comment "Official entity name".
+
+leak:rel_type a owl:DatatypeProperty;
+  rdfs:isDefinedBy leak:;
+  rdfs:label "rel_type";
+  rdfs:domain leak:Edge;
+  rdfs:comment "Relation type".
+
+leak:service_provider a owl:DatatypeProperty;
+  rdfs:isDefinedBy leak:;
+  rdfs:label "service_provider";
+  rdfs:domain leak:Entity;
+  rdfs:comment """ "Mossack Fonseca", "Portcullis Trustnet" or "Commonwealth Trust Limited" """.
+
+leak:sourceID a owl:DatatypeProperty;
+  rdfs:isDefinedBy leak:;
+  rdfs:label "sourceID";
+  rdfs:domain leak:Node;
+  rdfs:comment """ "Panama Papers" or "Offshore Leaks" """.
+
+leak:status a owl:DatatypeProperty;
+  rdfs:isDefinedBy leak:;
+  rdfs:label "status";
+  rdfs:domain leak:Node;
+  rdfs:comment "Different value lists for Intermediary and Entity".
+
+leak:struck_off_date a owl:DatatypeProperty;
+  rdfs:isDefinedBy leak:;
+  rdfs:label "struck_off_date";
+  rdfs:domain leak:Entity;
+  rdfs:comment "When entity was removed from register".
+
+leak:valid_until a owl:DatatypeProperty;
+  rdfs:isDefinedBy leak:;
+  rdfs:label "valid_until";
+  rdfs:domain leak:Node;
+  rdfs:comment """Fixed statement, eg "The Panama Papers data is current through 2015".""".
+
+## "Cooked" classes and properties, inferred from the raw data
+
+leak:Country a owl:Class;
+  rdfs:isDefinedBy leak:;
+  rdfs:label "Country";
+  rdfs:comment "Country identified by its ISO alpha3 code";
+  skos:example "leaks:country-VGB, which is owl:sameAs dbr:British_Virgin_Islands".
+
+leak:OffshoreJurisdiction a owl:Class;
+  rdfs:isDefinedBy leak:;
+  rdfs:label "Offshore jurisdiction";
+  rdfs:comment "Offshore jurisdiction identified by a special code (*not* ISO alpha3)";
+  skos:example "leaks:offshore-BVI, which is British Virgin Islands".
+
+leak:code a owl:DatatypeProperty;
+  rdfs:isDefinedBy leak:;
+  rdfs:label "code";
+  rdfs:comment "Code for someting, eg ISO alpha3 of Country".
+
+leak:hasCountry a owl:ObjectProperty;
+  rdfs:isDefinedBy leak:;
+  rdfs:label "hasCountry";
+  rdfs:domain leak:Node;
+  rdfs:range leak:Country;
+  rdfs:comment "Country (Countries) of Address, Entity, Intermediary or Officer";
+  skos:scopeNote "Obtained by splitting country_codes on ';' and linking".
+
+leak:hasJurisdiction a owl:ObjectProperty;
+  rdfs:isDefinedBy leak:;
+  rdfs:label "hasJurisdiction";
+  rdfs:domain leak:Entity;
+  rdfs:range leak:OffshoreJurisdiction;
+  rdfs:comment "OffshoreJurisdiction of an Entity".
+
+leak:sourceNode a owl:ObjectProperty;
+  rdfs:isDefinedBy leak:;
+  rdfs:label "sourceNode";
+  rdfs:domain leak:Edge;
+  rdfs:range leak:Node;
+  rdfs:comment "Source node of a relation (edge)".
+
+leak:targetNode a owl:ObjectProperty;
+  rdfs:isDefinedBy leak:;
+  rdfs:label "targetNode";
+  rdfs:domain leak:Edge;
+  rdfs:range leak:Node;
+  rdfs:comment "Target node of a relation (edge)".
+
+# a owl:ObjectProperty;
+#   rdfs:isDefinedBy leak:;
+#   rdfs:label "";
+#   rdfs:domain leak:;
+#   rdfs:range leak:;
+#   rdfs:comment "".

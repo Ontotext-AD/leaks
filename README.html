@@ -1,0 +1,1511 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>Offshore Leaks as LOD</title>
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="Ontotext" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<style type='text/css'> h1,h2,h3,h4,h5,h6,h7 {font-family: Arial} .author, .date, .creator {-webkit-margin-before: 0em; -webkit-margin-after: 0em} .abstract {margin: 1em; padding: 1em; border: 1px solid black} .abstract:before {content: 'Abstract: '; font-weight: bold} #preamble p {font-size: 110%%; margin-left: auto; margin-right: auto; text-align: center} th.left {text-align:left} th.right {text-align:right} th, td {line-height: 1em; border-width: 1px; border-style: solid solid; border-spacing: 2px 2px; padding: 2px 1px} .CANCELED {color: blue} .MAYBE {color: blue} .POSTPONED {color: blue} .INPROGRESS {color: orange} .NEXT {color: orange} .IER {color: orange}.underline {text-decoration:underline} </style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Offshore Leaks as LOD</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. Intro</a>
+<ul>
+<li><a href="#sec-1-1">1.1. Offshore Links</a></li>
+<li><a href="#sec-1-2">1.2. The Database</a></li>
+<li><a href="#sec-1-3">1.3. Addresses.csv</a></li>
+<li><a href="#sec-1-4">1.4. Entities.csv</a></li>
+<li><a href="#sec-1-5">1.5. Intermediaries.csv</a></li>
+<li><a href="#sec-1-6">1.6. Officers.csv</a></li>
+<li><a href="#sec-1-7">1.7. all_edges.csv</a></li>
+<li><a href="#sec-1-8">1.8. rel_type</a></li>
+</ul>
+</li>
+<li><a href="#sec-2">2. RDF Conversion</a>
+<ul>
+<li><a href="#sec-2-1">2.1. Date Conversion</a></li>
+<li><a href="#sec-2-2">2.2. Leaks Ontology</a></li>
+<li><a href="#sec-2-3">2.3. tarql</a>
+<ul>
+<li><a href="#sec-2-3-1">2.3.1. tarql Queries</a></li>
+<li><a href="#sec-2-3-2">2.3.2. tarql Results</a></li>
+<li><a href="#sec-2-3-3">2.3.3. Running tarql</a></li>
+<li><a href="#sec-2-3-4">2.3.4. tarql Problems</a></li>
+</ul>
+</li>
+<li><a href="#sec-2-4">2.4. <span class="todo TODO">TODO</span> Geonames and DBpedia Geography</a></li>
+<li><a href="#sec-2-5">2.5. Country Codes</a></li>
+<li><a href="#sec-2-6">2.6. Offshore Jurisdictions</a></li>
+<li><a href="#sec-2-7">2.7. Data Model</a></li>
+<li><a href="#sec-2-8">2.8. Day1 Recap</a></li>
+</ul>
+</li>
+<li><a href="#sec-3">3. Inferencing</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> Intro</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+Day 1: <span class="timestamp-wrapper"><span class="timestamp">&lt;2016-05-12 Thu&gt;</span></span>
+</p>
+<ul class="org-ul">
+<li>HTML rendered version: <a href="http://rawgit.com/Ontotext-AD/leaks">http://rawgit.com/Ontotext-AD/leaks</a>
+</li>
+<li>Post an issue on Github: <a href="https://github.com/Ontotext-AD/leaks/issues">https://github.com/Ontotext-AD/leaks/issues</a>
+</li>
+<li>Chat to us on Gitter: <a href="https://gitter.im/Ontotext-AD/leaks">https://gitter.im/Ontotext-AD/leaks</a>
+</li>
+</ul>
+</div>
+
+<div id="outline-container-sec-1-1" class="outline-3">
+<h3 id="sec-1-1"><span class="section-number-3">1.1</span> Offshore Links</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+The <a href="https://offshoreleaks.icij.org/">Offshore Leaks</a> database of The International Consortium of Investigative Journalists (ICIJ)
+is a wonderful resource that allows you to explore the murky world of high-flyer finance and offshore destinations.
+It includes two sources:
+</p>
+<ul class="org-ul">
+<li><a href="https://panamapapers.icij.org">Panama Papers</a>
+</li>
+<li><a href="https://www.icij.org/offshore">Offshore Leaks</a> (but seemingly excluding Luxembourg Leaks, see sec <a href="#sec-2-6">2.6</a>)
+</li>
+</ul>
+
+<p>
+<a href="https://offshoreleaks.icij.org/pages/database">The database</a> was released on May 10 (please download it from their torrent link)
+and on May 12 we decided to explore it using Linked Open Data (LOD).
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-1-2" class="outline-3">
+<h3 id="sec-1-2"><span class="section-number-3">1.2</span> The Database</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+The database is available as 5 CSV files with the following number of records:
+</p>
+<pre class="example">
+&gt;wc -l *.csv
+   151128 Addresses.csv
+   319422 Entities.csv
+    23643 Intermediaries.csv
+   345646 Officers.csv
+  1269797 all_edges.csv
+</pre>
+<p>
+When parsing it, you should be careful about two aspects:
+</p>
+<ul class="org-ul">
+<li>CSV quoting
+</li>
+<li>Unicode (UTF-8) encoding
+</li>
+</ul>
+
+<p>
+The files have the following columns, which you can see with
+</p>
+<pre class="example">
+head -1 *.csv
+</pre>
+<p>
+As we analyze the data, we'll add more in-depth notes.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-1-3" class="outline-3">
+<h3 id="sec-1-3"><span class="section-number-3">1.3</span> Addresses.csv</h3>
+<div class="outline-text-3" id="text-1-3">
+<table border="1" cellspacing="0" cellpadding="2" rules="all" frame="box">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="left"><b>col</b></td>
+<td class="left"><b>notes</b></td>
+<td class="left"><b>example</b></td>
+</tr>
+
+<tr>
+<td class="left">address</td>
+<td class="left">textual address</td>
+<td class="left">#02-01; 14 MOHAMED SULTAN ROAD; SINGAPORE 238963</td>
+</tr>
+
+<tr>
+<td class="left">icij_id</td>
+<td class="left">ICIJ guid</td>
+<td class="left">91BB6C910709CE3331D31A89DD97EDAD</td>
+</tr>
+
+<tr>
+<td class="left">valid_until</td>
+<td class="left">fixed statement</td>
+<td class="left">The Panama Papers  data is current through 2015</td>
+</tr>
+
+<tr>
+<td class="left">country_codes</td>
+<td class="left">ISO alpha3 code</td>
+<td class="left">SGP</td>
+</tr>
+
+<tr>
+<td class="left">countries</td>
+<td class="left">country name</td>
+<td class="left">Singapore</td>
+</tr>
+
+<tr>
+<td class="left">node_id</td>
+<td class="left">unique across all files</td>
+<td class="left">14000015</td>
+</tr>
+
+<tr>
+<td class="left">sourceID</td>
+<td class="left">source name</td>
+<td class="left">"Panama Papers" or "Offshorshuckaks"</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-sec-1-4" class="outline-3">
+<h3 id="sec-1-4"><span class="section-number-3">1.4</span> Entities.csv</h3>
+<div class="outline-text-3" id="text-1-4">
+<p>
+Legal bodies such as companies, foundations, trusts&#x2026;
+</p>
+<table border="1" cellspacing="0" cellpadding="2" rules="all" frame="box">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="left"><b>col</b></td>
+<td class="left"><b>notes</b></td>
+<td class="left"><b>example</b></td>
+</tr>
+
+<tr>
+<td class="left">name</td>
+<td class="left">company name</td>
+<td class="left">CHEM D-T Corp.</td>
+</tr>
+
+<tr>
+<td class="left">original_name</td>
+<td class="left">official name</td>
+<td class="left">CHEM D-T Corp. EX-CHEM DT Corp.</td>
+</tr>
+
+<tr>
+<td class="left">former_name</td>
+<td class="left">former name (often empty)</td>
+<td class="left">CHEM DT Corp.</td>
+</tr>
+
+<tr>
+<td class="left">jurisdiction</td>
+<td class="left">where registered (<b>not</b> alpha3 code)</td>
+<td class="left">SAM</td>
+</tr>
+
+<tr>
+<td class="left">jurisdiction_description</td>
+<td class="left">where registered (country, US state, &#x2026;)</td>
+<td class="left">Samoa</td>
+</tr>
+
+<tr>
+<td class="left">company_type</td>
+<td class="left">formal type</td>
+<td class="left">"Standard International Company", "BVI Trust"&#x2026;</td>
+</tr>
+
+<tr>
+<td class="left">address</td>
+<td class="left">formal address</td>
+<td class="left">GO SHINE MANAGEMENT CO.; LTD. ROOM B; 5F.; NO. 92; SEC. 1NANJING E. RD.; JHONGSHAN DISTRICT; TAIPEI CITY 104; TAIPEI TAIWAN</td>
+</tr>
+
+<tr>
+<td class="left">internal_id</td>
+<td class="left">???</td>
+<td class="left">1000094</td>
+</tr>
+
+<tr>
+<td class="left">incorporation_date</td>
+<td class="left">when created</td>
+<td class="left">30-MAR-2004</td>
+</tr>
+
+<tr>
+<td class="left">inactivation_date</td>
+<td class="left">when deactivated</td>
+<td class="left">06-NOV-2009</td>
+</tr>
+
+<tr>
+<td class="left">struck_off_date</td>
+<td class="left">when removed from register</td>
+<td class="left">15-FEB-2010</td>
+</tr>
+
+<tr>
+<td class="left">dorm_date</td>
+<td class="left">when became dormant</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">status</td>
+<td class="left">29% Active, 29% Defaulted, 7% Dissolved&#x2026;</td>
+<td class="left">Defaulted</td>
+</tr>
+
+<tr>
+<td class="left">service_provider</td>
+<td class="left">law firm serving the entity</td>
+<td class="left">"Mossack Fonseca", "Portcullis Trustnet" or "Commonwealth Trust Limited"</td>
+</tr>
+
+<tr>
+<td class="left">ibcRUC</td>
+<td class="left">???</td>
+<td class="left">16469</td>
+</tr>
+
+<tr>
+<td class="left">country_codes</td>
+<td class="left">where active (alpha3), can be <b>multiple</b></td>
+<td class="left">AUS;BLZ</td>
+</tr>
+
+<tr>
+<td class="left">countries</td>
+<td class="left">where active (countries), can be <b>multiple</b></td>
+<td class="left">Australia;Belize</td>
+</tr>
+
+<tr>
+<td class="left">note</td>
+<td class="left">most often empty</td>
+<td class="left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="left">valid_until</td>
+<td class="left">fixed statement</td>
+<td class="left">The Panama Papers  data is current through 2015</td>
+</tr>
+
+<tr>
+<td class="left">node_id</td>
+<td class="left">unique across all files</td>
+<td class="left">10000018</td>
+</tr>
+
+<tr>
+<td class="left">sourceID</td>
+<td class="left">source name</td>
+<td class="left">"Panama Papers" or "Offshore Leaks"</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-sec-1-5" class="outline-3">
+<h3 id="sec-1-5"><span class="section-number-3">1.5</span> Intermediaries.csv</h3>
+<div class="outline-text-3" id="text-1-5">
+<p>
+Agents that help beneficiaries setup offshore companies
+</p>
+<table border="1" cellspacing="0" cellpadding="2" rules="all" frame="box">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="left"><b>col</b></td>
+<td class="left"><b>notes</b></td>
+<td class="left"><b>example</b></td>
+</tr>
+
+<tr>
+<td class="left">name</td>
+<td class="left">name</td>
+<td class="left">SECRETARIAL SERVICES LIMITED</td>
+</tr>
+
+<tr>
+<td class="left">internal_id</td>
+<td class="left">???</td>
+<td class="left">1009</td>
+</tr>
+
+<tr>
+<td class="left">address</td>
+<td class="left">address</td>
+<td class="left">SECRETARIAL SERVICES LIMITED P.O. BOX 37 ST. ANNE'S HOUSE; VICTORIA STREET ALDERNEY; CHANNEL ISLANDS</td>
+</tr>
+
+<tr>
+<td class="left">valid_until</td>
+<td class="left">fixed statement</td>
+<td class="left">The Panama Papers  data is current through 2015</td>
+</tr>
+
+<tr>
+<td class="left">country_codes</td>
+<td class="left">where active (alpha3), can be <b>multiple</b></td>
+<td class="left">GGY;GBR</td>
+</tr>
+
+<tr>
+<td class="left">countries</td>
+<td class="left">where active (countries), can be <b>multiple</b></td>
+<td class="left">Guernsey;United Kingdom</td>
+</tr>
+
+<tr>
+<td class="left">status</td>
+<td class="left">46% blank, 30% ACTIVE, 20% SUSPENDED&#x2026;</td>
+<td class="left">SUSPENDED</td>
+</tr>
+
+<tr>
+<td class="left">node_id</td>
+<td class="left">unique across all files</td>
+<td class="left">11000034</td>
+</tr>
+
+<tr>
+<td class="left">sourceID</td>
+<td class="left">source name</td>
+<td class="left">"Panama Papers" or "Offshore Leaks"</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-sec-1-6" class="outline-3">
+<h3 id="sec-1-6"><span class="section-number-3">1.6</span> Officers.csv</h3>
+<div class="outline-text-3" id="text-1-6">
+<p>
+Agents (people, groups of people, companies) that serve as company officers and beneficiaries, both formal and real
+</p>
+<table border="1" cellspacing="0" cellpadding="2" rules="all" frame="box">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="left"><b>col</b></td>
+<td class="left"><b>notes</b></td>
+<td class="left"><b>example</b></td>
+</tr>
+
+<tr>
+<td class="left">name</td>
+<td class="left">name</td>
+<td class="left">Wu Chi-Ping and Wu Chou Tsan-Ting</td>
+</tr>
+
+<tr>
+<td class="left">icij_id</td>
+<td class="left">ICIJ guid</td>
+<td class="left">1B92FDDD451DA8DCA9CD36B0AF797411</td>
+</tr>
+
+<tr>
+<td class="left">valid_until</td>
+<td class="left">fixed statement</td>
+<td class="left">The Panama Papers  data is current through 2015</td>
+</tr>
+
+<tr>
+<td class="left">country_codes</td>
+<td class="left">where active (alpha3), can be <b>multiple</b></td>
+<td class="left">TWN</td>
+</tr>
+
+<tr>
+<td class="left">countries</td>
+<td class="left">where active (countries), can be <b>multiple</b></td>
+<td class="left">Taiwan, Province of China</td>
+</tr>
+
+<tr>
+<td class="left">node_id</td>
+<td class="left">unique across all files</td>
+<td class="left">12000009</td>
+</tr>
+
+<tr>
+<td class="left">sourceID</td>
+<td class="left">source name</td>
+<td class="left">"Panama Papers" or "Offshore Leaks"</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-sec-1-7" class="outline-3">
+<h3 id="sec-1-7"><span class="section-number-3">1.7</span> all_edges.csv</h3>
+<div class="outline-text-3" id="text-1-7">
+<p>
+Relations between records. Since node_id is unique across files, there's no need to mention the entity types.
+</p>
+<table border="1" cellspacing="0" cellpadding="2" rules="all" frame="box">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="left"><b>col</b></td>
+<td class="left"><b>notes</b></td>
+</tr>
+
+<tr>
+<td class="left">node_1</td>
+<td class="left">source node</td>
+</tr>
+
+<tr>
+<td class="left">rel_type</td>
+<td class="left">relation type</td>
+</tr>
+
+<tr>
+<td class="left">node_2</td>
+<td class="left">destination node</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-sec-1-8" class="outline-3">
+<h3 id="sec-1-8"><span class="section-number-3">1.8</span> rel_type</h3>
+<div class="outline-text-3" id="text-1-8">
+<p>
+The relation types is one of the most interesting key fields. The distribution of values is as follows:
+</p>
+<table border="1" cellspacing="0" cellpadding="2" rules="all" frame="box">
+
+
+<colgroup>
+<col  class="right" />
+
+<col  class="left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="right"><b>count</b></td>
+<td class="left"><b>rel_type</b></td>
+</tr>
+
+<tr>
+<td class="right">319121</td>
+<td class="left">intermediary of</td>
+</tr>
+
+<tr>
+<td class="right">316472</td>
+<td class="left">registered address</td>
+</tr>
+
+<tr>
+<td class="right">277380</td>
+<td class="left">shareholder of</td>
+</tr>
+
+<tr>
+<td class="right">118589</td>
+<td class="left">Director of</td>
+</tr>
+
+<tr>
+<td class="right">105408</td>
+<td class="left">Shareholder of</td>
+</tr>
+
+<tr>
+<td class="right">46761</td>
+<td class="left">similar name and address as</td>
+</tr>
+
+<tr>
+<td class="right">36318</td>
+<td class="left">Records &amp; Registers of</td>
+</tr>
+
+<tr>
+<td class="right">15151</td>
+<td class="left">beneficiary of</td>
+</tr>
+
+<tr>
+<td class="right">14351</td>
+<td class="left">Secretary of</td>
+</tr>
+
+<tr>
+<td class="right">4031</td>
+<td class="left">Beneficiary of</td>
+</tr>
+
+<tr>
+<td class="right">3146</td>
+<td class="left">same name and registration date as</td>
+</tr>
+
+<tr>
+<td class="right">1847</td>
+<td class="left">Beneficial Owner of</td>
+</tr>
+
+<tr>
+<td class="right">1418</td>
+<td class="left">Trustee of Trust of</td>
+</tr>
+
+<tr>
+<td class="right">1234</td>
+<td class="left">Trust Settlor of</td>
+</tr>
+
+<tr>
+<td class="right">1229</td>
+<td class="left">Authorised Person / Signatory of</td>
+</tr>
+
+<tr>
+<td class="right">1198</td>
+<td class="left">Protector of</td>
+</tr>
+
+<tr>
+<td class="right">1130</td>
+<td class="left">Nominee Shareholder of</td>
+</tr>
+
+<tr>
+<td class="right">960</td>
+<td class="left">same address as</td>
+</tr>
+
+<tr>
+<td class="right">622</td>
+<td class="left">related entity</td>
+</tr>
+
+<tr>
+<td class="right">583</td>
+<td class="left">Assistant Secretary of</td>
+</tr>
+
+<tr>
+<td class="right">409</td>
+<td class="left">Alternate Director of</td>
+</tr>
+
+<tr>
+<td class="right">320</td>
+<td class="left">Co-Trustee of Trust of</td>
+</tr>
+
+<tr>
+<td class="right">281</td>
+<td class="left">Officer of</td>
+</tr>
+
+<tr>
+<td class="right">272</td>
+<td class="left">Resident Director of</td>
+</tr>
+
+<tr>
+<td class="right">207</td>
+<td class="left">Auditor of</td>
+</tr>
+
+<tr>
+<td class="right">173</td>
+<td class="left">Correspondent Addr. of</td>
+</tr>
+
+<tr>
+<td class="right">123</td>
+<td class="left">Bank Signatory of</td>
+</tr>
+
+<tr>
+<td class="right">120</td>
+<td class="left">General Accountant of</td>
+</tr>
+
+<tr>
+<td class="right">101</td>
+<td class="left">Nominated Person of</td>
+</tr>
+
+<tr>
+<td class="right">89</td>
+<td class="left">Legal Advisor of</td>
+</tr>
+
+<tr>
+<td class="right">74</td>
+<td class="left">Reserve Director of</td>
+</tr>
+
+<tr>
+<td class="right">65</td>
+<td class="left">Investment Advisor of</td>
+</tr>
+
+<tr>
+<td class="right">64</td>
+<td class="left">Nominee Director of</td>
+</tr>
+
+<tr>
+<td class="right">48</td>
+<td class="left">Register of Director of</td>
+</tr>
+
+<tr>
+<td class="right">41</td>
+<td class="left">Register of Shareholder of</td>
+</tr>
+
+<tr>
+<td class="right">41</td>
+<td class="left">Joint Settlor of</td>
+</tr>
+
+<tr>
+<td class="right">40</td>
+<td class="left">President of</td>
+</tr>
+
+<tr>
+<td class="right">32</td>
+<td class="left">Auth. Representative of</td>
+</tr>
+
+<tr>
+<td class="right">32</td>
+<td class="left">Appointor of</td>
+</tr>
+
+<tr>
+<td class="right">28</td>
+<td class="left">Owner, director and shareholder of</td>
+</tr>
+
+<tr>
+<td class="right">25</td>
+<td class="left">Beneficial owner of</td>
+</tr>
+
+<tr>
+<td class="right">24</td>
+<td class="left">Nominee Trust Settlor of</td>
+</tr>
+
+<tr>
+<td class="right">20</td>
+<td class="left">Power of Attorney of</td>
+</tr>
+
+<tr>
+<td class="right">18</td>
+<td class="left">Unit Trust Register of</td>
+</tr>
+
+<tr>
+<td class="right">18</td>
+<td class="left">Treasurer of</td>
+</tr>
+
+<tr>
+<td class="right">16</td>
+<td class="left">Owner of</td>
+</tr>
+
+<tr>
+<td class="right">14</td>
+<td class="left">Tax Advisor of</td>
+</tr>
+
+<tr>
+<td class="right">14</td>
+<td class="left">Custodian of</td>
+</tr>
+
+<tr>
+<td class="right">13</td>
+<td class="left">Successor Protector of</td>
+</tr>
+
+<tr>
+<td class="right">11</td>
+<td class="left">Stockbroker of</td>
+</tr>
+
+<tr>
+<td class="right">9</td>
+<td class="left">Power of attorney of</td>
+</tr>
+
+<tr>
+<td class="right">9</td>
+<td class="left">Personal Directorship of</td>
+</tr>
+
+<tr>
+<td class="right">8</td>
+<td class="left">Safekeeping of</td>
+</tr>
+
+<tr>
+<td class="right">8</td>
+<td class="left">Nominee Protector of</td>
+</tr>
+
+<tr>
+<td class="right">7</td>
+<td class="left">Vice President of</td>
+</tr>
+
+<tr>
+<td class="right">7</td>
+<td class="left">Partner of</td>
+</tr>
+
+<tr>
+<td class="right">6</td>
+<td class="left">Director / Shareholder of</td>
+</tr>
+
+<tr>
+<td class="right">6</td>
+<td class="left">Beneficiary, shareholder and director of</td>
+</tr>
+
+<tr>
+<td class="right">5</td>
+<td class="left">Nominee Secretary of</td>
+</tr>
+
+<tr>
+<td class="right">4</td>
+<td class="left">Sole shareholder of</td>
+</tr>
+
+<tr>
+<td class="right">4</td>
+<td class="left">Nominee Beneficial Owner of</td>
+</tr>
+
+<tr>
+<td class="right">4</td>
+<td class="left">Director / Beneficial Owner of</td>
+</tr>
+
+<tr>
+<td class="right">4</td>
+<td class="left">Chairman of</td>
+</tr>
+
+<tr>
+<td class="right">3</td>
+<td class="left">Principal beneficiary of</td>
+</tr>
+
+<tr>
+<td class="right">3</td>
+<td class="left">Member of Foundation Council of</td>
+</tr>
+
+<tr>
+<td class="right">3</td>
+<td class="left">Connected of</td>
+</tr>
+
+<tr>
+<td class="right">2</td>
+<td class="left">Sole signatory of</td>
+</tr>
+
+<tr>
+<td class="right">2</td>
+<td class="left">Signatory of</td>
+</tr>
+
+<tr>
+<td class="right">2</td>
+<td class="left">Nominee Beneficiary of</td>
+</tr>
+
+<tr>
+<td class="right">2</td>
+<td class="left">Director / Shareholder / Beneficial Owner of</td>
+</tr>
+
+<tr>
+<td class="right">2</td>
+<td class="left">Director (Rami Makhlouf) of</td>
+</tr>
+
+<tr>
+<td class="right">2</td>
+<td class="left">Board Representative of</td>
+</tr>
+
+<tr>
+<td class="right">1</td>
+<td class="left">Sole signatory / Beneficial owner of</td>
+</tr>
+
+<tr>
+<td class="right">1</td>
+<td class="left">Shareholder (through Julex Foundation) of</td>
+</tr>
+
+<tr>
+<td class="right">1</td>
+<td class="left">President and director of</td>
+</tr>
+
+<tr>
+<td class="right">1</td>
+<td class="left">President - Director of</td>
+</tr>
+
+<tr>
+<td class="right">1</td>
+<td class="left">Power of Attorney / Shareholder of</td>
+</tr>
+
+<tr>
+<td class="right">1</td>
+<td class="left">Nominee Name of</td>
+</tr>
+
+<tr>
+<td class="right">1</td>
+<td class="left">Nominee Investment Advisor of</td>
+</tr>
+
+<tr>
+<td class="right">1</td>
+<td class="left">Member / Shareholder of</td>
+</tr>
+
+<tr>
+<td class="right">1</td>
+<td class="left">Grantee of a mortgage of</td>
+</tr>
+
+<tr>
+<td class="right">1</td>
+<td class="left">First beneficiary of</td>
+</tr>
+
+<tr>
+<td class="right">1</td>
+<td class="left">Director and shareholder of</td>
+</tr>
+
+<tr>
+<td class="right">1</td>
+<td class="left">Authorized signatory of</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> RDF Conversion</h2>
+<div class="outline-text-2" id="text-2">
+</div><div id="outline-container-sec-2-1" class="outline-3">
+<h3 id="sec-2-1"><span class="section-number-3">2.1</span> Date Conversion</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+The dates in <code>Entities.csv</code> have the form "06-NOV-2009", but we want to convert them to proper xsd:date, eg "2009-11-06".
+We do that with a script <a href="./dates.pl">./dates.pl</a> by calling it like
+</p>
+<pre class="example">
+perl dates.pl Entities.csv &gt; Entities-dated.csv
+</pre>
+
+<p>
+We can find the distribution of years like this:
+</p>
+<pre class="example">
+perl -ne 'print "$1\n" if m{\b[0-9]{2}-[A-Z]{3}-([0-9]{4})\b}' Entities.csv|sort|uniq -c
+</pre>
+<p>
+The most active years were 1999-2009. (There are also 9 invalid dates 1-APR-1001.)
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-2-2" class="outline-3">
+<h3 id="sec-2-2"><span class="section-number-3">2.2</span> Leaks Ontology</h3>
+<div class="outline-text-3" id="text-2-2">
+<p>
+First we define all prefixes we use in a single file <a href="./prefixes.ttl">./prefixes.ttl</a>, so we won't have to repeat them many times.
+In addition to standard prefixes (that you can get from <a href="http://prefix.cc/dbr,dbo,dct,rdf,rdfs,skos,owl,xsd.ttl">http://prefix.cc/dbr,dbo,dct,rdf,rdfs,skos,owl,xsd.ttl</a>),
+we also define:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-Turtle"><span style="color: #a020f0;">@prefix</span> <span style="color: #228b22;">leak:</span><span style="color: #008b8b;"> </span> <span style="color: #0000ff;">&lt;http://data.ontotext.com/resource/leaks#&gt;</span><span style="color: #b22222;">.  # ontology</span>
+<span style="color: #a020f0;">@prefix</span> <span style="color: #228b22;">leaks:</span><span style="color: #008b8b;"> </span><span style="color: #0000ff;">&lt;http://data.ontotext.com/resource/leaks/&gt;</span> . <span style="color: #b22222;"># dat</span><span style="color: #a020f0;">a</span>
+</pre>
+</div>
+
+<p>
+We made an ontology <a href="./leak.ttl">./leak.ttl</a> that has 4 parts:
+</p>
+<ul class="org-ul">
+<li>A header that describes the ontology itself:
+</li>
+</ul>
+<div class="org-src-container">
+
+<pre class="src src-Turtle"><span style="color: #228b22;">leak:</span><span style="color: #008b8b;"> a</span> <span style="color: #228b22;">owl:</span><span style="color: #008b8b;">Ontology</span>;
+  <span style="color: #228b22;">rdfs:</span><span style="color: #008b8b;">label</span> <span style="color: #8b2252;">"Offshore Leaks ontology"</span>;
+  <span style="color: #228b22;">rdfs:</span><span style="color: #008b8b;">comment</span> <span style="color: #8b2252;">"Describes the ICIJ Offshore Leaks database released on 2016-05-10"</span>;
+  <span style="color: #228b22;">dct:</span><span style="color: #008b8b;">subject</span> <span style="color: #228b22;">dbr:</span><span style="color: #008b8b;">Offshore_company,</span> <span style="color: #228b22;">dbr:</span><span style="color: #008b8b;">Money_laundering,</span> <span style="color: #228b22;">dbr:</span><span style="color: #008b8b;">Tax_evasion</span>;
+  <span style="color: #228b22;">dct:</span><span style="color: #008b8b;">created</span> <span style="color: #8b2252;">"2016-05-12"</span><span style="color: #228b22;">^^xsd:</span><span style="color: #008b8b;">date</span>;
+  <span style="color: #228b22;">rdfs:</span>seeAlso
+    <span style="color: #0000ff;">&lt;https://offshoreleaks.icij.org/&gt;</span>,
+    <span style="color: #0000ff;">&lt;http://data.ontotext.com/resource/leaks&gt;</span>,
+    <span style="color: #0000ff;">&lt;https://github.com/Ontotext-AD/leaks&gt;</span>;
+  <span style="color: #228b22;">dct:</span><span style="color: #008b8b;">source</span> <span style="color: #0000ff;">&lt;https://offshoreleaks.icij.org/pages/database&gt;</span>;
+  <span style="color: #228b22;">dct:</span><span style="color: #008b8b;">creator</span> <span style="color: #0000ff;">&lt;http://www.ontotext.com&gt;</span>;
+  <span style="color: #228b22;">void:</span><span style="color: #008b8b;">sparqlEndpoint</span> <span style="color: #0000ff;">&lt;http://data.ontotext.com/sparql&gt;</span>.
+</pre>
+</div>
+<ul class="org-ul">
+<li>"raw" classes and properties derived directly from the CSVs, eg:
+</li>
+</ul>
+<div class="org-src-container">
+
+<pre class="src src-Turtle"><span style="color: #228b22;">leak:</span><span style="color: #008b8b;">Node</span> <span style="color: #a020f0;">a</span> <span style="color: #228b22;">owl:</span><span style="color: #008b8b;">Class</span>;
+  <span style="color: #228b22;">rdfs:</span><span style="color: #008b8b;">isDefinedBy</span> <span style="color: #228b22;">leak:</span>;
+  <span style="color: #228b22;">rdfs:</span><span style="color: #008b8b;">label</span> <span style="color: #8b2252;">"Node"</span>;
+  <span style="color: #228b22;">rdfs:</span><span style="color: #008b8b;">comment</span> <span style="color: #8b2252;">"Any kind of node"</span><span style="color: #228b22;">.</span>
+
+<span style="color: #228b22;">leak:</span><span style="color: #008b8b;">Address</span> <span style="color: #a020f0;">a</span> <span style="color: #228b22;">owl:</span><span style="color: #008b8b;">Class</span>;
+  <span style="color: #228b22;">rdfs:</span><span style="color: #008b8b;">subClassOf</span> <span style="color: #228b22;">leak:</span><span style="color: #008b8b;">Node</span>;
+  <span style="color: #228b22;">rdfs:</span><span style="color: #008b8b;">isDefinedBy</span> <span style="color: #228b22;">leak:</span>;
+  <span style="color: #228b22;">rdfs:</span><span style="color: #008b8b;">label</span> <span style="color: #8b2252;">"Address"</span>;
+  <span style="color: #228b22;">rdfs:</span><span style="color: #008b8b;">comment</span> <span style="color: #8b2252;">"Address of an entity, intermediary or officer"</span>.
+</pre>
+</div>
+<ul class="org-ul">
+<li>"Cooked" classes and properties, inferred from the raw data, eg (we'll be adding more):
+</li>
+</ul>
+<div class="org-src-container">
+
+<pre class="src src-Turtle"><span style="color: #228b22;">leak:</span><span style="color: #008b8b;">Country</span> <span style="color: #a020f0;">a</span> <span style="color: #228b22;">owl:</span><span style="color: #008b8b;">Class</span>;
+  <span style="color: #228b22;">rdfs:</span><span style="color: #008b8b;">isDefinedBy</span> <span style="color: #228b22;">leak:</span>;
+  <span style="color: #228b22;">rdfs:</span><span style="color: #008b8b;">label</span> <span style="color: #8b2252;">"Country"</span>;
+  <span style="color: #228b22;">rdfs:</span><span style="color: #008b8b;">comment</span> <span style="color: #8b2252;">"Country identified by its ISO alpha3 code"</span>;
+  <span style="color: #228b22;">skos:</span><span style="color: #008b8b;">example</span> <span style="color: #8b2252;">"leaks:country-VGB, which is owl:sameAs dbr:British_Virgin_Islands"</span><span style="color: #228b22;">.</span>
+
+<span style="color: #228b22;">leak:</span><span style="color: #008b8b;">hasCountry</span> <span style="color: #a020f0;">a</span> <span style="color: #228b22;">owl:</span><span style="color: #008b8b;">ObjectProperty</span>;
+  <span style="color: #228b22;">rdfs:</span><span style="color: #008b8b;">isDefinedBy</span> <span style="color: #228b22;">leak:</span>;
+  <span style="color: #228b22;">rdfs:</span><span style="color: #008b8b;">label</span> <span style="color: #8b2252;">"hasCountry"</span>;
+  <span style="color: #228b22;">rdfs:</span><span style="color: #008b8b;">domain</span> <span style="color: #228b22;">leak:</span><span style="color: #008b8b;">Node</span>;
+  <span style="color: #228b22;">rdfs:</span><span style="color: #008b8b;">range</span> <span style="color: #228b22;">leak:</span><span style="color: #008b8b;">Country</span>;
+  <span style="color: #228b22;">rdfs:</span><span style="color: #008b8b;">comment</span> <span style="color: #8b2252;">"Obtained by splitting country_codes on ';' and linking"</span>.
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-2-3" class="outline-3">
+<h3 id="sec-2-3"><span class="section-number-3">2.3</span> tarql</h3>
+<div class="outline-text-3" id="text-2-3">
+<p>
+We use <a href="https://github.com/tarql/tarql">tarql</a> (SPARQL processor for Tables) to convert from CSV to Turtle.
+</p>
+</div>
+
+<div id="outline-container-sec-2-3-1" class="outline-4">
+<h4 id="sec-2-3-1"><span class="section-number-4">2.3.1</span> tarql Queries</h4>
+<div class="outline-text-4" id="text-2-3-1">
+<p>
+<code>tarql</code> is driven by CONSTRUCT queries.
+They are fairly straight-forward: the columns are mapped to raw data properties of the same name,
+while the URL is made of a descriptive prefix (eg "address-") and the <code>node_id</code>:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sparql"><span style="color: #a020f0;">prefix</span> rdf:   <span style="color: #008b8b;">&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;</span>
+<span style="color: #a020f0;">prefix</span> leak:  <span style="color: #008b8b;">&lt;http://data.ontotext.com/resource/leaks#&gt;</span><span style="color: #b22222;"> # ontology</span>
+<span style="color: #a020f0;">prefix</span> leaks: <span style="color: #008b8b;">&lt;http://data.ontotext.com/resource/leaks/&gt;</span> <span style="color: #b22222;"># data</span>
+
+<span style="color: #a020f0;">construct</span> {
+  <span style="color: #a0522d;">?node</span> a leak:Address;
+    leak:address        <span style="color: #a0522d;">?address</span>;
+    leak:icij_id        <span style="color: #a0522d;">?icij_id</span>;
+    leak:valid_until    <span style="color: #a0522d;">?valid_until</span>;
+    leak:country_codes  <span style="color: #a0522d;">?country_codes</span>;
+    leak:countries      <span style="color: #a0522d;">?countries</span>;
+    leak:node_id        <span style="color: #a0522d;">?node_id</span>;
+    leak:sourceID       <span style="color: #a0522d;">?sourceID</span>
+  }
+<span style="color: #a020f0;">from</span> <span style="color: #008b8b;">&lt;file:../Addresses.csv#encoding=utf-8&gt;</span>
+<span style="color: #a020f0;">where</span> {
+  <span style="color: #a020f0;">bind</span>(uri(concat(str(leaks:),<span style="color: #8b2252;">"address-"</span>,<span style="color: #a0522d;">?node_id</span>)) <span style="color: #a020f0;">as</span> <span style="color: #a0522d;">?node</span>)
+}
+</pre>
+</div>
+<p>
+We got <a href="./addresses.rq">./addresses.rq</a>, <a href="./edges.rq">./edges.rq</a>, <a href="./entities.rq">./entities.rq</a>, <a href="./intermediaries.rq">./intermediaries.rq</a>, <a href="./officers.rq">./officers.rq</a>.
+(These are the only files that include prefixes, since <code>tarql</code> can't use an extra prefix file.)
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-2-3-2" class="outline-4">
+<h4 id="sec-2-3-2"><span class="section-number-4">2.3.2</span> tarql Results</h4>
+<div class="outline-text-4" id="text-2-3-2">
+<p>
+The  <a href="./addresses.rq">./addresses.rq</a> query produces Turtle RDF data like this:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-Turtle"><span style="color: #228b22;">leaks:</span>address-14000003
+        <span style="color: #228b22;">rdf:</span><span style="color: #008b8b;">type</span>            <span style="color: #228b22;">leak:</span><span style="color: #008b8b;">Address</span> ;
+        <span style="color: #228b22;">leak:</span><span style="color: #008b8b;">address</span>        <span style="color: #8b2252;">"\"Cantoni</span><span style="color: #a020f0;">a</span><span style="color: #8b2252;">\" South Road St Georges Hill Weybridge, Surrey"</span> ;
+        <span style="color: #228b22;">leak:</span><span style="color: #008b8b;">icij_id</span>        <span style="color: #8b2252;">"240EE44DFB70AF775E6CD02AF8CB889B"</span> ;
+        <span style="color: #228b22;">leak:</span><span style="color: #008b8b;">valid_until</span>    <span style="color: #8b2252;">"The Panama Papers  data is current through 2015"</span> ;
+        <span style="color: #228b22;">leak:</span><span style="color: #008b8b;">country_codes</span>  <span style="color: #8b2252;">"GBR"</span> ;
+        <span style="color: #228b22;">leak:</span><span style="color: #008b8b;">countries</span>      <span style="color: #8b2252;">"United Kingdom"</span> ;
+        <span style="color: #228b22;">leak:</span><span style="color: #008b8b;">node_id</span>        <span style="color: #8b2252;">"14000003"</span> ;
+        <span style="color: #228b22;">leak:</span><span style="color: #008b8b;">sourceID</span>       <span style="color: #8b2252;">"Panama Papers"</span> .
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-2-3-3" class="outline-4">
+<h4 id="sec-2-3-3"><span class="section-number-4">2.3.3</span> Running tarql</h4>
+<div class="outline-text-4" id="text-2-3-3">
+<p>
+Since the queries designate the input files (assumed to be in a directory one level up), we run <code>tarql</code> simply like this:
+</p>
+<pre class="example">
+tarql addresses.rq      &gt; addresses.ttl
+tarql edges.rq          &gt; edges.ttl
+tarql entities.rq       &gt; entities.ttl
+tarql intermediaries.rq &gt; intermediaries.ttl
+tarql officers.rq       &gt; officers.ttl
+</pre>
+
+<p>
+This easily makes 760Mb of RDF data, so you better have a fast disk (SSD). Voila!
+</p>
+
+<p>
+Notes:
+</p>
+<ul class="org-ul">
+<li>We use UUIDs for edges, because 
+the same pair &lt;node_1, node_2&gt; may be connected by several edges,
+yet edges don't have a unique ID themselves, and <code>tarql</code>'s special variable <code>?ROWNUM</code> doesn't work.
+<div class="org-src-container">
+
+<pre class="src src-Turtle"><span style="color: #228b22;">leaks:</span><span style="color: #008b8b;">edge-31203a84-a56e-4e2a-8bc6-0921a399b691</span> <span style="color: #a020f0;">a</span> <span style="color: #228b22;">leak:</span><span style="color: #008b8b;">Edge</span>...
+</pre>
+</div>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-2-3-4" class="outline-4">
+<h4 id="sec-2-3-4"><span class="section-number-4">2.3.4</span> tarql Problems</h4>
+<div class="outline-text-4" id="text-2-3-4">
+<ul class="org-ul">
+<li>Skips some rows (unexplained), but the loss is very small.
+Eg 319150 entities.ttl vs 319421 Entities.csv, or a loss of 0.08%
+</li>
+<li>TODO Unicode problems
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-2-4" class="outline-3">
+<h3 id="sec-2-4"><span class="section-number-3">2.4</span> <span class="todo TODO">TODO</span> Geonames and DBpedia Geography</h3>
+<div class="outline-text-3" id="text-2-4">
+<p>
+We want to correlate countries to Geonames and DBpedia, in order to use the <code>gn:parentFeature</code> hierarchy to group countries by region (eg Eastern Europe) and continent (eg Europe).
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-2-5" class="outline-3">
+<h3 id="sec-2-5"><span class="section-number-3">2.5</span> Country Codes</h3>
+<div class="outline-text-3" id="text-2-5">
+<p>
+Since the data uses ISO alpha3 country codes, we have to use that to correlate to DBpedia.
+</p>
+<ul class="org-ul">
+<li><a href="https://en.wikipedia.org/wiki/ISO_3166-1">Wikipedia</a> has such a list in the form of a table
+</li>
+<li><a href="http://www.geonames.org/countries/">Geonames</a> has another such list
+</li>
+<li>We extracted them to a <a href="https://docs.google.com/spreadsheets/d/1Zjp_azlkZzczkQvi2mnY68AscfwBHIsFjw6HjZFSV2U/edit">Google sheet</a> and did a quick check that all codes match (Geonames has 3 more)
+</li>
+</ul>
+<p>
+The Google sheet almost does what we want, but the first column is a country display name, and not the actual page title
+</p>
+<ul class="org-ul">
+<li>Aland Islands !Åland Islands: the first is used for sorting, and the second is the page title
+</li>
+<li>Virgin Islands (British) is the display name, but British Virgin Islands is the actual page title
+</li>
+</ul>
+
+<p>
+So we wrote a script <a href="./countries-wiki.pl">./countries-wiki.pl</a> that extracts country links from <a href="https://en.wikipedia.org/w/index.php?title=ISO_3166-1&action=edit&section=5">Wikipedia source</a> (<a href="./countries-wiki-source.txt">./countries-wiki-source.txt</a>).
+The result <a href="./countries-wiki.txt">./countries-wiki.txt</a> looks like this:
+</p>
+<pre class="example">
+ABW	http://dbpedia.org/resource/Aruba
+AFG	http://dbpedia.org/resource/Afghanistan
+...
+XXX	http://dbpedia.org/resource/Undefined
+</pre>
+<p>
+The data uses code "XXX" Undefined, so we've added a fake line for it (<code>dbr:Undefined</code> is a disambiguation page, but is good enough to use as a signal value).
+</p>
+
+<p>
+It turns out that <code>Addresses.csv</code> has the largest number of country codes (211).
+We cross-checked, and all codes are covered by Wikipedia (250) and Geonames (252).
+</p>
+
+<p>
+From this we also make <a href="./countries-dbpedia.ttl">./countries-dbpedia.ttl</a>, which has statements like this:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-Turtle"><span style="color: #228b22;">leak:</span><span style="color: #008b8b;">country-ABW</span> <span style="color: #228b22;">owl:</span><span style="color: #008b8b;">sameAs</span> <span style="color: #228b22;">dbr:</span><span style="color: #008b8b;">Aruba</span><span style="color: #228b22;">.</span>
+<span style="color: #228b22;">leak:</span><span style="color: #008b8b;">country-AFG</span> <span style="color: #228b22;">owl:</span><span style="color: #008b8b;">sameAs</span> <span style="color: #228b22;">dbr:</span><span style="color: #008b8b;">Afghanistan</span><span style="color: #228b22;">.</span>
+<span style="color: #228b22;">...</span>
+<span style="color: #228b22;">leak:</span><span style="color: #008b8b;">country-XXX</span> <span style="color: #228b22;">owl:</span><span style="color: #008b8b;">sameAs</span> <span style="color: #228b22;">dbr:</span><span style="color: #008b8b;">Undefined</span>.
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-2-6" class="outline-3">
+<h3 id="sec-2-6"><span class="section-number-3">2.6</span> Offshore Jurisdictions</h3>
+<div class="outline-text-3" id="text-2-6">
+<p>
+<a href="./jurisdictions.ttl">./jurisdictions.ttl</a> includes data about the Offshore Jurisdictions 
+</p>
+<div class="org-src-container">
+
+<pre class="src src-Turtle"><span style="color: #228b22;">leaks:</span><span style="color: #008b8b;">offshore-BVI</span>    <span style="color: #a020f0;">a</span> <span style="color: #228b22;">leak:</span><span style="color: #008b8b;">OffshoreJurisdiction</span>; <span style="color: #228b22;">leak:</span><span style="color: #008b8b;">code</span> <span style="color: #8b2252;">"BVI"</span>;   <span style="color: #228b22;">leak:</span><span style="color: #008b8b;">name</span> <span style="color: #8b2252;">"British Virgin Islands"</span>;   <span style="color: #228b22;">skos:</span><span style="color: #008b8b;">exactMatch</span> <span style="color: #228b22;">dbr:</span><span style="color: #008b8b;">British_Virgin_Islands</span> . <span style="color: #b22222;"># </span><span style="color: #228b22;">151588</span>
+<span style="color: #228b22;">leaks:</span><span style="color: #008b8b;">offshore-XXX</span>    <span style="color: #a020f0;">a</span> <span style="color: #228b22;">leak:</span><span style="color: #008b8b;">OffshoreJurisdiction</span>; <span style="color: #228b22;">leak:</span><span style="color: #008b8b;">code</span> <span style="color: #8b2252;">"XXX"</span>;   <span style="color: #228b22;">leak:</span><span style="color: #008b8b;">name</span> <span style="color: #8b2252;">"Undetermined"</span>;             <span style="color: #228b22;">skos:</span><span style="color: #008b8b;">exactMatch</span> <span style="color: #228b22;">dbr:</span><span style="color: #008b8b;">Undetermined</span>           . <span style="color: #b22222;"># 55645</span>
+</pre>
+</div>
+<div class="org-src-container">
+
+<pre class="src src-Turtle"><span style="color: #228b22;">leaks:</span><span style="color: #008b8b;">offshore-NIUE</span>   <span style="color: #a020f0;">a</span> <span style="color: #228b22;">leak:</span><span style="color: #008b8b;">OffshoreJurisdiction</span>; <span style="color: #228b22;">leak:</span><span style="color: #008b8b;">code</span> <span style="color: #8b2252;">"NIUE"</span>;  <span style="color: #228b22;">leak:</span><span style="color: #008b8b;">name</span> <span style="color: #8b2252;">"Niue"</span>;                     <span style="color: #228b22;">skos:</span><span style="color: #008b8b;">exactMatch</span> <span style="color: #228b22;">dbr:</span><span style="color: #008b8b;">Niue</span>                   . <span style="color: #b22222;"># </span><span style="color: #228b22;">9611</span>
+<span style="color: #228b22;">leaks:</span><span style="color: #008b8b;">offshore-LABUA</span>  <span style="color: #a020f0;">a</span> <span style="color: #228b22;">leak:</span><span style="color: #008b8b;">OffshoreJurisdiction</span>; <span style="color: #228b22;">leak:</span><span style="color: #008b8b;">code</span> <span style="color: #8b2252;">"LABUA"</span>; <span style="color: #228b22;">leak:</span><span style="color: #008b8b;">name</span> <span style="color: #8b2252;">"Labuan"</span>;                   <span style="color: #228b22;">skos:</span><span style="color: #008b8b;">exactMatch</span> <span style="color: #228b22;">dbr:</span><span style="color: #008b8b;">Labuan</span>                 . <span style="color: #b22222;"># 421</span>
+</pre>
+</div>
+<div class="org-src-container">
+
+<pre class="src src-Turtle"><span style="color: #228b22;">leaks:</span><span style="color: #008b8b;">offshore-WYO</span>    <span style="color: #a020f0;">a</span> <span style="color: #228b22;">leak:</span><span style="color: #008b8b;">OffshoreJurisdiction</span>; <span style="color: #228b22;">leak:</span><span style="color: #008b8b;">code</span> <span style="color: #8b2252;">"WYO"</span>;   <span style="color: #228b22;">leak:</span><span style="color: #008b8b;">name</span> <span style="color: #8b2252;">"Wyoming"</span>;                  <span style="color: #228b22;">skos:</span><span style="color: #008b8b;">exactMatch</span> <span style="color: #228b22;">dbr:</span><span style="color: #008b8b;">Wyoming</span>                . <span style="color: #b22222;"># </span><span style="color: #228b22;">37</span>
+<span style="color: #228b22;">leaks:</span><span style="color: #008b8b;">offshore-RAK</span>    <span style="color: #a020f0;">a</span> <span style="color: #228b22;">leak:</span><span style="color: #008b8b;">OffshoreJurisdiction</span>; <span style="color: #228b22;">leak:</span><span style="color: #008b8b;">code</span> <span style="color: #8b2252;">"RAK"</span>;   <span style="color: #228b22;">leak:</span><span style="color: #008b8b;">name</span> <span style="color: #8b2252;">"Ras Al Khaimah"</span>;           <span style="color: #228b22;">skos:</span><span style="color: #008b8b;">exactMatch</span> <span style="color: #228b22;">dbr:</span><span style="color: #008b8b;">Ras_al-Khaimah</span>         . <span style="color: #b22222;"># 2</span>
+</pre>
+</div>
+<p>
+Notably, Luxembourg is missing from the list (see <a href="https://www.icij.org/project/luxembourg-leaks">Luxembourg Leaks</a>)
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-2-7" class="outline-3">
+<h3 id="sec-2-7"><span class="section-number-3">2.7</span> Data Model</h3>
+<div class="outline-text-3" id="text-2-7">
+<p>
+To enrich and use the RDF data efficiently, it's important to understand how it is laid out, i.e. the data model 
+(or as is currently called, <a href="https://www.w3.org/2014/data-shapes">RDF Shape</a>).
+</p>
+
+<p>
+Ontotext has developed a tool <b>rdfpuml</b> that creates precise diagrams from actual Turtle.
+See "Making True RDF Diagrams With rdfpuml": <a href="http://vladimiralexiev.github.io/pres/20160325-rdfpuml/">presentation</a> or <a href="http://vladimiralexiev.github.io/pres/20160325-rdfpuml/index-full.html">continuous HTML</a>.
+</p>
+
+<p>
+We made a sample <a href="./model.ttl">./model.ttl</a> that describes a few entities, Edges between them, and the associated Countries and Offshore jurisdictions.
+We generated the following diagram directly from it:
+</p>
+
+
+<div class="figure">
+<p><img src="./model.png" alt="model.png" />
+</p>
+</div>
+
+<p>
+We'll keep enriching the diagram as we add more inferences. Stay tuned.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-2-8" class="outline-3">
+<h3 id="sec-2-8"><span class="section-number-3">2.8</span> Day1 Recap</h3>
+<div class="outline-text-3" id="text-2-8">
+<p>
+And looked Onto upon the land, and saw that it was good:
+</p>
+<ul class="org-ul">
+<li>CSVs parsed good, the devilish comma betwixt data divined right
+</li>
+<li>UTFs looketh right
+</li>
+<li>tarql worketh fastly and loseth nearly nought data (0.08%)
+</li>
+<li>760 million ducats of RDF spilt forth
+</li>
+<li>Prefixes unified and registered as <a href="http://prefix.cc/leak">http://prefix.cc/leak</a>
+</li>
+<li>Ontology described by the <a href="https://www.w3.org/TR/void/">VOID</a>, and shalt be registered in the <a href="http://lov.okfn.org/">LOV</a>
+</li>
+<li>Data model lucid and clear
+</li>
+<li>Countries and Offshores hast connexion to DBpedia
+</li>
+</ul>
+<p>
+Go forth and queriest! Whence did money came from, and whither did it flow?
+</p>
+
+<p>
+And there was evening (actually well past midnight), and there was morning&#x2013;the first day.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> Inferencing</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+Day 2: <span class="timestamp-wrapper"><span class="timestamp">&lt;2016-05-13 Fri&gt;</span></span>
+What shalt we do today? How about inferring some new data from the basic RDF.
+</p>
+
+<p>
+Thou can direct us in our endeavours: <a href="https://github.com/Ontotext-AD/leaks/issues">hither on Github</a> or <a href="https://gitter.im/Ontotext-AD/leaks">thither on Gitter</a>
+</p>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">&lt;2016-05-13&gt;</span></span></p>
+<p class="author">Author: Ontotext</p>
+<p class="creator">Emacs 25.0.50.1 (Org mode 8.2.10)</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

@@ -1,0 +1,423 @@
+#+TITLE: Offshore Leaks as LOD
+#+DATE: <2016-05-13>
+#+AUTHOR: Ontotext
+#+OPTIONS: ':nil *:t -:t ::t <:t H:5 \n:nil ^:{} arch:headline author:t c:nil
+#+OPTIONS: creator:comment d:(not "LOGBOOK") date:t e:t email:nil f:t inline:t num:t
+#+OPTIONS: p:nil pri:nil stat:t tags:t tasks:t tex:t timestamp:nil toc:3 todo:t |:t
+#+CREATOR: Emacs 25.0.50.1 (Org mode 8.2.10)
+#+DESCRIPTION:
+#+EXCLUDE_TAGS: noexport
+#+KEYWORDS:
+#+LANGUAGE: en
+#+SELECT_TAGS: export
+
+* Intro
+Day 1: <2016-05-12 Thu>
+- HTML rendered version: [[http://rawgit.com/Ontotext-AD/leaks]]
+- Post an issue on Github: https://github.com/Ontotext-AD/leaks/issues
+- Chat to us on Gitter: https://gitter.im/Ontotext-AD/leaks
+
+** Offshore Links
+The [[https://offshoreleaks.icij.org/][Offshore Leaks]] database of The International Consortium of Investigative Journalists (ICIJ)
+is a wonderful resource that allows you to explore the murky world of high-flyer finance and offshore destinations.
+It includes two sources:
+- [[https://panamapapers.icij.org][Panama Papers]]
+- [[https://www.icij.org/offshore][Offshore Leaks]] (but seemingly excluding Luxembourg Leaks, see sec [[* Offshore Jurisdictions]])
+
+[[https://offshoreleaks.icij.org/pages/database][The database]] was released on May 10 (please download it from their torrent link)
+and on May 12 we decided to explore it using Linked Open Data (LOD).
+
+** The Database
+The database is available as 5 CSV files with the following number of records:
+#+BEGIN_EXAMPLE
+>wc -l *.csv
+   151128 Addresses.csv
+   319422 Entities.csv
+    23643 Intermediaries.csv
+   345646 Officers.csv
+  1269797 all_edges.csv
+#+END_EXAMPLE
+When parsing it, you should be careful about two aspects:
+- CSV quoting
+- Unicode (UTF-8) encoding
+
+The files have the following columns, which you can see with
+: head -1 *.csv
+As we analyze the data, we'll add more in-depth notes.
+
+** Addresses.csv
+| *col*         | *notes*                 | *example*                                        |
+| address       | textual address         | #02-01; 14 MOHAMED SULTAN ROAD; SINGAPORE 238963 |
+| icij_id       | ICIJ guid               | 91BB6C910709CE3331D31A89DD97EDAD                 |
+| valid_until   | fixed statement         | The Panama Papers  data is current through 2015  |
+| country_codes | ISO alpha3 code         | SGP                                              |
+| countries     | country name            | Singapore                                        |
+| node_id       | unique across all files | 14000015                                         |
+| sourceID      | source name             | "Panama Papers" or "Offshorshuckaks"              |
+
+** Entities.csv
+Legal bodies such as companies, foundations, trusts...
+| *col*                    | *notes*                                     | *example*                                                                                                                   |
+| name                     | company name                                | CHEM D-T Corp.                                                                                                              |
+| original_name            | official name                               | CHEM D-T Corp. EX-CHEM DT Corp.                                                                                             |
+| former_name              | former name (often empty)                   | CHEM DT Corp.                                                                                                               |
+| jurisdiction             | where registered (*not* alpha3 code)        | SAM                                                                                                                         |
+| jurisdiction_description | where registered (country, US state, ...)   | Samoa                                                                                                                       |
+| company_type             | formal type                                 | "Standard International Company", "BVI Trust"...                                                                            |
+| address                  | formal address                              | GO SHINE MANAGEMENT CO.; LTD. ROOM B; 5F.; NO. 92; SEC. 1NANJING E. RD.; JHONGSHAN DISTRICT; TAIPEI CITY 104; TAIPEI TAIWAN |
+| internal_id              | ???                                         | 1000094                                                                                                                     |
+| incorporation_date       | when created                                | 30-MAR-2004                                                                                                                 |
+| inactivation_date        | when deactivated                            | 06-NOV-2009                                                                                                                 |
+| struck_off_date          | when removed from register                  | 15-FEB-2010                                                                                                                 |
+| dorm_date                | when became dormant                         |                                                                                                                             |
+| status                   | 29% Active, 29% Defaulted, 7% Dissolved...  | Defaulted                                                                                                                   |
+| service_provider         | law firm serving the entity                 | "Mossack Fonseca", "Portcullis Trustnet" or "Commonwealth Trust Limited"                                                    |
+| ibcRUC                   | ???                                         | 16469                                                                                                                       |
+| country_codes            | where active (alpha3), can be *multiple*    | AUS;BLZ                                                                                                                     |
+| countries                | where active (countries), can be *multiple* | Australia;Belize                                                                                                            |
+| note                     | most often empty                            |                                                                                                                             |
+| valid_until              | fixed statement                             | The Panama Papers  data is current through 2015                                                                             |
+| node_id                  | unique across all files                     | 10000018                                                                                                                    |
+| sourceID                 | source name                                 | "Panama Papers" or "Offshore Leaks"                                                                                         |
+
+** Intermediaries.csv
+Agents that help beneficiaries setup offshore companies
+| *col*         | *notes*                                     | *example*                                                                                            |
+| name          | name                                        | SECRETARIAL SERVICES LIMITED                                                                         |
+| internal_id   | ???                                         | 1009                                                                                                 |
+| address       | address                                     | SECRETARIAL SERVICES LIMITED P.O. BOX 37 ST. ANNE'S HOUSE; VICTORIA STREET ALDERNEY; CHANNEL ISLANDS |
+| valid_until   | fixed statement                             | The Panama Papers  data is current through 2015                                                      |
+| country_codes | where active (alpha3), can be *multiple*    | GGY;GBR                                                                                              |
+| countries     | where active (countries), can be *multiple* | Guernsey;United Kingdom                                                                              |
+| status        | 46% blank, 30% ACTIVE, 20% SUSPENDED...     | SUSPENDED                                                                                            |
+| node_id       | unique across all files                     | 11000034                                                                                             |
+| sourceID      | source name                                 | "Panama Papers" or "Offshore Leaks"                                                                  |
+
+** Officers.csv
+Agents (people, groups of people, companies) that serve as company officers and beneficiaries, both formal and real
+| *col*         | *notes*                                     | *example*                                       |
+| name          | name                                        | Wu Chi-Ping and Wu Chou Tsan-Ting               |
+| icij_id       | ICIJ guid                                   | 1B92FDDD451DA8DCA9CD36B0AF797411                |
+| valid_until   | fixed statement                             | The Panama Papers  data is current through 2015 |
+| country_codes | where active (alpha3), can be *multiple*    | TWN                                             |
+| countries     | where active (countries), can be *multiple* | Taiwan, Province of China                       |
+| node_id       | unique across all files                     | 12000009                                        |
+| sourceID      | source name                                 | "Panama Papers" or "Offshore Leaks"             |
+
+** all_edges.csv
+Relations between records. Since node_id is unique across files, there's no need to mention the entity types.
+| *col*    | *notes*          |
+| node_1   | source node      |
+| rel_type | relation type    |
+| node_2   | destination node |
+
+** rel_type
+The relation types is one of the most interesting key fields. The distribution of values is as follows:
+| *count* | *rel_type*                                   |
+|  319121 | intermediary of                              |
+|  316472 | registered address                           |
+|  277380 | shareholder of                               |
+|  118589 | Director of                                  |
+|  105408 | Shareholder of                               |
+|   46761 | similar name and address as                  |
+|   36318 | Records & Registers of                       |
+|   15151 | beneficiary of                               |
+|   14351 | Secretary of                                 |
+|    4031 | Beneficiary of                               |
+|    3146 | same name and registration date as           |
+|    1847 | Beneficial Owner of                          |
+|    1418 | Trustee of Trust of                          |
+|    1234 | Trust Settlor of                             |
+|    1229 | Authorised Person / Signatory of             |
+|    1198 | Protector of                                 |
+|    1130 | Nominee Shareholder of                       |
+|     960 | same address as                              |
+|     622 | related entity                               |
+|     583 | Assistant Secretary of                       |
+|     409 | Alternate Director of                        |
+|     320 | Co-Trustee of Trust of                       |
+|     281 | Officer of                                   |
+|     272 | Resident Director of                         |
+|     207 | Auditor of                                   |
+|     173 | Correspondent Addr. of                       |
+|     123 | Bank Signatory of                            |
+|     120 | General Accountant of                        |
+|     101 | Nominated Person of                          |
+|      89 | Legal Advisor of                             |
+|      74 | Reserve Director of                          |
+|      65 | Investment Advisor of                        |
+|      64 | Nominee Director of                          |
+|      48 | Register of Director of                      |
+|      41 | Register of Shareholder of                   |
+|      41 | Joint Settlor of                             |
+|      40 | President of                                 |
+|      32 | Auth. Representative of                      |
+|      32 | Appointor of                                 |
+|      28 | Owner, director and shareholder of           |
+|      25 | Beneficial owner of                          |
+|      24 | Nominee Trust Settlor of                     |
+|      20 | Power of Attorney of                         |
+|      18 | Unit Trust Register of                       |
+|      18 | Treasurer of                                 |
+|      16 | Owner of                                     |
+|      14 | Tax Advisor of                               |
+|      14 | Custodian of                                 |
+|      13 | Successor Protector of                       |
+|      11 | Stockbroker of                               |
+|       9 | Power of attorney of                         |
+|       9 | Personal Directorship of                     |
+|       8 | Safekeeping of                               |
+|       8 | Nominee Protector of                         |
+|       7 | Vice President of                            |
+|       7 | Partner of                                   |
+|       6 | Director / Shareholder of                    |
+|       6 | Beneficiary, shareholder and director of     |
+|       5 | Nominee Secretary of                         |
+|       4 | Sole shareholder of                          |
+|       4 | Nominee Beneficial Owner of                  |
+|       4 | Director / Beneficial Owner of               |
+|       4 | Chairman of                                  |
+|       3 | Principal beneficiary of                     |
+|       3 | Member of Foundation Council of              |
+|       3 | Connected of                                 |
+|       2 | Sole signatory of                            |
+|       2 | Signatory of                                 |
+|       2 | Nominee Beneficiary of                       |
+|       2 | Director / Shareholder / Beneficial Owner of |
+|       2 | Director (Rami Makhlouf) of                  |
+|       2 | Board Representative of                      |
+|       1 | Sole signatory / Beneficial owner of         |
+|       1 | Shareholder (through Julex Foundation) of    |
+|       1 | President and director of                    |
+|       1 | President - Director of                      |
+|       1 | Power of Attorney / Shareholder of           |
+|       1 | Nominee Name of                              |
+|       1 | Nominee Investment Advisor of                |
+|       1 | Member / Shareholder of                      |
+|       1 | Grantee of a mortgage of                     |
+|       1 | First beneficiary of                         |
+|       1 | Director and shareholder of                  |
+|       1 | Authorized signatory of                      |
+
+* RDF Conversion
+
+** Date Conversion
+The dates in ~Entities.csv~ have the form "06-NOV-2009", but we want to convert them to proper xsd:date, eg "2009-11-06".
+We do that with a script [[./dates.pl]] by calling it like
+: perl dates.pl Entities.csv > Entities-dated.csv
+
+We can find the distribution of years like this:
+: perl -ne 'print "$1\n" if m{\b[0-9]{2}-[A-Z]{3}-([0-9]{4})\b}' Entities.csv|sort|uniq -c
+The most active years were 1999-2009. (There are also 9 invalid dates 1-APR-1001.)
+
+** Leaks Ontology
+First we define all prefixes we use in a single file [[./prefixes.ttl]], so we won't have to repeat them many times.
+In addition to standard prefixes (that you can get from http://prefix.cc/dbr,dbo,dct,rdf,rdfs,skos,owl,xsd.ttl),
+we also define:
+#+BEGIN_SRC Turtle
+@prefix leak:  <http://data.ontotext.com/resource/leaks#>.  # ontology
+@prefix leaks: <http://data.ontotext.com/resource/leaks/> . # data
+#+END_SRC
+
+We made an ontology [[./leak.ttl]] that has 4 parts:
+- A header that describes the ontology itself:
+#+BEGIN_SRC Turtle
+leak: a owl:Ontology;
+  rdfs:label "Offshore Leaks ontology";
+  rdfs:comment "Describes the ICIJ Offshore Leaks database released on 2016-05-10";
+  dct:subject dbr:Offshore_company, dbr:Money_laundering, dbr:Tax_evasion;
+  dct:created "2016-05-12"^^xsd:date;
+  rdfs:seeAlso
+    <https://offshoreleaks.icij.org/>,
+    <http://data.ontotext.com/resource/leaks>,
+    <https://github.com/Ontotext-AD/leaks>;
+  dct:source <https://offshoreleaks.icij.org/pages/database>;
+  dct:creator <http://www.ontotext.com>;
+  void:sparqlEndpoint <http://data.ontotext.com/sparql>.
+#+END_SRC
+- "raw" classes and properties derived directly from the CSVs, eg:
+#+BEGIN_SRC Turtle
+leak:Node a owl:Class;
+  rdfs:isDefinedBy leak:;
+  rdfs:label "Node";
+  rdfs:comment "Any kind of node".
+
+leak:Address a owl:Class;
+  rdfs:subClassOf leak:Node;
+  rdfs:isDefinedBy leak:;
+  rdfs:label "Address";
+  rdfs:comment "Address of an entity, intermediary or officer".
+#+END_SRC
+- "Cooked" classes and properties, inferred from the raw data, eg (we'll be adding more):
+#+BEGIN_SRC Turtle
+leak:Country a owl:Class;
+  rdfs:isDefinedBy leak:;
+  rdfs:label "Country";
+  rdfs:comment "Country identified by its ISO alpha3 code";
+  skos:example "leaks:country-VGB, which is owl:sameAs dbr:British_Virgin_Islands".
+
+leak:hasCountry a owl:ObjectProperty;
+  rdfs:isDefinedBy leak:;
+  rdfs:label "hasCountry";
+  rdfs:domain leak:Node;
+  rdfs:range leak:Country;
+  rdfs:comment "Obtained by splitting country_codes on ';' and linking".
+#+END_SRC
+
+** tarql
+We use [[https://github.com/tarql/tarql][tarql]] (SPARQL processor for Tables) to convert from CSV to Turtle.
+
+*** tarql Queries
+~tarql~ is driven by CONSTRUCT queries.
+They are fairly straight-forward: the columns are mapped to raw data properties of the same name,
+while the URL is made of a descriptive prefix (eg "address-") and the ~node_id~:
+#+BEGIN_SRC sparql
+prefix rdf:   <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+prefix leak:  <http://data.ontotext.com/resource/leaks#> # ontology
+prefix leaks: <http://data.ontotext.com/resource/leaks/> # data
+
+construct {
+  ?node a leak:Address;
+    leak:address        ?address;
+    leak:icij_id        ?icij_id;
+    leak:valid_until    ?valid_until;
+    leak:country_codes  ?country_codes;
+    leak:countries      ?countries;
+    leak:node_id        ?node_id;
+    leak:sourceID       ?sourceID
+  }
+from <file:../Addresses.csv#encoding=utf-8>
+where {
+  bind(uri(concat(str(leaks:),"address-",?node_id)) as ?node)
+}
+#+END_SRC
+We got [[./addresses.rq]], [[./edges.rq]], [[./entities.rq]], [[./intermediaries.rq]], [[./officers.rq]].
+(These are the only files that include prefixes, since ~tarql~ can't use an extra prefix file.)
+
+*** tarql Results
+The  [[./addresses.rq]] query produces Turtle RDF data like this:
+#+BEGIN_SRC Turtle
+leaks:address-14000003
+        rdf:type            leak:Address ;
+        leak:address        "\"Cantonia\" South Road St Georges Hill Weybridge, Surrey" ;
+        leak:icij_id        "240EE44DFB70AF775E6CD02AF8CB889B" ;
+        leak:valid_until    "The Panama Papers  data is current through 2015" ;
+        leak:country_codes  "GBR" ;
+        leak:countries      "United Kingdom" ;
+        leak:node_id        "14000003" ;
+        leak:sourceID       "Panama Papers" .
+#+END_SRC
+
+*** Running tarql
+Since the queries designate the input files (assumed to be in a directory one level up), we run ~tarql~ simply like this:
+#+BEGIN_EXAMPLE
+tarql addresses.rq      > addresses.ttl
+tarql edges.rq          > edges.ttl
+tarql entities.rq       > entities.ttl
+tarql intermediaries.rq > intermediaries.ttl
+tarql officers.rq       > officers.ttl
+#+END_EXAMPLE
+
+This easily makes 760Mb of RDF data, so you better have a fast disk (SSD). Voila!
+
+Notes:
+- We use UUIDs for edges, because 
+  the same pair <node_1, node_2> may be connected by several edges,
+  yet edges don't have a unique ID themselves, and ~tarql~'s special variable ~?ROWNUM~ doesn't work.
+  #+BEGIN_SRC Turtle
+  leaks:edge-31203a84-a56e-4e2a-8bc6-0921a399b691 a leak:Edge...
+  #+END_SRC
+
+*** tarql Problems
+- Skips some rows (unexplained), but the loss is very small.
+  Eg 319150 entities.ttl vs 319421 Entities.csv, or a loss of 0.08%
+- TODO Unicode problems
+
+** TODO Geonames and DBpedia Geography
+We want to correlate countries to Geonames and DBpedia, in order to use the ~gn:parentFeature~ hierarchy to group countries by region (eg Eastern Europe) and continent (eg Europe).
+
+** Country Codes
+Since the data uses ISO alpha3 country codes, we have to use that to correlate to DBpedia.
+- [[https://en.wikipedia.org/wiki/ISO_3166-1][Wikipedia]] has such a list in the form of a table
+- [[http://www.geonames.org/countries/][Geonames]] has another such list
+- We extracted them to a [[https://docs.google.com/spreadsheets/d/1Zjp_azlkZzczkQvi2mnY68AscfwBHIsFjw6HjZFSV2U/edit][Google sheet]] and did a quick check that all codes match (Geonames has 3 more)
+The Google sheet almost does what we want, but the first column is a country display name, and not the actual page title
+- Aland Islands !Åland Islands: the first is used for sorting, and the second is the page title
+- Virgin Islands (British) is the display name, but British Virgin Islands is the actual page title
+
+So we wrote a script [[./countries-wiki.pl]] that extracts country links from [[https://en.wikipedia.org/w/index.php?title%3DISO_3166-1&action%3Dedit&section%3D5][Wikipedia source]] ([[./countries-wiki-source.txt]]).
+The result [[./countries-wiki.txt]] looks like this:
+#+BEGIN_EXAMPLE
+ABW	http://dbpedia.org/resource/Aruba
+AFG	http://dbpedia.org/resource/Afghanistan
+...
+XXX	http://dbpedia.org/resource/Undefined
+#+END_EXAMPLE
+The data uses code "XXX" Undefined, so we've added a fake line for it (~dbr:Undefined~ is a disambiguation page, but is good enough to use as a signal value).
+
+It turns out that ~Addresses.csv~ has the largest number of country codes (211).
+We cross-checked, and all codes are covered by Wikipedia (250) and Geonames (252).
+
+From this we also make [[./countries-dbpedia.ttl]], which has statements like this:
+#+BEGIN_SRC Turtle
+leak:country-ABW owl:sameAs dbr:Aruba.
+leak:country-AFG owl:sameAs dbr:Afghanistan.
+...
+leak:country-XXX owl:sameAs dbr:Undefined.
+#+END_SRC
+
+** Offshore Jurisdictions
+[[./jurisdictions.ttl]] includes data about the Offshore Jurisdictions 
+#+BEGIN_SRC Turtle
+leaks:offshore-BVI    a leak:OffshoreJurisdiction; leak:code "BVI";   leak:name "British Virgin Islands";   skos:exactMatch dbr:British_Virgin_Islands . # 151588
+leaks:offshore-XXX    a leak:OffshoreJurisdiction; leak:code "XXX";   leak:name "Undetermined";             skos:exactMatch dbr:Undetermined           . # 55645
+#+END_SRC
+#+BEGIN_SRC Turtle
+leaks:offshore-NIUE   a leak:OffshoreJurisdiction; leak:code "NIUE";  leak:name "Niue";                     skos:exactMatch dbr:Niue                   . # 9611
+leaks:offshore-LABUA  a leak:OffshoreJurisdiction; leak:code "LABUA"; leak:name "Labuan";                   skos:exactMatch dbr:Labuan                 . # 421
+#+END_SRC
+#+BEGIN_SRC Turtle
+leaks:offshore-WYO    a leak:OffshoreJurisdiction; leak:code "WYO";   leak:name "Wyoming";                  skos:exactMatch dbr:Wyoming                . # 37
+leaks:offshore-RAK    a leak:OffshoreJurisdiction; leak:code "RAK";   leak:name "Ras Al Khaimah";           skos:exactMatch dbr:Ras_al-Khaimah         . # 2
+#+END_SRC
+Notably, Luxembourg is missing from the list (see [[https://www.icij.org/project/luxembourg-leaks][Luxembourg Leaks]])
+
+** Data Model
+To enrich and use the RDF data efficiently, it's important to understand how it is laid out, i.e. the data model 
+(or as is currently called, [[https://www.w3.org/2014/data-shapes][RDF Shape]]).
+
+Ontotext has developed a tool *rdfpuml* that creates precise diagrams from actual Turtle.
+See "Making True RDF Diagrams With rdfpuml": [[http://vladimiralexiev.github.io/pres/20160325-rdfpuml/][presentation]] or [[http://vladimiralexiev.github.io/pres/20160325-rdfpuml/index-full.html][continuous HTML]].
+
+We made a sample [[./model.ttl]] that describes a few entities, Edges between them, and the associated Countries and Offshore jurisdictions.
+We generated the following diagram directly from it:
+
+[[./model.png]]
+
+We'll keep enriching the diagram as we add more inferences. Stay tuned.
+
+** Day1 Recap
+#+BEGIN_COMMENT
+http://biblehub.com/genesis/1.htm
+http://www.kencollins.com/explanations/why-05.htm
+https://en.wikipedia.org/wiki/User:@pple/List_of_archaic_English_words_and_their_modern_equivalents
+#+END_COMMENT
+
+And looked Onto upon the land, and saw that it was good:
+- CSVs parsed good, the devilish comma betwixt data divined right
+- UTFs looketh right
+- tarql worketh fastly and loseth nearly nought data (0.08%)
+- 760 million ducats of RDF spilt forth
+- Prefixes unified and registered as http://prefix.cc/leak
+- Ontology described by the [[https://www.w3.org/TR/void/][VOID]], and shalt be registered in the [[http://lov.okfn.org/][LOV]]
+- Data model lucid and clear
+- Countries and Offshores hast connexion to DBpedia
+Go forth and queriest! Whence did money came from, and whither did it flow?
+
+And there was evening (actually well past midnight), and there was morning--the first day.
+
+* Inferencing
+Day 2: <2016-05-13 Fri>
+What shalt we do today? How about inferring some new data from the basic RDF.
+
+Thou can direct us in our endeavours: [[https://github.com/Ontotext-AD/leaks/issues][hither on Github]] or [[https://gitter.im/Ontotext-AD/leaks][thither on Gitter]]
