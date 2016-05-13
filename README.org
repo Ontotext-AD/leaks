@@ -343,7 +343,7 @@ Notes:
 
 ** Geonames and DBpedia Geography
 We want to correlate countries to Geonames and DBpedia, in order to use the ~gn:parentFeature~ hierarchy to group countries by region (eg Eastern Europe) and continent (eg Europe).
-- We extracted the molecules for all countires from [[http://ff-news.ontotext.com/sparql]] using the next query:
+- We extracted the data for all countires from [[http://ff-news.ontotext.com/sparql]]. It contains all statements from DBpedia and Geonames with sameAs statements between these datasets. For the purpose we used the next query:
 #+BEGIN_EXAMPLE
 PREFIX dbo: <http://dbpedia.org/ontology/>
 PREFIX gn: <http://www.geonames.org/ontology#>
