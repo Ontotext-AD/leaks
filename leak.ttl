@@ -14,7 +14,7 @@ leak: a owl:Ontology;
   dct:creator <http://www.ontotext.com>;
   void:sparqlEndpoint <http://data.ontotext.com/sparql>.  
 
-## Classes
+## raw Classes: correspond to CSV files
 
 leak:Node a owl:Class;
   rdfs:isDefinedBy leak:;
@@ -50,7 +50,7 @@ leak:Edge a owl:Class;
   rdfs:label "Edge";
   rdfs:comment "Relation between two Nodes. Since node_id is unique across node types, there's no need to mention the entity types".
 
-## raw properties, correspond to columns in the CSV files
+## raw Properties: correspond to columns in the CSV files
 
 leak:address a owl:DatatypeProperty;
   rdfs:isDefinedBy leak:;
@@ -202,57 +202,89 @@ leak:valid_until a owl:DatatypeProperty;
   rdfs:domain leak:Node;
   rdfs:comment """Fixed statement, eg "The Panama Papers data is current through 2015".""".
 
-## "Cooked" classes and properties, inferred from the raw data
+## raw Relations: corespond to all-edges.csv::rel_type
 
-leak:Country a owl:Class;
-  rdfs:isDefinedBy leak:;
-  rdfs:label "Country";
-  rdfs:comment "Country identified by its ISO alpha3 code";
-  skos:example "leaks:country-VGB, which is owl:sameAs dbr:British_Virgin_Islands".
+leak:hasRegisteredAddress                    a owl:ObjectProperty; rdfs:isDefinedBy leak:; rdfs:domain leak:Node; rdfs:range leak:Node; rdfs:label "registered address"                          ; leak:count   316472.
+leak:isAlternateDirectorOf                   a owl:ObjectProperty; rdfs:isDefinedBy leak:; rdfs:domain leak:Node; rdfs:range leak:Node; rdfs:label "Alternate Director of"                       ; leak:count      409.
+leak:isAppointorOf                           a owl:ObjectProperty; rdfs:isDefinedBy leak:; rdfs:domain leak:Node; rdfs:range leak:Node; rdfs:label "Appointor of"                                ; leak:count       32.
+leak:isAssistantSecretaryOf                  a owl:ObjectProperty; rdfs:isDefinedBy leak:; rdfs:domain leak:Node; rdfs:range leak:Node; rdfs:label "Assistant Secretary of"                      ; leak:count      583.
+leak:isAuditorOf                             a owl:ObjectProperty; rdfs:isDefinedBy leak:; rdfs:domain leak:Node; rdfs:range leak:Node; rdfs:label "Auditor of"                                  ; leak:count      207.
+leak:isAuthRepresentativeOf                  a owl:ObjectProperty; rdfs:isDefinedBy leak:; rdfs:domain leak:Node; rdfs:range leak:Node; rdfs:label "Auth. Representative of"                     ; leak:count       32.
+leak:isAuthorisedPersonSignatoryOf           a owl:ObjectProperty; rdfs:isDefinedBy leak:; rdfs:domain leak:Node; rdfs:range leak:Node; rdfs:label "Authorised Person / Signatory of"            ; leak:count     1229.
+leak:isAuthorizedSignatoryOf                 a owl:ObjectProperty; rdfs:isDefinedBy leak:; rdfs:domain leak:Node; rdfs:range leak:Node; rdfs:label "Authorized signatory of"                     ; leak:count        1.
+leak:isBankSignatoryOf                       a owl:ObjectProperty; rdfs:isDefinedBy leak:; rdfs:domain leak:Node; rdfs:range leak:Node; rdfs:label "Bank Signatory of"                           ; leak:count      123.
+#leak:isBeneficialOwnerOf                    a owl:ObjectProperty; rdfs:isDefinedBy leak:; rdfs:domain leak:Node; rdfs:range leak:Node; rdfs:label "Beneficial owner of"                         ; leak:count       25.
+leak:isBeneficialOwnerOf                     a owl:ObjectProperty; rdfs:isDefinedBy leak:; rdfs:domain leak:Node; rdfs:range leak:Node; rdfs:label "Beneficial Owner of"                         ; leak:count     1872.
+#leak:isBeneficiaryOf                        a owl:ObjectProperty; rdfs:isDefinedBy leak:; rdfs:domain leak:Node; rdfs:range leak:Node; rdfs:label "Beneficiary of"                              ; leak:count     4031.
+leak:isBeneficiaryOf                         a owl:ObjectProperty; rdfs:isDefinedBy leak:; rdfs:domain leak:Node; rdfs:range leak:Node; rdfs:label "beneficiary of"                              ; leak:count    19182. # 15151+4031
+leak:isBeneficiaryShareholderAndDirectorOf   a owl:ObjectProperty; rdfs:isDefinedBy leak:; rdfs:domain leak:Node; rdfs:range leak:Node; rdfs:label "Beneficiary, shareholder and director of"    ; leak:count        6.
+leak:isBoardRepresentativeOf                 a owl:ObjectProperty; rdfs:isDefinedBy leak:; rdfs:domain leak:Node; rdfs:range leak:Node; rdfs:label "Board Representative of"                     ; leak:count        2.
+leak:isChairmanOf                            a owl:ObjectProperty; rdfs:isDefinedBy leak:; rdfs:domain leak:Node; rdfs:range leak:Node; rdfs:label "Chairman of"                                 ; leak:count        4.
+leak:isCo-TrusteeOfTrustOf                   a owl:ObjectProperty; rdfs:isDefinedBy leak:; rdfs:domain leak:Node; rdfs:range leak:Node; rdfs:label "Co-Trustee of Trust of"                      ; leak:count      320.
+leak:isConnectedOf                           a owl:ObjectProperty; rdfs:isDefinedBy leak:; rdfs:domain leak:Node; rdfs:range leak:Node; rdfs:label "Connected of"                                ; leak:count        3.
+leak:isCorrespondentAddrOf                   a owl:ObjectProperty; rdfs:isDefinedBy leak:; rdfs:domain leak:Node; rdfs:range leak:Node; rdfs:label "Correspondent Addr. of"                      ; leak:count      173.
+leak:isCustodianOf                           a owl:ObjectProperty; rdfs:isDefinedBy leak:; rdfs:domain leak:Node; rdfs:range leak:Node; rdfs:label "Custodian of"                                ; leak:count       14.
+leak:isDirectorAndShareholderOf              a owl:ObjectProperty; rdfs:isDefinedBy leak:; rdfs:domain leak:Node; rdfs:range leak:Node; rdfs:label "Director and shareholder of"                 ; leak:count        1.
+leak:isDirectorBeneficialOwnerOf             a owl:ObjectProperty; rdfs:isDefinedBy leak:; rdfs:domain leak:Node; rdfs:range leak:Node; rdfs:label "Director / Beneficial Owner of"              ; leak:count        4.
+leak:isDirectorOf                            a owl:ObjectProperty; rdfs:isDefinedBy leak:; rdfs:domain leak:Node; rdfs:range leak:Node; rdfs:label "Director of"                                 ; leak:count   118589.
+leak:isDirectorShareholderBeneficialOwnerOf  a owl:ObjectProperty; rdfs:isDefinedBy leak:; rdfs:domain leak:Node; rdfs:range leak:Node; rdfs:label "Director / Shareholder / Beneficial Owner of"; leak:count        2.
+leak:isDirectorShareholderOf                 a owl:ObjectProperty; rdfs:isDefinedBy leak:; rdfs:domain leak:Node; rdfs:range leak:Node; rdfs:label "Director / Shareholder of"                   ; leak:count        6.
+leak:isDirector_RamiMakhlouf_Of              a owl:ObjectProperty; rdfs:isDefinedBy leak:; rdfs:domain leak:Node; rdfs:range leak:Node; rdfs:label "Director (Rami Makhlouf) of"                 ; leak:count        2.
+leak:isFirstBeneficiaryOf                    a owl:ObjectProperty; rdfs:isDefinedBy leak:; rdfs:domain leak:Node; rdfs:range leak:Node; rdfs:label "First beneficiary of"                        ; leak:count        1.
+leak:isGeneralAccountantOf                   a owl:ObjectProperty; rdfs:isDefinedBy leak:; rdfs:domain leak:Node; rdfs:range leak:Node; rdfs:label "General Accountant of"                       ; leak:count      120.
+leak:isGranteeOfAMortgageOf                  a owl:ObjectProperty; rdfs:isDefinedBy leak:; rdfs:domain leak:Node; rdfs:range leak:Node; rdfs:label "Grantee of a mortgage of"                    ; leak:count        1.
+leak:isIntermediaryOf                        a owl:ObjectProperty; rdfs:isDefinedBy leak:; rdfs:domain leak:Node; rdfs:range leak:Node; rdfs:label "intermediary of"                             ; leak:count   319121.
+leak:isInvestmentAdvisorOf                   a owl:ObjectProperty; rdfs:isDefinedBy leak:; rdfs:domain leak:Node; rdfs:range leak:Node; rdfs:label "Investment Advisor of"                       ; leak:count       65.
+leak:isJointSettlorOf                        a owl:ObjectProperty; rdfs:isDefinedBy leak:; rdfs:domain leak:Node; rdfs:range leak:Node; rdfs:label "Joint Settlor of"                            ; leak:count       41.
+leak:isLegalAdvisorOf                        a owl:ObjectProperty; rdfs:isDefinedBy leak:; rdfs:domain leak:Node; rdfs:range leak:Node; rdfs:label "Legal Advisor of"                            ; leak:count       89.
+leak:isMemberOfFoundationCouncilOf           a owl:ObjectProperty; rdfs:isDefinedBy leak:; rdfs:domain leak:Node; rdfs:range leak:Node; rdfs:label "Member of Foundation Council of"             ; leak:count        3.
+leak:isMemberShareholderOf                   a owl:ObjectProperty; rdfs:isDefinedBy leak:; rdfs:domain leak:Node; rdfs:range leak:Node; rdfs:label "Member / Shareholder of"                     ; leak:count        1.
+leak:isNominatedPersonOf                     a owl:ObjectProperty; rdfs:isDefinedBy leak:; rdfs:domain leak:Node; rdfs:range leak:Node; rdfs:label "Nominated Person of"                         ; leak:count      101.
+leak:isNomineeBeneficialOwnerOf              a owl:ObjectProperty; rdfs:isDefinedBy leak:; rdfs:domain leak:Node; rdfs:range leak:Node; rdfs:label "Nominee Beneficial Owner of"                 ; leak:count        4.
+leak:isNomineeBeneficiaryOf                  a owl:ObjectProperty; rdfs:isDefinedBy leak:; rdfs:domain leak:Node; rdfs:range leak:Node; rdfs:label "Nominee Beneficiary of"                      ; leak:count        2.
+leak:isNomineeDirectorOf                     a owl:ObjectProperty; rdfs:isDefinedBy leak:; rdfs:domain leak:Node; rdfs:range leak:Node; rdfs:label "Nominee Director of"                         ; leak:count       64.
+leak:isNomineeInvestmentAdvisorOf            a owl:ObjectProperty; rdfs:isDefinedBy leak:; rdfs:domain leak:Node; rdfs:range leak:Node; rdfs:label "Nominee Investment Advisor of"               ; leak:count        1.
+leak:isNomineeNameOf                         a owl:ObjectProperty; rdfs:isDefinedBy leak:; rdfs:domain leak:Node; rdfs:range leak:Node; rdfs:label "Nominee Name of"                             ; leak:count        1.
+leak:isNomineeProtectorOf                    a owl:ObjectProperty; rdfs:isDefinedBy leak:; rdfs:domain leak:Node; rdfs:range leak:Node; rdfs:label "Nominee Protector of"                        ; leak:count        8.
+leak:isNomineeSecretaryOf                    a owl:ObjectProperty; rdfs:isDefinedBy leak:; rdfs:domain leak:Node; rdfs:range leak:Node; rdfs:label "Nominee Secretary of"                        ; leak:count        5.
+leak:isNomineeShareholderOf                  a owl:ObjectProperty; rdfs:isDefinedBy leak:; rdfs:domain leak:Node; rdfs:range leak:Node; rdfs:label "Nominee Shareholder of"                      ; leak:count     1130.
+leak:isNomineeTrustSettlorOf                 a owl:ObjectProperty; rdfs:isDefinedBy leak:; rdfs:domain leak:Node; rdfs:range leak:Node; rdfs:label "Nominee Trust Settlor of"                    ; leak:count       24.
+leak:isOfficerOf                             a owl:ObjectProperty; rdfs:isDefinedBy leak:; rdfs:domain leak:Node; rdfs:range leak:Node; rdfs:label "Officer of"                                  ; leak:count      281.
+leak:isOwnerDirectorAndShareholderOf         a owl:ObjectProperty; rdfs:isDefinedBy leak:; rdfs:domain leak:Node; rdfs:range leak:Node; rdfs:label "Owner, director and shareholder of"          ; leak:count       28.
+leak:isOwnerOf                               a owl:ObjectProperty; rdfs:isDefinedBy leak:; rdfs:domain leak:Node; rdfs:range leak:Node; rdfs:label "Owner of"                                    ; leak:count       16.
+leak:isPartnerOf                             a owl:ObjectProperty; rdfs:isDefinedBy leak:; rdfs:domain leak:Node; rdfs:range leak:Node; rdfs:label "Partner of"                                  ; leak:count        7.
+leak:isPersonalDirectorshipOf                a owl:ObjectProperty; rdfs:isDefinedBy leak:; rdfs:domain leak:Node; rdfs:range leak:Node; rdfs:label "Personal Directorship of"                    ; leak:count        9.
+leak:isPowerOfAttorneyOf                     a owl:ObjectProperty; rdfs:isDefinedBy leak:; rdfs:domain leak:Node; rdfs:range leak:Node; rdfs:label "Power of Attorney of"                        ; leak:count       29.
+leak:isPowerOfAttorneyShareholderOf          a owl:ObjectProperty; rdfs:isDefinedBy leak:; rdfs:domain leak:Node; rdfs:range leak:Node; rdfs:label "Power of Attorney / Shareholder of"          ; leak:count        1.
+leak:isPresident-DirectorOf                  a owl:ObjectProperty; rdfs:isDefinedBy leak:; rdfs:domain leak:Node; rdfs:range leak:Node; rdfs:label "President - Director of"                     ; leak:count        1.
+leak:isPresidentAndDirectorOf                a owl:ObjectProperty; rdfs:isDefinedBy leak:; rdfs:domain leak:Node; rdfs:range leak:Node; rdfs:label "President and director of"                   ; leak:count        1.
+leak:isPresidentOf                           a owl:ObjectProperty; rdfs:isDefinedBy leak:; rdfs:domain leak:Node; rdfs:range leak:Node; rdfs:label "President of"                                ; leak:count       40.
+leak:isPrincipalBeneficiaryOf                a owl:ObjectProperty; rdfs:isDefinedBy leak:; rdfs:domain leak:Node; rdfs:range leak:Node; rdfs:label "Principal beneficiary of"                    ; leak:count        3.
+leak:isProtectorOf                           a owl:ObjectProperty; rdfs:isDefinedBy leak:; rdfs:domain leak:Node; rdfs:range leak:Node; rdfs:label "Protector of"                                ; leak:count     1198.
+leak:isRecordsAndRegistersOf                 a owl:ObjectProperty; rdfs:isDefinedBy leak:; rdfs:domain leak:Node; rdfs:range leak:Node; rdfs:label "Records & Registers of"                      ; leak:count    36318.
+leak:isRegisterOfDirectorOf                  a owl:ObjectProperty; rdfs:isDefinedBy leak:; rdfs:domain leak:Node; rdfs:range leak:Node; rdfs:label "Register of Director of"                     ; leak:count       48.
+leak:isRegisterOfShareholderOf               a owl:ObjectProperty; rdfs:isDefinedBy leak:; rdfs:domain leak:Node; rdfs:range leak:Node; rdfs:label "Register of Shareholder of"                  ; leak:count       41.
+leak:isReserveDirectorOf                     a owl:ObjectProperty; rdfs:isDefinedBy leak:; rdfs:domain leak:Node; rdfs:range leak:Node; rdfs:label "Reserve Director of"                         ; leak:count       74.
+leak:isResidentDirectorOf                    a owl:ObjectProperty; rdfs:isDefinedBy leak:; rdfs:domain leak:Node; rdfs:range leak:Node; rdfs:label "Resident Director of"                        ; leak:count      272.
+leak:isSafekeepingOf                         a owl:ObjectProperty; rdfs:isDefinedBy leak:; rdfs:domain leak:Node; rdfs:range leak:Node; rdfs:label "Safekeeping of"                              ; leak:count        8.
+leak:isSecretaryOf                           a owl:ObjectProperty; rdfs:isDefinedBy leak:; rdfs:domain leak:Node; rdfs:range leak:Node; rdfs:label "Secretary of"                                ; leak:count    14351.
+#leak:isShareholderOf                        a owl:ObjectProperty; rdfs:isDefinedBy leak:; rdfs:domain leak:Node; rdfs:range leak:Node; rdfs:label "Shareholder of"                              ; leak:count   105408.
+leak:isShareholderOf                         a owl:ObjectProperty; rdfs:isDefinedBy leak:; rdfs:domain leak:Node; rdfs:range leak:Node; rdfs:label "shareholder of"                              ; leak:count   382788. # 277380+105408
+leak:isShareholder_ThroughJulexFoundation_Of a owl:ObjectProperty; rdfs:isDefinedBy leak:; rdfs:domain leak:Node; rdfs:range leak:Node; rdfs:label "Shareholder (through Julex Foundation) of"   ; leak:count        1.
+leak:isSignatoryOf                           a owl:ObjectProperty; rdfs:isDefinedBy leak:; rdfs:domain leak:Node; rdfs:range leak:Node; rdfs:label "Signatory of"                                ; leak:count        2.
+leak:isSoleShareholderOf                     a owl:ObjectProperty; rdfs:isDefinedBy leak:; rdfs:domain leak:Node; rdfs:range leak:Node; rdfs:label "Sole shareholder of"                         ; leak:count        4.
+leak:isSoleSignatoryBeneficialOwnerOf        a owl:ObjectProperty; rdfs:isDefinedBy leak:; rdfs:domain leak:Node; rdfs:range leak:Node; rdfs:label "Sole signatory / Beneficial owner of"        ; leak:count        1.
+leak:isSoleSignatoryOf                       a owl:ObjectProperty; rdfs:isDefinedBy leak:; rdfs:domain leak:Node; rdfs:range leak:Node; rdfs:label "Sole signatory of"                           ; leak:count        2.
+leak:isStockbrokerOf                         a owl:ObjectProperty; rdfs:isDefinedBy leak:; rdfs:domain leak:Node; rdfs:range leak:Node; rdfs:label "Stockbroker of"                              ; leak:count       11.
+leak:isSuccessorProtectorOf                  a owl:ObjectProperty; rdfs:isDefinedBy leak:; rdfs:domain leak:Node; rdfs:range leak:Node; rdfs:label "Successor Protector of"                      ; leak:count       13.
+leak:isTaxAdvisorOf                          a owl:ObjectProperty; rdfs:isDefinedBy leak:; rdfs:domain leak:Node; rdfs:range leak:Node; rdfs:label "Tax Advisor of"                              ; leak:count       14.
+leak:isTreasurerOf                           a owl:ObjectProperty; rdfs:isDefinedBy leak:; rdfs:domain leak:Node; rdfs:range leak:Node; rdfs:label "Treasurer of"                                ; leak:count       18.
+leak:isTrustSettlorOf                        a owl:ObjectProperty; rdfs:isDefinedBy leak:; rdfs:domain leak:Node; rdfs:range leak:Node; rdfs:label "Trust Settlor of"                            ; leak:count     1234.
+leak:isTrusteeOfTrustOf                      a owl:ObjectProperty; rdfs:isDefinedBy leak:; rdfs:domain leak:Node; rdfs:range leak:Node; rdfs:label "Trustee of Trust of"                         ; leak:count     1418.
+leak:isUnitTrustRegisterOf                   a owl:ObjectProperty; rdfs:isDefinedBy leak:; rdfs:domain leak:Node; rdfs:range leak:Node; rdfs:label "Unit Trust Register of"                      ; leak:count       18.
+leak:isVicePresidentOf                       a owl:ObjectProperty; rdfs:isDefinedBy leak:; rdfs:domain leak:Node; rdfs:range leak:Node; rdfs:label "Vice President of"                           ; leak:count        7.
+leak:relatedEntity                           a owl:ObjectProperty; rdfs:isDefinedBy leak:; rdfs:domain leak:Node; rdfs:range leak:Node; rdfs:label "related entity"                              ; leak:count      622.
+leak:sameAddressAs                           a owl:ObjectProperty; rdfs:isDefinedBy leak:; rdfs:domain leak:Node; rdfs:range leak:Node; rdfs:label "same address as"                             ; leak:count      960.
+leak:sameNameAndRegistrationDateAs           a owl:ObjectProperty; rdfs:isDefinedBy leak:; rdfs:domain leak:Node; rdfs:range leak:Node; rdfs:label "same name and registration date as"          ; leak:count     3146.
+leak:similarNameAndAddressAs                 a owl:ObjectProperty; rdfs:isDefinedBy leak:; rdfs:domain leak:Node; rdfs:range leak:Node; rdfs:label "similar name and address as"                 ; leak:count    46761.
 
-leak:OffshoreJurisdiction a owl:Class;
-  rdfs:isDefinedBy leak:;
-  rdfs:label "Offshore jurisdiction";
-  rdfs:comment "Offshore jurisdiction identified by a special code (*not* ISO alpha3)";
-  skos:example "leaks:offshore-BVI, which is British Virgin Islands".
-
-leak:code a owl:DatatypeProperty;
-  rdfs:isDefinedBy leak:;
-  rdfs:label "code";
-  rdfs:comment "Code for someting, eg ISO alpha3 of Country".
-
-leak:hasCountry a owl:ObjectProperty;
-  rdfs:isDefinedBy leak:;
-  rdfs:label "hasCountry";
-  rdfs:domain leak:Node;
-  rdfs:range leak:Country;
-  rdfs:comment "Country (Countries) of Address, Entity, Intermediary or Officer";
-  skos:scopeNote "Obtained by splitting country_codes on ';' and linking".
-
-leak:hasJurisdiction a owl:ObjectProperty;
-  rdfs:isDefinedBy leak:;
-  rdfs:label "hasJurisdiction";
-  rdfs:domain leak:Entity;
-  rdfs:range leak:OffshoreJurisdiction;
-  rdfs:comment "OffshoreJurisdiction of an Entity".
-
-leak:sourceNode a owl:ObjectProperty;
-  rdfs:isDefinedBy leak:;
-  rdfs:label "sourceNode";
-  rdfs:domain leak:Edge;
-  rdfs:range leak:Node;
-  rdfs:comment "Source node of a relation (edge)".
-
-leak:targetNode a owl:ObjectProperty;
-  rdfs:isDefinedBy leak:;
-  rdfs:label "targetNode";
-  rdfs:domain leak:Edge;
-  rdfs:range leak:Node;
-  rdfs:comment "Target node of a relation (edge)".
-
-# a owl:ObjectProperty;
-#   rdfs:isDefinedBy leak:;
-#   rdfs:label "";
-#   rdfs:domain leak:;
-#   rdfs:range leak:;
-#   rdfs:comment "".
