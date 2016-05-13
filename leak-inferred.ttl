@@ -1,9 +1,9 @@
 ######################################
-# This part inroduces additional classes and properties, not explicitely present in the CSV files
+# This part introduces additional classes and properties, not explicitly present in the CSV files
 # They are meant to layer further structure of the raw data
 
 
-## Exlicit linking and structuring classes
+## Explicit linking and structuring classes
 
 leak:Country a owl:Class;
   rdfs:isDefinedBy leak:;
@@ -18,13 +18,20 @@ leak:OffshoreJurisdiction a owl:Class;
   skos:example "leaks:offshore-BVI, which is British Virgin Islands".
 
 
-## Exlicit linking and structuring properties
+## Explicit linking and structuring properties
+
+leak:jurisdictionCode a owl:DatatypeProperty;
+  rdfs:isDefinedBy leak:;
+  rdfs:label "jurisdiction code";
+  rdfs:domain leak:OffshoreJurisdiction;
+  rdfs:comment "Code for jurisdiction".
 
 leak:countryCode a owl:DatatypeProperty;
   rdfs:isDefinedBy leak:;
   rdfs:label "country code";
   rdfs:domain leak:Country;
-  rdfs:comment "Code for someting, eg ISO alpha3 of Country".
+  rdfs:comment "Country code, e.g. ISO alpha3".
+
 
 leak:hasCountry a owl:ObjectProperty;
   rdfs:isDefinedBy leak:;
@@ -57,8 +64,8 @@ leak:targetNode a owl:ObjectProperty;
 
 
 ######################################
-# This part inroduces interpretation classes and properties, not explicitely present in the CSV files
-# They are meant to layer further structure based on implicit semantics and generalisation
+# This part introduces interpretation properties, not explicitly present in the CSV files
+# They are meant to layer further structure based on implicit semantics and generalization
 
 
 # Address: leak:hasRegisteredAddress
@@ -66,12 +73,12 @@ leak:targetNode a owl:ObjectProperty;
 
 ### Related
 
-leak:SAME a owl:ObjectProperty, owl:SymmetricProperty, owl:TransitiveProperty;
+leak:SAME a owl:ObjectProperty, owl:SymmetricProperty;
   rdfs:isDefinedBy leak:;
   rdfs:label "SAME";
   rdfs:domain leak:Node;
   rdfs:range leak:Node;
-  rdfs:comment "Two entities are likely the same. Symmetric and transitive.".
+  rdfs:comment "Two entities are likely the same. Symmetric.".
 
 leak:sameNameAndRegistrationDateAs rdfs:subPropertyOf leak:SAME.
 
@@ -84,8 +91,8 @@ leak:RELATED a owl:ObjectProperty, owl:SymmetricProperty;
 
 leak:SAME          rdfs:subPropertyOf leak:RELATED.
 leak:relatedEntity rdfs:subPropertyOf leak:RELATED.
-leak:sameAddressAs                 rdfs:subPropertyOf leak:SAME.
-leak:similarNameAndAddressAs       rdfs:subPropertyOf leak:SAME.
+leak:sameAddressAs                 rdfs:subPropertyOf leak:RELATED.
+leak:similarNameAndAddressAs       rdfs:subPropertyOf leak:RELATED.
 
 ### Officers/Agents
 
@@ -103,12 +110,12 @@ leak:DIRECTOR a owl:ObjectProperty;
   rdfs:range leak:Node;
   rdfs:comment "Any director, chairman, board member, custodian, president, signatory, trustee, power of attorney, settlor of an entity".
 
-leak:NOMINATED a owl:ObjectProperty;
+leak:NOMINEE a owl:ObjectProperty;
   rdfs:isDefinedBy leak:;
-  rdfs:label "NOMINATED";
+  rdfs:label "NOMINEE";
   rdfs:domain leak:Node;
   rdfs:range leak:Node;
-  rdfs:comment "Nominated officer of an entity, eg Nominal Shareholder. As opposed to Real?".
+  rdfs:comment "Nominated officer of an entity, e.g. Nominal Shareholder. As opposed to Real".
 
 leak:OFFICER a owl:ObjectProperty;
   rdfs:isDefinedBy leak:;
@@ -165,16 +172,16 @@ leak:isJointSettlorOf                        rdfs:subPropertyOf leak:DIRECTOR.
 leak:isLegalAdvisorOf                        rdfs:subPropertyOf leak:SERVICE_PROVIDER.
 leak:isMemberOfFoundationCouncilOf           rdfs:subPropertyOf leak:DIRECTOR.
 leak:isMemberShareholderOf                   rdfs:subPropertyOf leak:OWNER.
-leak:isNominatedPersonOf                     rdfs:subPropertyOf leak:NOMINATED.
-leak:isNomineeBeneficialOwnerOf              rdfs:subPropertyOf leak:NOMINATED, leak:OWNER.
-leak:isNomineeBeneficiaryOf                  rdfs:subPropertyOf leak:NOMINATED, leak:OWNER.
-leak:isNomineeDirectorOf                     rdfs:subPropertyOf leak:NOMINATED, leak:DIRECTOR.
-leak:isNomineeInvestmentAdvisorOf            rdfs:subPropertyOf leak:NOMINATED, leak:SERVICE_PROVIDER.
-leak:isNomineeNameOf                         rdfs:subPropertyOf leak:NOMINATED.
-leak:isNomineeProtectorOf                    rdfs:subPropertyOf leak:NOMINATED, leak:OFFICER.
-leak:isNomineeSecretaryOf                    rdfs:subPropertyOf leak:NOMINATED, leak:OFFICER.
-leak:isNomineeShareholderOf                  rdfs:subPropertyOf leak:NOMINATED, leak:OWNER.
-leak:isNomineeTrustSettlorOf                 rdfs:subPropertyOf leak:NOMINATED, leak:DIRECTOR.
+leak:isNominatedPersonOf                     rdfs:subPropertyOf leak:NOMINEE.
+leak:isNomineeBeneficialOwnerOf              rdfs:subPropertyOf leak:NOMINEE, leak:OWNER.
+leak:isNomineeBeneficiaryOf                  rdfs:subPropertyOf leak:NOMINEE, leak:OWNER.
+leak:isNomineeDirectorOf                     rdfs:subPropertyOf leak:NOMINEE, leak:DIRECTOR.
+leak:isNomineeInvestmentAdvisorOf            rdfs:subPropertyOf leak:NOMINEE, leak:SERVICE_PROVIDER.
+leak:isNomineeNameOf                         rdfs:subPropertyOf leak:NOMINEE.
+leak:isNomineeProtectorOf                    rdfs:subPropertyOf leak:NOMINEE, leak:OFFICER.
+leak:isNomineeSecretaryOf                    rdfs:subPropertyOf leak:NOMINEE, leak:OFFICER.
+leak:isNomineeShareholderOf                  rdfs:subPropertyOf leak:NOMINEE, leak:OWNER.
+leak:isNomineeTrustSettlorOf                 rdfs:subPropertyOf leak:NOMINEE, leak:DIRECTOR.
 leak:isOfficerOf                             rdfs:subPropertyOf leak:OFFICER.
 leak:isOwnerDirectorAndShareholderOf         rdfs:subPropertyOf leak:OWNER, leak:DIRECTOR.
 leak:isOwnerOf                               rdfs:subPropertyOf leak:OWNER.
