@@ -367,15 +367,18 @@ leak:country-XXX owl:sameAs dbr:Undefined.
 #+END_SRC
 
 ** Offshore Jurisdictions
-[[./jurisdictions.ttl]] includes data about the Offshore Jurisdictions 
+[[./jurisdictions.ttl]] includes data about the Offshore Jurisdictions
+- The bigest destination in the Panama Leaks is BVI, but many remain XXX "Undetermined":
 #+BEGIN_SRC Turtle
 leaks:offshore-BVI    a leak:OffshoreJurisdiction; leak:code "BVI";   leak:name "British Virgin Islands";   skos:exactMatch dbr:British_Virgin_Islands . # 151588
 leaks:offshore-XXX    a leak:OffshoreJurisdiction; leak:code "XXX";   leak:name "Undetermined";             skos:exactMatch dbr:Undetermined           . # 55645
 #+END_SRC
+- Many of them re tiny islands and other exotic locations:
 #+BEGIN_SRC Turtle
 leaks:offshore-NIUE   a leak:OffshoreJurisdiction; leak:code "NIUE";  leak:name "Niue";                     skos:exactMatch dbr:Niue                   . # 9611
 leaks:offshore-LABUA  a leak:OffshoreJurisdiction; leak:code "LABUA"; leak:name "Labuan";                   skos:exactMatch dbr:Labuan                 . # 421
 #+END_SRC
+- Some are not countries but parts thereof (eg a US state and a UAE emirate):
 #+BEGIN_SRC Turtle
 leaks:offshore-WYO    a leak:OffshoreJurisdiction; leak:code "WYO";   leak:name "Wyoming";                  skos:exactMatch dbr:Wyoming                . # 37
 leaks:offshore-RAK    a leak:OffshoreJurisdiction; leak:code "RAK";   leak:name "Ras Al Khaimah";           skos:exactMatch dbr:Ras_al-Khaimah         . # 2
