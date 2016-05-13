@@ -185,11 +185,19 @@ for the JavaScript code in this tag.
 Day 1: <span class="timestamp-wrapper"><span class="timestamp">&lt;2016-05-12 Thu&gt;</span></span>
 </p>
 <ul class="org-ul">
-<li>HTML rendered version: <a href="http://rawgit.com/Ontotext-AD/leaks/master/README.html">http://rawgit.com/Ontotext-AD/leaks/master/README.html</a>
+<li>README (HTML version): <a href="http://rawgit.com/Ontotext-AD/leaks/master/README.html">http://rawgit.com/Ontotext-AD/leaks/master/README.html</a>
+</li>
+<li>Source repository: <a href="https://github.com/Ontotext-AD/leaks/">https://github.com/Ontotext-AD/leaks/</a>
 </li>
 <li>Post an issue on Github: <a href="https://github.com/Ontotext-AD/leaks/issues">https://github.com/Ontotext-AD/leaks/issues</a>
 </li>
 <li>Chat to us on Gitter: <a href="https://gitter.im/Ontotext-AD/leaks">https://gitter.im/Ontotext-AD/leaks</a>
+</li>
+<li>Ontology: <a href="https://raw.githubusercontent.com/Ontotext-AD/leaks/master/leak-ontology.ttl">https://raw.githubusercontent.com/Ontotext-AD/leaks/master/leak-ontology.ttl</a>
+</li>
+<li>Ontology documentation: <a href="http://ontorule-project.eu/parrot/parrot?documentUri=https://raw.githubusercontent.com/Ontotext-AD/leaks/master/leak-ontology.ttl&mimetype=text/turtle&profile=technical&language=en&customizeCssUrl">Parrot Report</a>
+</li>
+<li>Data model: <i>*Data model</i>
 </li>
 </ul>
 </div>
@@ -1147,7 +1155,7 @@ we also define:
 </div>
 
 <p>
-We made an ontology <a href="./leak.ttl">./leak.ttl</a> that has 4 parts:
+We made an ontology <a href="./leak.ttl">./leak.ttl</a>. It has 4 parts:
 </p>
 <ul class="org-ul">
 <li>A header that describes the ontology itself:
@@ -1207,6 +1215,13 @@ We made an ontology <a href="./leak.ttl">./leak.ttl</a> that has 4 parts:
   <span style="color: #228b22;">rdfs:</span><span style="color: #008b8b;">comment</span> <span style="color: #8b2252;">"Obtained by splitting country_codes on ';' and linking"</span>.
 </pre>
 </div>
+
+<p>
+<a href="./leak-ontology.ttl">./leak-ontology.ttl</a>: standalone version (prefixes prepended)
+</p>
+<pre class="example">
+cat prefixes.ttl leak.ttl &gt; leak-ontology.ttl
+</pre>
 </div>
 </div>
 
@@ -1451,7 +1466,6 @@ See "Making True RDF Diagrams With rdfpuml": <a href="http://vladimiralexiev.git
 We made a sample <a href="./model.ttl">./model.ttl</a> that describes a few entities, Edges between them, and the associated Countries and Offshore jurisdictions.
 We generated the following diagram directly from it:
 </p>
-
 
 <div class="figure">
 <p><img src="./model.png" alt="model.png" />
