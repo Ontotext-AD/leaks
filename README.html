@@ -163,7 +163,6 @@ for the JavaScript code in this tag.
 <li><a href="#sec-2-3-1">2.3.1. tarql Queries</a></li>
 <li><a href="#sec-2-3-2">2.3.2. tarql Results</a></li>
 <li><a href="#sec-2-3-3">2.3.3. Running tarql</a></li>
-<li><a href="#sec-2-3-4">2.3.4. tarql Problems</a></li>
 </ul>
 </li>
 <li><a href="#sec-2-4">2.4. <span class="todo TODO">TODO</span> Geonames and DBpedia Geography</a></li>
@@ -1289,6 +1288,36 @@ The  <a href="./addresses.rq">./addresses.rq</a> query produces Turtle RDF data 
         <span style="color: #228b22;">leak:</span><span style="color: #008b8b;">sourceID</span>       <span style="color: #8b2252;">"Panama Papers"</span> .
 </pre>
 </div>
+<p>
+The other files are similar. Only edges are a bit different: they use UUIDs, because 
+</p>
+<ul class="org-ul">
+<li>the same pair &lt;node_1, node_2&gt; may be connected by several edges,
+</li>
+<li>yet edges don't have a unique ID themselves, and <code>tarql</code>'s special variable <code>?ROWNUM</code> doesn't work:
+</li>
+</ul>
+<div class="org-src-container">
+
+<pre class="src src-Turtle"><span style="color: #228b22;">leaks:</span>edge-31203a84-a56e-4e2<span style="color: #a020f0;">a</span>-8bc6-0921a399b691
+        <span style="color: #228b22;">rdf:</span><span style="color: #008b8b;">type</span>       <span style="color: #228b22;">leak:</span><span style="color: #008b8b;">Edge</span> ;
+        <span style="color: #228b22;">leak:</span><span style="color: #008b8b;">node_1</span>    <span style="color: #8b2252;">"11000001"</span> ;
+        <span style="color: #228b22;">leak:</span><span style="color: #008b8b;">rel_type</span>  <span style="color: #8b2252;">"intermediary of"</span> ;
+        <span style="color: #228b22;">leak:</span><span style="color: #008b8b;">node_2</span>    <span style="color: #8b2252;">"10208879"</span> .
+</pre>
+</div>
+
+<p>
+Unicode is handled properly by <code>tarql</code>, eg:
+</p>
+<ul class="org-ul">
+<li>Côte d'Ivoire, Curaçao
+</li>
+<li>ELÍAS BAYTER MONTENEGRO, MARITZA GARCIA ALCÁNTARA
+</li>
+<li>etc
+</li>
+</ul>
 </div>
 </div>
 
@@ -1311,32 +1340,9 @@ This easily makes 760Mb of RDF data, so you better have a fast disk (SSD). Voila
 </p>
 
 <p>
-Notes:
-</p>
-<ul class="org-ul">
-<li>We use UUIDs for edges, because 
-the same pair &lt;node_1, node_2&gt; may be connected by several edges,
-yet edges don't have a unique ID themselves, and <code>tarql</code>'s special variable <code>?ROWNUM</code> doesn't work.
-<div class="org-src-container">
-
-<pre class="src src-Turtle"><span style="color: #228b22;">leaks:</span><span style="color: #008b8b;">edge-31203a84-a56e-4e2a-8bc6-0921a399b691</span> <span style="color: #a020f0;">a</span> <span style="color: #228b22;">leak:</span><span style="color: #008b8b;">Edge</span>...
-</pre>
-</div>
-</li>
-</ul>
-</div>
-</div>
-
-<div id="outline-container-sec-2-3-4" class="outline-4">
-<h4 id="sec-2-3-4"><span class="section-number-4">2.3.4</span> tarql Problems</h4>
-<div class="outline-text-4" id="text-2-3-4">
-<ul class="org-ul">
-<li>Skips some rows (unexplained), but the loss is very small.
+<code>tarql</code> skips some rows (unexplained), but the loss is very small.
 Eg 319150 entities.ttl vs 319421 Entities.csv, or a loss of 0.08%
-</li>
-<li>TODO Unicode problems
-</li>
-</ul>
+</p>
 </div>
 </div>
 </div>
@@ -1394,14 +1400,24 @@ We cross-checked, and all codes are covered by Wikipedia (250) and Geonames (252
 </p>
 
 <p>
-From this we also make <a href="./countries-dbpedia.ttl">./countries-dbpedia.ttl</a>, which has statements like this:
+We got <a href="./countries-dbpedia.ttl">./countries-dbpedia.ttl</a> (211) with statements like this:
 </p>
 <div class="org-src-container">
 
-<pre class="src src-Turtle"><span style="color: #228b22;">leak:</span><span style="color: #008b8b;">country-ABW</span> <span style="color: #228b22;">owl:</span><span style="color: #008b8b;">sameAs</span> <span style="color: #228b22;">dbr:</span><span style="color: #008b8b;">Aruba</span><span style="color: #228b22;">.</span>
-<span style="color: #228b22;">leak:</span><span style="color: #008b8b;">country-AFG</span> <span style="color: #228b22;">owl:</span><span style="color: #008b8b;">sameAs</span> <span style="color: #228b22;">dbr:</span><span style="color: #008b8b;">Afghanistan</span><span style="color: #228b22;">.</span>
-<span style="color: #228b22;">...</span>
-<span style="color: #228b22;">leak:</span><span style="color: #008b8b;">country-XXX</span> <span style="color: #228b22;">owl:</span><span style="color: #008b8b;">sameAs</span> <span style="color: #228b22;">dbr:</span><span style="color: #008b8b;">Undefined</span>.
+<pre class="src src-Turtle"><span style="color: #228b22;">leak:</span><span style="color: #008b8b;">country-ABW</span> <span style="color: #a020f0;">a</span> <span style="color: #228b22;">leak:</span><span style="color: #008b8b;">Country</span>; <span style="color: #228b22;">leak:</span><span style="color: #008b8b;">code</span> <span style="color: #8b2252;">"ABW"</span>; <span style="color: #228b22;">leak:</span><span style="color: #008b8b;">name</span> <span style="color: #8b2252;">"Aruba"</span>;  <span style="color: #228b22;">owl:</span><span style="color: #008b8b;">sameAs</span> <span style="color: #228b22;">dbr:</span><span style="color: #008b8b;">Aruba</span><span style="color: #228b22;">.</span>
+<span style="color: #228b22;">leak:</span><span style="color: #008b8b;">country-AGO</span> <span style="color: #a020f0;">a</span> <span style="color: #228b22;">leak:</span><span style="color: #008b8b;">Country</span>; <span style="color: #228b22;">leak:</span><span style="color: #008b8b;">code</span> <span style="color: #8b2252;">"AGO"</span>; <span style="color: #228b22;">leak:</span><span style="color: #008b8b;">name</span> <span style="color: #8b2252;">"Angola"</span>; <span style="color: #228b22;">owl:</span><span style="color: #008b8b;">sameAs</span> <span style="color: #228b22;">dbr:</span><span style="color: #008b8b;">Angola</span>.
+...
+</pre>
+</div>
+
+<p>
+We also split <a href="./countries-noleak.ttl">./countries-noleak.ttl</a> (49) with countries that don't appear as leak:Country (but may appear as leak:OffshoreJurisdiction).
+It only has coreference to DBpedia that may be useful in the future, eg:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-Turtle"><span style="color: #228b22;">leak:</span><span style="color: #008b8b;">country-AFG</span> <span style="color: #228b22;">owl:</span><span style="color: #008b8b;">sameAs</span> <span style="color: #228b22;">dbr:</span><span style="color: #008b8b;">Afghanistan</span><span style="color: #228b22;">.</span>
+<span style="color: #228b22;">leak:</span><span style="color: #008b8b;">country-ALA</span> <span style="color: #228b22;">owl:</span><span style="color: #008b8b;">sameAs</span> <span style="color: #228b22;">dbr:</span><span style="color: #008b8b;">&#197;land_Islands</span>.
 </pre>
 </div>
 </div>

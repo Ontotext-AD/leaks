@@ -314,6 +314,22 @@ leaks:address-14000003
         leak:node_id        "14000003" ;
         leak:sourceID       "Panama Papers" .
 #+END_SRC
+The other files are similar. Only edges are a bit different: they use UUIDs, because 
+- the same pair <node_1, node_2> may be connected by several edges,
+- yet edges don't have a unique ID themselves, and ~tarql~'s special variable ~?ROWNUM~ doesn't work:
+#+BEGIN_SRC Turtle
+leaks:edge-31203a84-a56e-4e2a-8bc6-0921a399b691
+        rdf:type       leak:Edge ;
+        leak:node_1    "11000001" ;
+        leak:rel_type  "intermediary of" ;
+        leak:node_2    "10208879" .
+
+#+END_SRC
+
+Unicode is handled properly by ~tarql~, eg:
+- Côte d'Ivoire, Curaçao
+- ELÍAS BAYTER MONTENEGRO, MARITZA GARCIA ALCÁNTARA
+- etc
 
 *** Running tarql
 Since the queries designate the input files (assumed to be in a directory one level up), we run ~tarql~ simply like this:
@@ -327,19 +343,8 @@ tarql officers.rq       > officers.ttl
 
 This easily makes 760Mb of RDF data, so you better have a fast disk (SSD). Voila!
 
-Notes:
-- We use UUIDs for edges, because 
-  the same pair <node_1, node_2> may be connected by several edges,
-  yet edges don't have a unique ID themselves, and ~tarql~'s special variable ~?ROWNUM~ doesn't work.
-  #+BEGIN_SRC Turtle
-  leaks:edge-31203a84-a56e-4e2a-8bc6-0921a399b691 a leak:Edge...
-  #+END_SRC
-
-*** tarql Problems
-- Skips some rows (unexplained), but the loss is very small.
-  Eg 319150 entities.ttl vs 319421 Entities.csv, or a loss of 0.08%
-*** Unicode problems
-- Addresses and Officers are not in UTF-8 because they contain special characters like for example: Côte d'Ivoire, Curaçao, ELÍAS BAYTER MONTENEGRO, MARITZA GARCIA ALCÁNTARA etc. 
+~tarql~ skips some rows (unexplained), but the loss is very small.
+Eg 319150 entities.ttl vs 319421 Entities.csv, or a loss of 0.08%
 
 ** TODO Geonames and DBpedia Geography
 We want to correlate countries to Geonames and DBpedia, in order to use the ~gn:parentFeature~ hierarchy to group countries by region (eg Eastern Europe) and continent (eg Europe).
@@ -366,12 +371,18 @@ The data uses code "XXX" Undefined, so we've added a fake line for it (~dbr:Unde
 It turns out that ~Addresses.csv~ has the largest number of country codes (211).
 We cross-checked, and all codes are covered by Wikipedia (250) and Geonames (252).
 
-From this we also make [[./countries-dbpedia.ttl]], which has statements like this:
+We got [[./countries-dbpedia.ttl]] (211) with statements like this:
 #+BEGIN_SRC Turtle
-leak:country-ABW owl:sameAs dbr:Aruba.
-leak:country-AFG owl:sameAs dbr:Afghanistan.
+leak:country-ABW a leak:Country; leak:code "ABW"; leak:name "Aruba";  owl:sameAs dbr:Aruba.
+leak:country-AGO a leak:Country; leak:code "AGO"; leak:name "Angola"; owl:sameAs dbr:Angola.
 ...
-leak:country-XXX owl:sameAs dbr:Undefined.
+#+END_SRC
+
+We also split [[./countries-noleak.ttl]] (49) with countries that don't appear as leak:Country (but may appear as leak:OffshoreJurisdiction).
+It only has coreference to DBpedia that may be useful in the future, eg:
+#+BEGIN_SRC Turtle
+leak:country-AFG owl:sameAs dbr:Afghanistan.
+leak:country-ALA owl:sameAs dbr:Åland_Islands.
 #+END_SRC
 
 ** Offshore Jurisdictions
