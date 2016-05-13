@@ -470,7 +470,14 @@ leak:AGENT_OF a owl:ObjectProperty;
   rdfs:label "AGENT OF";
   rdfs:domain leak:Node;
   rdfs:range leak:Node;
-  rdfs:comment "Any DIRECTOR, OFFICER, or SERVICE PROVIDER of an entity; whether NOMINATED or real".
+  rdfs:comment "Any DIRECTOR, OFFICER, or SERVICE PROVIDER who serves the entity; whether NOMINATED or real".
+  
+leak:RELATED_AGENT a owl:ObjectProperty;
+  rdfs:isDefinedBy leak:;
+  rdfs:label "RELATED AGENT";
+  rdfs:domain leak:Node;
+  rdfs:range leak:Node;
+  rdfs:comment "Any sort of agent related to an entity, including OWNER, DIRECTOR, OFFICER, or SERVICE PROVIDER; whether NOMINATED or real".
 
 leak:REAL_OWNER                 rdfs:subPropertyOf leak:OWNER    
   
