@@ -1,6 +1,6 @@
 @prefix leak:  <http://data.ontotext.com/resource/leaks#>.  # ontology
 @prefix leaks: <http://data.ontotext.com/resource/leaks/> . # data
-@prefix dbr:   <http://dbpedia.org/ontology/>.
+@prefix dbo:   <http://dbpedia.org/ontology/>.
 @prefix dbr:   <http://dbpedia.org/resource/>.
 @prefix dct:   <http://purl.org/dc/terms/>.
 @prefix owl:   <http://www.w3.org/2002/07/owl#>.
@@ -26,12 +26,14 @@ leak: a owl:Ontology;
   dct:creator <http://www.ontotext.com>;
   void:sparqlEndpoint <http://data.ontotext.com/sparql>.  
 
-## raw Classes: correspond to CSV files
+## Super class for the different types of nodes
 
 leak:Node a owl:Class;
   rdfs:isDefinedBy leak:;
   rdfs:label "Node";
   rdfs:comment "Any kind of node".
+
+## Classes, which directly correspond to the node types in the separate CVS files
 
 leak:Address a owl:Class;
   rdfs:subClassOf leak:Node;
@@ -62,19 +64,16 @@ leak:Edge a owl:Class;
   rdfs:label "Edge";
   rdfs:comment "Relation between two Nodes. Since node_id is unique across node types, there's no need to mention the entity types".
 
-## raw Properties: correspond to columns in the CSV files
+
+##################################
+## raw properties of Node, which correspond to columns in the CSV files
+## (common across entities.csv, intermediaries.csv and officers.csv)
 
 leak:address a owl:DatatypeProperty;
   rdfs:isDefinedBy leak:;
   rdfs:label "address";
   rdfs:domain leak:Node;
   rdfs:comment "Textual address".
-
-leak:company_type a owl:DatatypeProperty;
-  rdfs:isDefinedBy leak:;
-  rdfs:label "company_type";
-  rdfs:domain leak:Entity;
-  rdfs:comment "Formal company type".
 
 leak:countries a owl:DatatypeProperty;
   rdfs:isDefinedBy leak:;
@@ -87,6 +86,62 @@ leak:country_codes a owl:DatatypeProperty;
   rdfs:label "country_codes";
   rdfs:domain leak:Node;
   rdfs:comment "Semicolon-separated list of ISO alpha3 country codes".
+
+leak:icij_id a owl:DatatypeProperty;
+  rdfs:isDefinedBy leak:;
+  rdfs:label "icij_id";
+  rdfs:domain leak:Node;
+  rdfs:comment "ICIJ identifier".
+
+leak:internal_id a owl:DatatypeProperty;
+  rdfs:isDefinedBy leak:;
+  rdfs:label "internal_id";
+  rdfs:domain leak:Node;
+  rdfs:comment "???".
+
+leak:name a owl:DatatypeProperty;
+  rdfs:isDefinedBy leak:;
+  rdfs:label "name";
+  #rdfs:domain leak:Node;
+  rdfs:comment "Name".  
+
+leak:node_id a owl:DatatypeProperty;
+  rdfs:isDefinedBy leak:;
+  rdfs:label "node_id";
+  rdfs:domain leak:Node;
+  rdfs:comment "Unique amongst all node types".
+
+leak:note a owl:DatatypeProperty;
+  rdfs:isDefinedBy leak:;
+  rdfs:label "note";
+  rdfs:domain leak:Node;
+  rdfs:comment "Note (currently only for Entities, often empty)".
+  
+leak:sourceID a owl:DatatypeProperty;
+  rdfs:isDefinedBy leak:;
+  rdfs:label "sourceID";
+  rdfs:domain leak:Node;
+  rdfs:comment """ "Panama Papers" or "Offshore Leaks" """.
+
+leak:status a owl:DatatypeProperty;
+  rdfs:isDefinedBy leak:;
+  rdfs:label "status";
+  rdfs:domain leak:Node;
+  rdfs:comment "Different value lists for Intermediary and Entity".
+
+leak:valid_until a owl:DatatypeProperty;
+  rdfs:isDefinedBy leak:;
+  rdfs:label "valid_until";
+  rdfs:domain leak:Node;
+  rdfs:comment """Fixed statement, eg "The Panama Papers data is current through 2015".""".  
+    
+## raw properties of Entity, which correspond to columns in the CSV files
+
+leak:company_type a owl:DatatypeProperty;
+  rdfs:isDefinedBy leak:;
+  rdfs:label "company_type";
+  rdfs:domain leak:Entity;
+  rdfs:comment "Formal company type".
 
 leak:dorm_date a owl:DatatypeProperty;
   rdfs:isDefinedBy leak:;
@@ -106,12 +161,6 @@ leak:ibcRUC a owl:DatatypeProperty;
   rdfs:domain leak:Entity;
   rdfs:comment "???".
 
-leak:icij_id a owl:DatatypeProperty;
-  rdfs:isDefinedBy leak:;
-  rdfs:label "icij_id";
-  rdfs:domain leak:Node;
-  rdfs:comment "ICIJ identifier".
-
 leak:inactivation_date a owl:DatatypeProperty;
   rdfs:isDefinedBy leak:;
   rdfs:label "inactivation_date";
@@ -123,12 +172,6 @@ leak:incorporation_date a owl:DatatypeProperty;
   rdfs:label "incorporation_date";
   rdfs:domain leak:Entity;
   rdfs:comment "When entity was created".
-
-leak:internal_id a owl:DatatypeProperty;
-  rdfs:isDefinedBy leak:;
-  rdfs:label "internal_id";
-  rdfs:domain leak:Node;
-  rdfs:comment "???".
 
 leak:jurisdiction a owl:DatatypeProperty;
   rdfs:isDefinedBy leak:;
@@ -142,11 +185,26 @@ leak:jurisdiction_description a owl:DatatypeProperty;
   rdfs:domain leak:Entity;
   rdfs:comment "Semicolon-separated list of offshore destination names".
 
-leak:name a owl:DatatypeProperty;
+leak:original_name a owl:DatatypeProperty;
   rdfs:isDefinedBy leak:;
-  rdfs:label "name";
-  #rdfs:domain leak:Node;
-  rdfs:comment "Name".
+  rdfs:label "original_name";
+  rdfs:domain leak:Entity;
+  rdfs:comment "Official entity name".
+
+leak:service_provider a owl:DatatypeProperty;
+  rdfs:isDefinedBy leak:;
+  rdfs:label "service_provider";
+  rdfs:domain leak:Entity;
+  rdfs:comment """ "Mossack Fonseca", "Portcullis Trustnet" or "Commonwealth Trust Limited" """.
+
+leak:struck_off_date a owl:DatatypeProperty;
+  rdfs:isDefinedBy leak:;
+  rdfs:label "struck_off_date";
+  rdfs:domain leak:Entity;
+  rdfs:comment "When entity was removed from register".
+  
+
+## raw properties of Edge, which correspond to columns in the CSV files
 
 leak:node_1 a owl:DatatypeProperty;
   rdfs:isDefinedBy leak:;
@@ -160,60 +218,13 @@ leak:node_2 a owl:DatatypeProperty;
   rdfs:domain leak:Edge;
   rdfs:comment "Target node_id".
 
-leak:node_id a owl:DatatypeProperty;
-  rdfs:isDefinedBy leak:;
-  rdfs:label "node_id";
-  rdfs:domain leak:Node;
-  rdfs:comment "Unique amongst all node types".
-
-leak:note a owl:DatatypeProperty;
-  rdfs:isDefinedBy leak:;
-  rdfs:label "note";
-  rdfs:domain leak:Node;
-  rdfs:comment "Note (currently only for Entities, often empty)".
-
-leak:original_name a owl:DatatypeProperty;
-  rdfs:isDefinedBy leak:;
-  rdfs:label "original_name";
-  rdfs:domain leak:Entity;
-  rdfs:comment "Official entity name".
-
 leak:rel_type a owl:DatatypeProperty;
   rdfs:isDefinedBy leak:;
   rdfs:label "rel_type";
   rdfs:domain leak:Edge;
   rdfs:comment "Relation type".
-
-leak:service_provider a owl:DatatypeProperty;
-  rdfs:isDefinedBy leak:;
-  rdfs:label "service_provider";
-  rdfs:domain leak:Entity;
-  rdfs:comment """ "Mossack Fonseca", "Portcullis Trustnet" or "Commonwealth Trust Limited" """.
-
-leak:sourceID a owl:DatatypeProperty;
-  rdfs:isDefinedBy leak:;
-  rdfs:label "sourceID";
-  rdfs:domain leak:Node;
-  rdfs:comment """ "Panama Papers" or "Offshore Leaks" """.
-
-leak:status a owl:DatatypeProperty;
-  rdfs:isDefinedBy leak:;
-  rdfs:label "status";
-  rdfs:domain leak:Node;
-  rdfs:comment "Different value lists for Intermediary and Entity".
-
-leak:struck_off_date a owl:DatatypeProperty;
-  rdfs:isDefinedBy leak:;
-  rdfs:label "struck_off_date";
-  rdfs:domain leak:Entity;
-  rdfs:comment "When entity was removed from register".
-
-leak:valid_until a owl:DatatypeProperty;
-  rdfs:isDefinedBy leak:;
-  rdfs:label "valid_until";
-  rdfs:domain leak:Node;
-  rdfs:comment """Fixed statement, eg "The Panama Papers data is current through 2015".""".
-
+  
+##########################
 ## raw Relations: corespond to all-edges.csv::rel_type
 
 leak:hasRegisteredAddress                    a owl:ObjectProperty; rdfs:isDefinedBy leak:; rdfs:domain leak:Node; rdfs:range leak:Node; rdfs:label "registered address"                          ; leak:count   316472.
@@ -300,9 +311,12 @@ leak:sameAddressAs                           a owl:ObjectProperty; rdfs:isDefine
 leak:sameNameAndRegistrationDateAs           a owl:ObjectProperty; rdfs:isDefinedBy leak:; rdfs:domain leak:Node; rdfs:range leak:Node; rdfs:label "same name and registration date as"          ; leak:count     3146.
 leak:similarNameAndAddressAs                 a owl:ObjectProperty; rdfs:isDefinedBy leak:; rdfs:domain leak:Node; rdfs:range leak:Node; rdfs:label "similar name and address as"                 ; leak:count    46761.
 
-# This part inroduces "cooked" classes and properties: inferred from the raw data
+######################################
+# This part inroduces additional classes and properties, not explicitely present in the CSV files
+# They are meant to layer further structure of the raw data
 
-## "cooked" Classes
+
+## Exlicit linking and structuring classes
 
 leak:Country a owl:Class;
   rdfs:isDefinedBy leak:;
@@ -316,11 +330,13 @@ leak:OffshoreJurisdiction a owl:Class;
   rdfs:comment "Offshore jurisdiction identified by a special code (*not* ISO alpha3)";
   skos:example "leaks:offshore-BVI, which is British Virgin Islands".
 
-## "cooked" Properties
 
-leak:code a owl:DatatypeProperty;
+## Exlicit linking and structuring properties
+
+leak:countryCode a owl:DatatypeProperty;
   rdfs:isDefinedBy leak:;
-  rdfs:label "code";
+  rdfs:label "country code";
+  rdfs:domain leak:Country;
   rdfs:comment "Code for someting, eg ISO alpha3 of Country".
 
 leak:hasCountry a owl:ObjectProperty;
@@ -352,23 +368,25 @@ leak:targetNode a owl:ObjectProperty;
   rdfs:range leak:Node;
   rdfs:comment "Target node of a relation (edge)".
 
-## "cooked" Relations
+
+######################################
+# This part inroduces interpretation classes and properties, not explicitely present in the CSV files
+# They are meant to layer further structure based on implicit semantics and generalisation
+
 
 # Address: leak:hasRegisteredAddress
 # Intermediary: leak:isIntermediaryOf                           
 
 ### Related
 
-leak:SAME a owl:ObjectProperty, owl:SymmetricProperty;
+leak:SAME a owl:ObjectProperty, owl:SymmetricProperty, owl:TransitiveProperty;
   rdfs:isDefinedBy leak:;
   rdfs:label "SAME";
   rdfs:domain leak:Node;
   rdfs:range leak:Node;
-  rdfs:comment "Two entities are likely the same. Symmetric".
+  rdfs:comment "Two entities are likely the same. Symmetric and transitive.".
 
-leak:sameAddressAs                 rdfs:subPropertyOf leak:SAME.
 leak:sameNameAndRegistrationDateAs rdfs:subPropertyOf leak:SAME.
-leak:similarNameAndAddressAs       rdfs:subPropertyOf leak:SAME.
 
 leak:RELATED a owl:ObjectProperty, owl:SymmetricProperty;
   rdfs:isDefinedBy leak:;
@@ -379,6 +397,8 @@ leak:RELATED a owl:ObjectProperty, owl:SymmetricProperty;
 
 leak:SAME          rdfs:subPropertyOf leak:RELATED.
 leak:relatedEntity rdfs:subPropertyOf leak:RELATED.
+leak:sameAddressAs                 rdfs:subPropertyOf leak:SAME.
+leak:similarNameAndAddressAs       rdfs:subPropertyOf leak:SAME.
 
 ### Officers/Agents
 
