@@ -13,9 +13,13 @@
 
 * Intro
 Day 1: <2016-05-12 Thu>
-- HTML rendered version: http://rawgit.com/Ontotext-AD/leaks/master/README.html
+- README (HTML version): http://rawgit.com/Ontotext-AD/leaks/master/README.html
+- Source repository: https://github.com/Ontotext-AD/leaks/
 - Post an issue on Github: https://github.com/Ontotext-AD/leaks/issues
 - Chat to us on Gitter: https://gitter.im/Ontotext-AD/leaks
+- Ontology: https://raw.githubusercontent.com/Ontotext-AD/leaks/master/leak-ontology.ttl
+- Ontology documentation: [[http://ontorule-project.eu/parrot/parrot?documentUri%3Dhttps%3A%2F%2Fraw.githubusercontent.com%2FOntotext-AD%2Fleaks%2Fmaster%2Fleak-ontology.ttl&mimetype%3Dtext%2Fturtle&profile%3Dtechnical&language%3Den&customizeCssUrl][Parrot Report]]
+- Data model: [[*Data model]]
 
 ** Offshore Links
 The [[https://offshoreleaks.icij.org/][Offshore Leaks]] database of The International Consortium of Investigative Journalists (ICIJ)
@@ -219,9 +223,7 @@ we also define:
 @prefix leaks: <http://data.ontotext.com/resource/leaks/> . # data
 #+END_SRC
 
-We made an ontology [[./leak.ttl]]. We prepend the prefixes to make a standalone version:
-: cat prefixes.ttl leak.ttl > leak-ontology.ttl
-It has 4 parts:
+We made an ontology [[./leak.ttl]]. It has 4 parts:
 - A header that describes the ontology itself:
 #+BEGIN_SRC Turtle
 leak: a owl:Ontology;
@@ -265,6 +267,9 @@ leak:hasCountry a owl:ObjectProperty;
   rdfs:range leak:Country;
   rdfs:comment "Obtained by splitting country_codes on ';' and linking".
 #+END_SRC
+
+[[./leak-ontology.ttl]]: standalone version (prefixes prepended)
+: cat prefixes.ttl leak.ttl > leak-ontology.ttl
 
 ** tarql
 We use [[https://github.com/tarql/tarql][tarql]] (SPARQL processor for Tables) to convert from CSV to Turtle.
