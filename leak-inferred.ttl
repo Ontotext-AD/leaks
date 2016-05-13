@@ -1,6 +1,9 @@
-# This part inroduces "cooked" classes and properties: inferred from the raw data
+######################################
+# This part inroduces additional classes and properties, not explicitely present in the CSV files
+# They are meant to layer further structure of the raw data
 
-## "cooked" Classes
+
+## Exlicit linking and structuring classes
 
 leak:Country a owl:Class;
   rdfs:isDefinedBy leak:;
@@ -14,11 +17,13 @@ leak:OffshoreJurisdiction a owl:Class;
   rdfs:comment "Offshore jurisdiction identified by a special code (*not* ISO alpha3)";
   skos:example "leaks:offshore-BVI, which is British Virgin Islands".
 
-## "cooked" Properties
 
-leak:code a owl:DatatypeProperty;
+## Exlicit linking and structuring properties
+
+leak:countryCode a owl:DatatypeProperty;
   rdfs:isDefinedBy leak:;
-  rdfs:label "code";
+  rdfs:label "country code";
+  rdfs:domain leak:Country;
   rdfs:comment "Code for someting, eg ISO alpha3 of Country".
 
 leak:hasCountry a owl:ObjectProperty;
@@ -50,23 +55,25 @@ leak:targetNode a owl:ObjectProperty;
   rdfs:range leak:Node;
   rdfs:comment "Target node of a relation (edge)".
 
-## "cooked" Relations
+
+######################################
+# This part inroduces interpretation classes and properties, not explicitely present in the CSV files
+# They are meant to layer further structure based on implicit semantics and generalisation
+
 
 # Address: leak:hasRegisteredAddress
 # Intermediary: leak:isIntermediaryOf                           
 
 ### Related
 
-leak:SAME a owl:ObjectProperty, owl:SymmetricProperty;
+leak:SAME a owl:ObjectProperty, owl:SymmetricProperty, owl:TransitiveProperty;
   rdfs:isDefinedBy leak:;
   rdfs:label "SAME";
   rdfs:domain leak:Node;
   rdfs:range leak:Node;
-  rdfs:comment "Two entities are likely the same. Symmetric".
+  rdfs:comment "Two entities are likely the same. Symmetric and transitive.".
 
-leak:sameAddressAs                 rdfs:subPropertyOf leak:SAME.
 leak:sameNameAndRegistrationDateAs rdfs:subPropertyOf leak:SAME.
-leak:similarNameAndAddressAs       rdfs:subPropertyOf leak:SAME.
 
 leak:RELATED a owl:ObjectProperty, owl:SymmetricProperty;
   rdfs:isDefinedBy leak:;
@@ -77,6 +84,8 @@ leak:RELATED a owl:ObjectProperty, owl:SymmetricProperty;
 
 leak:SAME          rdfs:subPropertyOf leak:RELATED.
 leak:relatedEntity rdfs:subPropertyOf leak:RELATED.
+leak:sameAddressAs                 rdfs:subPropertyOf leak:SAME.
+leak:similarNameAndAddressAs       rdfs:subPropertyOf leak:SAME.
 
 ### Officers/Agents
 
