@@ -479,18 +479,19 @@ leak:RELATED_AGENT a owl:ObjectProperty;
   rdfs:range leak:Node;
   rdfs:comment "Any sort of agent related to an entity, including OWNER, DIRECTOR, OFFICER, or SERVICE PROVIDER; whether NOMINATED or real".
 
-leak:REAL_OWNER                 rdfs:subPropertyOf leak:OWNER    
+
+leak:REAL_OWNER                 rdfs:subPropertyOf leak:OWNER .   
   
-leak:OFFICER                    rdfs:subPropertyOf leak:AGENT_OF  
-leak:SERVICE_PROVIDER           rdfs:subPropertyOf leak:AGENT_OF  
-leak:DIRECTOR                   rdfs:subPropertyOf leak:AGENT_OF  
-leak:NOMINEE                    rdfs:subPropertyOf leak:AGENT_OF  
+leak:OFFICER                    rdfs:subPropertyOf leak:AGENT_OF . 
+leak:SERVICE_PROVIDER           rdfs:subPropertyOf leak:AGENT_OF .
+leak:DIRECTOR                   rdfs:subPropertyOf leak:AGENT_OF . 
+leak:NOMINEE                    rdfs:subPropertyOf leak:AGENT_OF . 
 
-leak:AUTHORIZED_REPRESENTATIVE  rdfs:subPropertyOf leak:SERVICE_PROVIDER    
-leak:EXECUTIVE                  rdfs:subPropertyOf leak:OFFICER    
+leak:AUTHORIZED_REPRESENTATIVE  rdfs:subPropertyOf leak:SERVICE_PROVIDER .   
+leak:EXECUTIVE                  rdfs:subPropertyOf leak:OFFICER .   
 
-leak:OWNER                      rdfs:subPropertyOf leak:RELATED_AGENT          
-leak:AGENT_OF                   rdfs:subPropertyOf leak:RELATED_AGENT          
+leak:OWNER                      rdfs:subPropertyOf leak:RELATED_AGENT .         
+leak:AGENT_OF                   rdfs:subPropertyOf leak:RELATED_AGENT .         
 
 
 #### source relations contribute to the derived relations
