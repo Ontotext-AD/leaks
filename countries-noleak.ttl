@@ -1,3 +1,8 @@
+@prefix leak:  <http://data.ontotext.com/resource/leaks#>.  # ontology
+@prefix leaks: <http://data.ontotext.com/resource/leaks/> . # data
+@prefix dbr:   <http://dbpedia.org/resource/>.
+@prefix owl:   <http://www.w3.org/2002/07/owl#>. 
+
 leaks:country-AFG owl:sameAs dbr:Afghanistan.
 leaks:country-ALA owl:sameAs dbr:Åland_Islands.
 leaks:country-ATA owl:sameAs dbr:Antarctica.

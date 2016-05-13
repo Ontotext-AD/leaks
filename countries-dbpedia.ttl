@@ -1,4 +1,9 @@
-leaks:country-ABW a leak:Country; leak:code "ABW"; leak:name "Aruba";                                  owl:sameAs dbr:Aruba.
+@prefix leak:  <http://data.ontotext.com/resource/leaks#>.  # ontology
+@prefix leaks: <http://data.ontotext.com/resource/leaks/> . # data
+@prefix dbr:   <http://dbpedia.org/resource/>.
+@prefix owl:   <http://www.w3.org/2002/07/owl#>.
+
+leaks:country-ABW a leak:Country; leak:countryCode "ABW"; leak:name "Aruba";                                  owl:sameAs dbr:Aruba.
 leaks:country-AGO a leak:Country; leak:countryCode "AGO"; leak:name "Angola";                                 owl:sameAs dbr:Angola.
 leaks:country-AIA a leak:Country; leak:countryCode "AIA"; leak:name "Anguilla";                               owl:sameAs dbr:Anguilla.
 leaks:country-ALB a leak:Country; leak:countryCode "ALB"; leak:name "Albania";                                owl:sameAs dbr:Albania.
@@ -119,7 +124,7 @@ leaks:country-MDG a leak:Country; leak:countryCode "MDG"; leak:name "Madagascar"
 leaks:country-MDV a leak:Country; leak:countryCode "MDV"; leak:name "Maldives";                               owl:sameAs dbr:Maldives.
 leaks:country-MEX a leak:Country; leak:countryCode "MEX"; leak:name "Mexico";                                 owl:sameAs dbr:Mexico.
 leaks:country-MHL a leak:Country; leak:countryCode "MHL"; leak:name "Marshall Islands";                       owl:sameAs dbr:Marshall_Islands.
-leaks:country-MKD a leak:Country; leak:countryCode "MKD"; leak:name "Macedonia, the Former Yugoslav Republic oowl:sameAs dbr:Republic_of_Macedonia.
+leaks:country-MKD a leak:Country; leak:countryCode "MKD"; leak:name "Macedonia, the Former Yugoslav Republic";owl:sameAs dbr:Republic_of_Macedonia.
 leaks:country-MLI a leak:Country; leak:countryCode "MLI"; leak:name "Mali";                                   owl:sameAs dbr:Mali.
 leaks:country-MLT a leak:Country; leak:countryCode "MLT"; leak:name "Malta";                                  owl:sameAs dbr:Malta.
 leaks:country-MMR a leak:Country; leak:countryCode "MMR"; leak:name "Myanmar";                                owl:sameAs dbr:Myanmar.
