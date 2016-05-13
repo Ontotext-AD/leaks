@@ -19,7 +19,7 @@ Day 1: <2016-05-12 Thu>
 - Chat to us on Gitter: https://gitter.im/Ontotext-AD/leaks
 - Ontology: https://raw.githubusercontent.com/Ontotext-AD/leaks/master/leak-ontology.ttl
 - Ontology documentation: [[http://ontorule-project.eu/parrot/parrot?documentUri%3Dhttps%3A%2F%2Fraw.githubusercontent.com%2FOntotext-AD%2Fleaks%2Fmaster%2Fleak-ontology.ttl&mimetype%3Dtext%2Fturtle&profile%3Dtechnical&language%3Den&customizeCssUrl][Parrot Report]]
-- Data model: [[*Data model]]
+- Data model: sec [[*Data Model]]
 
 ** Offshore Links
 The [[https://offshoreleaks.icij.org/][Offshore Leaks]] database of The International Consortium of Investigative Journalists (ICIJ)
@@ -339,11 +339,25 @@ Notes:
 - Skips some rows (unexplained), but the loss is very small.
   Eg 319150 entities.ttl vs 319421 Entities.csv, or a loss of 0.08%
 *** Unicode problems
-- Addresses and Officers are not in UTF-8 because they contain special characters like for example: Côte d'Ivoire, Curaçao, ELÍAS BAYTER MONTENEGRO, MARITZA GARCIA ALCÁNTARA etc. 
+- Addresses and Officers are not in UTF-8 because they contain special characters like for example: Côte d'Ivoire, Curaçao, EL�?AS BAYTER MONTENEGRO, MARITZA GARCIA ALC�?NTARA etc. 
 
-** TODO Geonames and DBpedia Geography
+** Geonames and DBpedia Geography
 We want to correlate countries to Geonames and DBpedia, in order to use the ~gn:parentFeature~ hierarchy to group countries by region (eg Eastern Europe) and continent (eg Europe).
-
+- We extracted the molecules for all countires from [[http://ff-news.ontotext.com/sparql]] using the next query:
+#+BEGIN_EXAMPLE
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX gn: <http://www.geonames.org/ontology#>
+PREFIX dbr: <http://dbpedia.org/resource/>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+construct {
+    ?s ?p ?o.
+}
+where {
+    ?s rdf:type dbo:Country;
+        ?p ?o.
+}
+#+END_EXAMPLE
 ** Country Codes
 Since the data uses ISO alpha3 country codes, we have to use that to correlate to DBpedia.
 - [[https://en.wikipedia.org/wiki/ISO_3166-1][Wikipedia]] has such a list in the form of a table
@@ -424,7 +438,7 @@ And looked Onto upon the land, and saw that it was good:
 - tarql worketh fastly and loseth nearly nought data (0.08%)
 - 760 million ducats of RDF spilt forth
 - Prefixes unified and registered as http://prefix.cc/leak
-- Ontology described by the [[https://www.w3.org/TR/void/][VOID]], and shalt be registered in the [[http://lov.okfn.org/][LOV]]
+- Ontology described by the [[https://www.w3.org/TR/void/][VOID]], and shalt be registered in the [[http://lov.okfn.org/][LOV]] (see [[https://plus.google.com/115593825497938381443/posts/7SaKJW3sanm][LOV announcement]])
 - Data model lucid and clear
 - Countries and Offshores hast connexion to DBpedia
 Go forth and queriest! Whence did money came from, and whither did it flow?
