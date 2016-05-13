@@ -338,7 +338,8 @@ Notes:
 *** tarql Problems
 - Skips some rows (unexplained), but the loss is very small.
   Eg 319150 entities.ttl vs 319421 Entities.csv, or a loss of 0.08%
-- TODO Unicode problems
+*** Unicode problems
+- Addresses and Officers are not in UTF-8 because they contain special characters like for example: Côte d'Ivoire, Curaçao, ELÍAS BAYTER MONTENEGRO, MARITZA GARCIA ALCÁNTARA etc. 
 
 ** TODO Geonames and DBpedia Geography
 We want to correlate countries to Geonames and DBpedia, in order to use the ~gn:parentFeature~ hierarchy to group countries by region (eg Eastern Europe) and continent (eg Europe).
