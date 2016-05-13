@@ -62,7 +62,7 @@ leak:targetNode a owl:ObjectProperty;
 
 
 # Address: leak:hasRegisteredAddress
-# Intermediary: leak:isIntermediaryOf                           
+# Intermediary: leak:isIntermediaryOf
 
 ### Related
 

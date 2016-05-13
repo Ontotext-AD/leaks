@@ -1,250 +1,209 @@
-leak:country-ABW owl:sameAs dbr:Aruba.
-leak:country-AFG owl:sameAs dbr:Afghanistan.
-leak:country-AGO owl:sameAs dbr:Angola.
-leak:country-AIA owl:sameAs dbr:Anguilla.
-leak:country-ALA owl:sameAs dbr:Åland_Islands.
-leak:country-ALB owl:sameAs dbr:Albania.
-leak:country-AND owl:sameAs dbr:Andorra.
-leak:country-ARE owl:sameAs dbr:United_Arab_Emirates.
-leak:country-ARG owl:sameAs dbr:Argentina.
-leak:country-ARM owl:sameAs dbr:Armenia.
-leak:country-ASM owl:sameAs dbr:American_Samoa.
-leak:country-ATA owl:sameAs dbr:Antarctica.
-leak:country-ATF owl:sameAs dbr:French_Southern_Territories.
-leak:country-ATG owl:sameAs dbr:Antigua_and_Barbuda.
-leak:country-AUS owl:sameAs dbr:Australia.
-leak:country-AUT owl:sameAs dbr:Austria.
-leak:country-AZE owl:sameAs dbr:Azerbaijan.
-leak:country-BDI owl:sameAs dbr:Burundi.
-leak:country-BEL owl:sameAs dbr:Belgium.
-leak:country-BEN owl:sameAs dbr:Benin.
-leak:country-BES owl:sameAs <http://dbpedia.org/resource/Bonaire,_Sint_Eustatius_and_Saba>.
-leak:country-BFA owl:sameAs dbr:Burkina_Faso.
-leak:country-BGD owl:sameAs dbr:Bangladesh.
-leak:country-BGR owl:sameAs dbr:Bulgaria.
-leak:country-BHR owl:sameAs dbr:Bahrain.
-leak:country-BHS owl:sameAs dbr:Bahamas.
-leak:country-BIH owl:sameAs dbr:Bosnia_and_Herzegovina.
-leak:country-BLM owl:sameAs dbr:Saint_Barthélemy.
-leak:country-BLR owl:sameAs dbr:Belarus.
-leak:country-BLZ owl:sameAs dbr:Belize.
-leak:country-BMU owl:sameAs dbr:Bermuda.
-leak:country-BOL owl:sameAs <http://dbpedia.org/resource/Bolivia_(Plurinational_State_of)>.
-leak:country-BRA owl:sameAs dbr:Brazil.
-leak:country-BRB owl:sameAs dbr:Barbados.
-leak:country-BRN owl:sameAs dbr:Brunei_Darussalam.
-leak:country-BTN owl:sameAs dbr:Bhutan.
-leak:country-BVT owl:sameAs dbr:Bouvet_Island.
-leak:country-BWA owl:sameAs dbr:Botswana.
-leak:country-CAF owl:sameAs dbr:Central_African_Republic.
-leak:country-CAN owl:sameAs dbr:Canada.
-leak:country-CCK owl:sameAs <http://dbpedia.org/resource/Cocos_(Keeling)_Islands>.
-leak:country-CHE owl:sameAs dbr:Switzerland.
-leak:country-CHL owl:sameAs dbr:Chile.
-leak:country-CHN owl:sameAs dbr:China.
-leak:country-CIV owl:sameAs <http://dbpedia.org/resource/Côte_d'Ivoire>.
-leak:country-CMR owl:sameAs dbr:Cameroon.
-leak:country-COD owl:sameAs <http://dbpedia.org/resource/Congo_(Democratic_Republic_of_the)>.
-leak:country-COG owl:sameAs dbr:Republic_of_the_Congo.
-leak:country-COK owl:sameAs dbr:Cook_Islands.
-leak:country-COL owl:sameAs dbr:Colombia.
-leak:country-COM owl:sameAs dbr:Comoros.
-leak:country-CPV owl:sameAs dbr:Cabo_Verde.
-leak:country-CRI owl:sameAs dbr:Costa_Rica.
-leak:country-CUB owl:sameAs dbr:Cuba.
-leak:country-CUW owl:sameAs dbr:Curaçao.
-leak:country-CXR owl:sameAs dbr:Christmas_Island.
-leak:country-CYM owl:sameAs dbr:Cayman_Islands.
-leak:country-CYP owl:sameAs dbr:Cyprus.
-leak:country-CZE owl:sameAs dbr:Czech_Republic.
-leak:country-DEU owl:sameAs dbr:Germany.
-leak:country-DJI owl:sameAs dbr:Djibouti.
-leak:country-DMA owl:sameAs dbr:Dominica.
-leak:country-DNK owl:sameAs dbr:Denmark.
-leak:country-DOM owl:sameAs dbr:Dominican_Republic.
-leak:country-DZA owl:sameAs dbr:Algeria.
-leak:country-ECU owl:sameAs dbr:Ecuador.
-leak:country-EGY owl:sameAs dbr:Egypt.
-leak:country-ERI owl:sameAs dbr:Eritrea.
-leak:country-ESH owl:sameAs dbr:Western_Sahara.
-leak:country-ESP owl:sameAs dbr:Spain.
-leak:country-EST owl:sameAs dbr:Estonia.
-leak:country-ETH owl:sameAs dbr:Ethiopia.
-leak:country-FIN owl:sameAs dbr:Finland.
-leak:country-FJI owl:sameAs dbr:Fiji.
-leak:country-FLK owl:sameAs <http://dbpedia.org/resource/Falkland_Islands_(Malvinas)>.
-leak:country-FRA owl:sameAs dbr:France.
-leak:country-FRO owl:sameAs dbr:Faroe_Islands.
-leak:country-FSM owl:sameAs <http://dbpedia.org/resource/Micronesia_(Federated_States_of)>.
-leak:country-GAB owl:sameAs dbr:Gabon.
-leak:country-GBR owl:sameAs dbr:United_Kingdom_of_Great_Britain_and_Northern_Ireland.
-leak:country-GEO owl:sameAs <http://dbpedia.org/resource/Georgia_(country)>.
-leak:country-GGY owl:sameAs dbr:Guernsey.
-leak:country-GHA owl:sameAs dbr:Ghana.
-leak:country-GIB owl:sameAs dbr:Gibraltar.
-leak:country-GIN owl:sameAs dbr:Guinea.
-leak:country-GLP owl:sameAs dbr:Guadeloupe.
-leak:country-GMB owl:sameAs dbr:Gambia.
-leak:country-GNB owl:sameAs dbr:Guinea-Bissau.
-leak:country-GNQ owl:sameAs dbr:Equatorial_Guinea.
-leak:country-GRC owl:sameAs dbr:Greece.
-leak:country-GRD owl:sameAs dbr:Grenada.
-leak:country-GRL owl:sameAs dbr:Greenland.
-leak:country-GTM owl:sameAs dbr:Guatemala.
-leak:country-GUF owl:sameAs dbr:French_Guiana.
-leak:country-GUM owl:sameAs dbr:Guam.
-leak:country-GUY owl:sameAs dbr:Guyana.
-leak:country-HKG owl:sameAs dbr:Hong_Kong.
-leak:country-HMD owl:sameAs dbr:Heard_Island_and_McDonald_Islands.
-leak:country-HND owl:sameAs dbr:Honduras.
-leak:country-HRV owl:sameAs dbr:Croatia.
-leak:country-HTI owl:sameAs dbr:Haiti.
-leak:country-HUN owl:sameAs dbr:Hungary.
-leak:country-IDN owl:sameAs dbr:Indonesia.
-leak:country-IMN owl:sameAs dbr:Isle_of_Man.
-leak:country-IND owl:sameAs dbr:India.
-leak:country-IOT owl:sameAs dbr:British_Indian_Ocean_Territory.
-leak:country-IRL owl:sameAs dbr:Republic_of_Ireland.
-leak:country-IRN owl:sameAs <http://dbpedia.org/resource/Iran_(Islamic_Republic_of)>.
-leak:country-IRQ owl:sameAs dbr:Iraq.
-leak:country-ISL owl:sameAs dbr:Iceland.
-leak:country-ISR owl:sameAs dbr:Israel.
-leak:country-ITA owl:sameAs dbr:Italy.
-leak:country-JAM owl:sameAs dbr:Jamaica.
-leak:country-JEY owl:sameAs dbr:Jersey.
-leak:country-JOR owl:sameAs dbr:Jordan.
-leak:country-JPN owl:sameAs dbr:Japan.
-leak:country-KAZ owl:sameAs dbr:Kazakhstan.
-leak:country-KEN owl:sameAs dbr:Kenya.
-leak:country-KGZ owl:sameAs dbr:Kyrgyzstan.
-leak:country-KHM owl:sameAs dbr:Cambodia.
-leak:country-KIR owl:sameAs dbr:Kiribati.
-leak:country-KNA owl:sameAs dbr:Saint_Kitts_and_Nevis.
-leak:country-KOR owl:sameAs <http://dbpedia.org/resource/Korea_(Republic_of)>.
-leak:country-KWT owl:sameAs dbr:Kuwait.
-leak:country-LAO owl:sameAs <http://dbpedia.org/resource/Lao_People's_Democratic_Republic>.
-leak:country-LBN owl:sameAs dbr:Lebanon.
-leak:country-LBR owl:sameAs dbr:Liberia.
-leak:country-LBY owl:sameAs dbr:Libya.
-leak:country-LCA owl:sameAs dbr:Saint_Lucia.
-leak:country-LIE owl:sameAs dbr:Liechtenstein.
-leak:country-LKA owl:sameAs dbr:Sri_Lanka.
-leak:country-LSO owl:sameAs dbr:Lesotho.
-leak:country-LTU owl:sameAs dbr:Lithuania.
-leak:country-LUX owl:sameAs dbr:Luxembourg.
-leak:country-LVA owl:sameAs dbr:Latvia.
-leak:country-MAC owl:sameAs dbr:Macao.
-leak:country-MAF owl:sameAs <http://dbpedia.org/resource/Saint_Martin_(French_part)>.
-leak:country-MAR owl:sameAs dbr:Morocco.
-leak:country-MCO owl:sameAs dbr:Monaco.
-leak:country-MDA owl:sameAs <http://dbpedia.org/resource/Moldova_(Republic_of)>.
-leak:country-MDG owl:sameAs dbr:Madagascar.
-leak:country-MDV owl:sameAs dbr:Maldives.
-leak:country-MEX owl:sameAs dbr:Mexico.
-leak:country-MHL owl:sameAs dbr:Marshall_Islands.
-leak:country-MKD owl:sameAs dbr:Republic_of_Macedonia.
-leak:country-MLI owl:sameAs dbr:Mali.
-leak:country-MLT owl:sameAs dbr:Malta.
-leak:country-MMR owl:sameAs dbr:Myanmar.
-leak:country-MNE owl:sameAs dbr:Montenegro.
-leak:country-MNG owl:sameAs dbr:Mongolia.
-leak:country-MNP owl:sameAs dbr:Northern_Mariana_Islands.
-leak:country-MOZ owl:sameAs dbr:Mozambique.
-leak:country-MRT owl:sameAs dbr:Mauritania.
-leak:country-MSR owl:sameAs dbr:Montserrat.
-leak:country-MTQ owl:sameAs dbr:Martinique.
-leak:country-MUS owl:sameAs dbr:Mauritius.
-leak:country-MWI owl:sameAs dbr:Malawi.
-leak:country-MYS owl:sameAs dbr:Malaysia.
-leak:country-MYT owl:sameAs dbr:Mayotte.
-leak:country-NAM owl:sameAs dbr:Namibia.
-leak:country-NCL owl:sameAs dbr:New_Caledonia.
-leak:country-NER owl:sameAs dbr:Niger.
-leak:country-NFK owl:sameAs dbr:Norfolk_Island.
-leak:country-NGA owl:sameAs dbr:Nigeria.
-leak:country-NIC owl:sameAs dbr:Nicaragua.
-leak:country-NIU owl:sameAs dbr:Niue.
-leak:country-NLD owl:sameAs dbr:Netherlands.
-leak:country-NOR owl:sameAs dbr:Norway.
-leak:country-NPL owl:sameAs dbr:Nepal.
-leak:country-NRU owl:sameAs dbr:Nauru.
-leak:country-NZL owl:sameAs dbr:New_Zealand.
-leak:country-OMN owl:sameAs dbr:Oman.
-leak:country-PAK owl:sameAs dbr:Pakistan.
-leak:country-PAN owl:sameAs dbr:Panama.
-leak:country-PCN owl:sameAs dbr:Pitcairn.
-leak:country-PER owl:sameAs dbr:Peru.
-leak:country-PHL owl:sameAs dbr:Philippines.
-leak:country-PLW owl:sameAs dbr:Palau.
-leak:country-PNG owl:sameAs dbr:Papua_New_Guinea.
-leak:country-POL owl:sameAs dbr:Poland.
-leak:country-PRI owl:sameAs dbr:Puerto_Rico.
-leak:country-PRK owl:sameAs dbr:North_Korea.
-leak:country-PRT owl:sameAs dbr:Portugal.
-leak:country-PRY owl:sameAs dbr:Paraguay.
-leak:country-PSE owl:sameAs dbr:State_of_Palestine.
-leak:country-PYF owl:sameAs dbr:French_Polynesia.
-leak:country-QAT owl:sameAs dbr:Qatar.
-leak:country-REU owl:sameAs dbr:Réunion.
-leak:country-ROU owl:sameAs dbr:Romania.
-leak:country-RUS owl:sameAs dbr:Russian_Federation.
-leak:country-RWA owl:sameAs dbr:Rwanda.
-leak:country-SAU owl:sameAs dbr:Saudi_Arabia.
-leak:country-SDN owl:sameAs dbr:Sudan.
-leak:country-SEN owl:sameAs dbr:Senegal.
-leak:country-SGP owl:sameAs dbr:Singapore.
-leak:country-SGS owl:sameAs dbr:South_Georgia_and_the_South_Sandwich_Islands.
-leak:country-SHN owl:sameAs <http://dbpedia.org/resource/Saint_Helena,_Ascension_and_Tristan_da_Cunha>.
-leak:country-SJM owl:sameAs dbr:Svalbard_and_Jan_Mayen.
-leak:country-SLB owl:sameAs dbr:Solomon_Islands.
-leak:country-SLE owl:sameAs dbr:Sierra_Leone.
-leak:country-SLV owl:sameAs dbr:El_Salvador.
-leak:country-SMR owl:sameAs dbr:San_Marino.
-leak:country-SOM owl:sameAs dbr:Somalia.
-leak:country-SPM owl:sameAs dbr:Saint_Pierre_and_Miquelon.
-leak:country-SRB owl:sameAs dbr:Serbia.
-leak:country-SSD owl:sameAs dbr:South_Sudan.
-leak:country-STP owl:sameAs dbr:Sao_Tome_and_Principe.
-leak:country-SUR owl:sameAs dbr:Suriname.
-leak:country-SVK owl:sameAs dbr:Slovakia.
-leak:country-SVN owl:sameAs dbr:Slovenia.
-leak:country-SWE owl:sameAs dbr:Sweden.
-leak:country-SWZ owl:sameAs dbr:Swaziland.
-leak:country-SXM owl:sameAs <http://dbpedia.org/resource/Sint_Maarten_(Dutch_part)>.
-leak:country-SYC owl:sameAs dbr:Seychelles.
-leak:country-SYR owl:sameAs dbr:Syrian_Arab_Republic.
-leak:country-TCA owl:sameAs dbr:Turks_and_Caicos_Islands.
-leak:country-TCD owl:sameAs dbr:Chad.
-leak:country-TGO owl:sameAs dbr:Togo.
-leak:country-THA owl:sameAs dbr:Thailand.
-leak:country-TJK owl:sameAs dbr:Tajikistan.
-leak:country-TKL owl:sameAs dbr:Tokelau.
-leak:country-TKM owl:sameAs dbr:Turkmenistan.
-leak:country-TLS owl:sameAs dbr:Timor-Leste.
-leak:country-TON owl:sameAs dbr:Tonga.
-leak:country-TTO owl:sameAs dbr:Trinidad_and_Tobago.
-leak:country-TUN owl:sameAs dbr:Tunisia.
-leak:country-TUR owl:sameAs dbr:Turkey.
-leak:country-TUV owl:sameAs dbr:Tuvalu.
-leak:country-TWN owl:sameAs <http://dbpedia.org/resource/Taiwan,_Province_of_China>.
-leak:country-TZA owl:sameAs <http://dbpedia.org/resource/Tanzania,_United_Republic_of>.
-leak:country-UGA owl:sameAs dbr:Uganda.
-leak:country-UKR owl:sameAs dbr:Ukraine.
-leak:country-UMI owl:sameAs dbr:United_States_Minor_Outlying_Islands.
-leak:country-URY owl:sameAs dbr:Uruguay.
-leak:country-USA owl:sameAs dbr:United_States_of_America.
-leak:country-UZB owl:sameAs dbr:Uzbekistan.
-leak:country-VAT owl:sameAs dbr:Vatican_City_State.
-leak:country-VCT owl:sameAs dbr:Saint_Vincent_and_the_Grenadines.
-leak:country-VEN owl:sameAs <http://dbpedia.org/resource/Venezuela_(Bolivarian_Republic_of)>.
-leak:country-VGB owl:sameAs dbr:British_Virgin_Islands.
-leak:country-VIR owl:sameAs dbr:United_States_Virgin_Islands.
-leak:country-VNM owl:sameAs dbr:Viet_Nam.
-leak:country-VUT owl:sameAs dbr:Vanuatu.
-leak:country-WLF owl:sameAs dbr:Wallis_and_Futuna.
-leak:country-WSM owl:sameAs dbr:Samoa.
-leak:country-XXX owl:sameAs dbr:Undefined.
-leak:country-YEM owl:sameAs dbr:Yemen.
-leak:country-ZAF owl:sameAs dbr:South_Africa.
-leak:country-ZMB owl:sameAs dbr:Zambia.
-leak:country-ZWE owl:sameAs dbr:Zimbabwe.
+leak:country-ABW a leak:Country; leak:code "ABW"; leak:name "Aruba";                                  owl:sameAs dbr:Aruba.
+leak:country-AGO a leak:Country; leak:code "AGO"; leak:name "Angola";                                 owl:sameAs dbr:Angola.
+leak:country-AIA a leak:Country; leak:code "AIA"; leak:name "Anguilla";                               owl:sameAs dbr:Anguilla.
+leak:country-ALB a leak:Country; leak:code "ALB"; leak:name "Albania";                                owl:sameAs dbr:Albania.
+leak:country-AND a leak:Country; leak:code "AND"; leak:name "Andorra";                                owl:sameAs dbr:Andorra.
+leak:country-ARE a leak:Country; leak:code "ARE"; leak:name "United Arab Emirates";                   owl:sameAs dbr:United_Arab_Emirates.
+leak:country-ARG a leak:Country; leak:code "ARG"; leak:name "Argentina";                              owl:sameAs dbr:Argentina.
+leak:country-ARM a leak:Country; leak:code "ARM"; leak:name "Armenia";                                owl:sameAs dbr:Armenia.
+leak:country-ASM a leak:Country; leak:code "ASM"; leak:name "American Samoa";                         owl:sameAs dbr:American_Samoa.
+leak:country-ATG a leak:Country; leak:code "ATG"; leak:name "Antigua and Barbuda";                    owl:sameAs dbr:Antigua_and_Barbuda.
+leak:country-AUS a leak:Country; leak:code "AUS"; leak:name "Australia";                              owl:sameAs dbr:Australia.
+leak:country-AUT a leak:Country; leak:code "AUT"; leak:name "Austria";                                owl:sameAs dbr:Austria.
+leak:country-AZE a leak:Country; leak:code "AZE"; leak:name "Azerbaijan";                             owl:sameAs dbr:Azerbaijan.
+leak:country-BEL a leak:Country; leak:code "BEL"; leak:name "Belgium";                                owl:sameAs dbr:Belgium.
+leak:country-BEN a leak:Country; leak:code "BEN"; leak:name "Benin";                                  owl:sameAs dbr:Benin.
+leak:country-BFA a leak:Country; leak:code "BFA"; leak:name "Burkina Faso";                           owl:sameAs dbr:Burkina_Faso.
+leak:country-BGD a leak:Country; leak:code "BGD"; leak:name "Bangladesh";                             owl:sameAs dbr:Bangladesh.
+leak:country-BGR a leak:Country; leak:code "BGR"; leak:name "Bulgaria";                               owl:sameAs dbr:Bulgaria.
+leak:country-BHR a leak:Country; leak:code "BHR"; leak:name "Bahrain";                                owl:sameAs dbr:Bahrain.
+leak:country-BHS a leak:Country; leak:code "BHS"; leak:name "Bahamas";                                owl:sameAs dbr:Bahamas.
+leak:country-BIH a leak:Country; leak:code "BIH"; leak:name "Bosnia and Herzegovina";                 owl:sameAs dbr:Bosnia_and_Herzegovina.
+leak:country-BLR a leak:Country; leak:code "BLR"; leak:name "Belarus";                                owl:sameAs dbr:Belarus.
+leak:country-BLZ a leak:Country; leak:code "BLZ"; leak:name "Belize";                                 owl:sameAs dbr:Belize.
+leak:country-BMU a leak:Country; leak:code "BMU"; leak:name "Bermuda";                                owl:sameAs dbr:Bermuda.
+leak:country-BOL a leak:Country; leak:code "BOL"; leak:name "Bolivia, Plurinational State of";        owl:sameAs <http://dbpedia.org/resource/Bolivia_(Plurinational_State_of)>.
+leak:country-BRA a leak:Country; leak:code "BRA"; leak:name "Brazil";                                 owl:sameAs dbr:Brazil.
+leak:country-BRB a leak:Country; leak:code "BRB"; leak:name "Barbados";                               owl:sameAs dbr:Barbados.
+leak:country-BRN a leak:Country; leak:code "BRN"; leak:name "Brunei Darussalam";                      owl:sameAs dbr:Brunei_Darussalam.
+leak:country-BTN a leak:Country; leak:code "BTN"; leak:name "Bhutan";                                 owl:sameAs dbr:Bhutan.
+leak:country-BWA a leak:Country; leak:code "BWA"; leak:name "Botswana";                               owl:sameAs dbr:Botswana.
+leak:country-CAF a leak:Country; leak:code "CAF"; leak:name "Central African Republic";               owl:sameAs dbr:Central_African_Republic.
+leak:country-CAN a leak:Country; leak:code "CAN"; leak:name "Canada";                                 owl:sameAs dbr:Canada.
+leak:country-CHE a leak:Country; leak:code "CHE"; leak:name "Switzerland";                            owl:sameAs dbr:Switzerland.
+leak:country-CHL a leak:Country; leak:code "CHL"; leak:name "Chile";                                  owl:sameAs dbr:Chile.
+leak:country-CHN a leak:Country; leak:code "CHN"; leak:name "China";                                  owl:sameAs dbr:China.
+leak:country-CIV a leak:Country; leak:code "CIV"; leak:name "Côte d'Ivoire";                          owl:sameAs <http://dbpedia.org/resource/Côte_d'Ivoire>.
+leak:country-CMR a leak:Country; leak:code "CMR"; leak:name "Cameroon";                               owl:sameAs dbr:Cameroon.
+leak:country-COD a leak:Country; leak:code "COD"; leak:name "Congo, the Democratic Republic of the";  owl:sameAs <http://dbpedia.org/resource/Congo_(Democratic_Republic_of_the)>.
+leak:country-COK a leak:Country; leak:code "COK"; leak:name "Cook Islands";                           owl:sameAs dbr:Cook_Islands.
+leak:country-COL a leak:Country; leak:code "COL"; leak:name "Colombia";                               owl:sameAs dbr:Colombia.
+leak:country-CPV a leak:Country; leak:code "CPV"; leak:name "Cape Verde";                             owl:sameAs dbr:Cabo_Verde.
+leak:country-CRI a leak:Country; leak:code "CRI"; leak:name "Costa Rica";                             owl:sameAs dbr:Costa_Rica.
+leak:country-CUB a leak:Country; leak:code "CUB"; leak:name "Cuba";                                   owl:sameAs dbr:Cuba.
+leak:country-CUW a leak:Country; leak:code "CUW"; leak:name "Curacao";                                owl:sameAs dbr:Curaçao.
+leak:country-CYM a leak:Country; leak:code "CYM"; leak:name "Cayman Islands";                         owl:sameAs dbr:Cayman_Islands.
+leak:country-CYP a leak:Country; leak:code "CYP"; leak:name "Cyprus";                                 owl:sameAs dbr:Cyprus.
+leak:country-CZE a leak:Country; leak:code "CZE"; leak:name "Czech Republic";                         owl:sameAs dbr:Czech_Republic.
+leak:country-DEU a leak:Country; leak:code "DEU"; leak:name "Germany";                                owl:sameAs dbr:Germany.
+leak:country-DJI a leak:Country; leak:code "DJI"; leak:name "Djibouti";                               owl:sameAs dbr:Djibouti.
+leak:country-DMA a leak:Country; leak:code "DMA"; leak:name "Dominica";                               owl:sameAs dbr:Dominica.
+leak:country-DNK a leak:Country; leak:code "DNK"; leak:name "Denmark";                                owl:sameAs dbr:Denmark.
+leak:country-DOM a leak:Country; leak:code "DOM"; leak:name "Dominican Republic";                     owl:sameAs dbr:Dominican_Republic.
+leak:country-DZA a leak:Country; leak:code "DZA"; leak:name "Algeria";                                owl:sameAs dbr:Algeria.
+leak:country-ECU a leak:Country; leak:code "ECU"; leak:name "Ecuador";                                owl:sameAs dbr:Ecuador.
+leak:country-EGY a leak:Country; leak:code "EGY"; leak:name "Egypt";                                  owl:sameAs dbr:Egypt.
+leak:country-ESP a leak:Country; leak:code "ESP"; leak:name "Spain";                                  owl:sameAs dbr:Spain.
+leak:country-EST a leak:Country; leak:code "EST"; leak:name "Estonia";                                owl:sameAs dbr:Estonia.
+leak:country-ETH a leak:Country; leak:code "ETH"; leak:name "Ethiopia";                               owl:sameAs dbr:Ethiopia.
+leak:country-FIN a leak:Country; leak:code "FIN"; leak:name "Finland";                                owl:sameAs dbr:Finland.
+leak:country-FJI a leak:Country; leak:code "FJI"; leak:name "Fiji";                                   owl:sameAs dbr:Fiji.
+leak:country-FRA a leak:Country; leak:code "FRA"; leak:name "France";                                 owl:sameAs dbr:France.
+leak:country-GAB a leak:Country; leak:code "GAB"; leak:name "Gabon";                                  owl:sameAs dbr:Gabon.
+leak:country-GBR a leak:Country; leak:code "GBR"; leak:name "United Kingdom";                         owl:sameAs dbr:United_Kingdom_of_Great_Britain_and_Northern_Ireland.
+leak:country-GEO a leak:Country; leak:code "GEO"; leak:name "Georgia";                                owl:sameAs <http://dbpedia.org/resource/Georgia_(country)>.
+leak:country-GGY a leak:Country; leak:code "GGY"; leak:name "Guernsey";                               owl:sameAs dbr:Guernsey.
+leak:country-GHA a leak:Country; leak:code "GHA"; leak:name "Ghana";                                  owl:sameAs dbr:Ghana.
+leak:country-GIB a leak:Country; leak:code "GIB"; leak:name "Gibraltar";                              owl:sameAs dbr:Gibraltar.
+leak:country-GIN a leak:Country; leak:code "GIN"; leak:name "Guinea";                                 owl:sameAs dbr:Guinea.
+leak:country-GMB a leak:Country; leak:code "GMB"; leak:name "Gambia";                                 owl:sameAs dbr:Gambia.
+leak:country-GNB a leak:Country; leak:code "GNB"; leak:name "Guinea-Bissau";                          owl:sameAs dbr:Guinea-Bissau.
+leak:country-GNQ a leak:Country; leak:code "GNQ"; leak:name "Equatorial Guinea";                      owl:sameAs dbr:Equatorial_Guinea.
+leak:country-GRC a leak:Country; leak:code "GRC"; leak:name "Greece";                                 owl:sameAs dbr:Greece.
+leak:country-GRD a leak:Country; leak:code "GRD"; leak:name "Grenada";                                owl:sameAs dbr:Grenada.
+leak:country-GTM a leak:Country; leak:code "GTM"; leak:name "Guatemala";                              owl:sameAs dbr:Guatemala.
+leak:country-GUM a leak:Country; leak:code "GUM"; leak:name "Guam";                                   owl:sameAs dbr:Guam.
+leak:country-GUY a leak:Country; leak:code "GUY"; leak:name "Guyana";                                 owl:sameAs dbr:Guyana.
+leak:country-HKG a leak:Country; leak:code "HKG"; leak:name "Hong Kong";                              owl:sameAs dbr:Hong_Kong.
+leak:country-HND a leak:Country; leak:code "HND"; leak:name "Honduras";                               owl:sameAs dbr:Honduras.
+leak:country-HRV a leak:Country; leak:code "HRV"; leak:name "Croatia";                                owl:sameAs dbr:Croatia.
+leak:country-HTI a leak:Country; leak:code "HTI"; leak:name "Haiti";                                  owl:sameAs dbr:Haiti.
+leak:country-HUN a leak:Country; leak:code "HUN"; leak:name "Hungary";                                owl:sameAs dbr:Hungary.
+leak:country-IDN a leak:Country; leak:code "IDN"; leak:name "Indonesia";                              owl:sameAs dbr:Indonesia.
+leak:country-IMN a leak:Country; leak:code "IMN"; leak:name "Isle of Man";                            owl:sameAs dbr:Isle_of_Man.
+leak:country-IND a leak:Country; leak:code "IND"; leak:name "India";                                  owl:sameAs dbr:India.
+leak:country-IRL a leak:Country; leak:code "IRL"; leak:name "Ireland";                                owl:sameAs dbr:Republic_of_Ireland.
+leak:country-IRN a leak:Country; leak:code "IRN"; leak:name "Iran, Islamic Republic of";              owl:sameAs <http://dbpedia.org/resource/Iran_(Islamic_Republic_of)>.
+leak:country-IRQ a leak:Country; leak:code "IRQ"; leak:name "Iraq";                                   owl:sameAs dbr:Iraq.
+leak:country-ISL a leak:Country; leak:code "ISL"; leak:name "Iceland";                                owl:sameAs dbr:Iceland.
+leak:country-ISR a leak:Country; leak:code "ISR"; leak:name "Israel";                                 owl:sameAs dbr:Israel.
+leak:country-ITA a leak:Country; leak:code "ITA"; leak:name "Italy";                                  owl:sameAs dbr:Italy.
+leak:country-JAM a leak:Country; leak:code "JAM"; leak:name "Jamaica";                                owl:sameAs dbr:Jamaica.
+leak:country-JEY a leak:Country; leak:code "JEY"; leak:name "Jersey";                                 owl:sameAs dbr:Jersey.
+leak:country-JOR a leak:Country; leak:code "JOR"; leak:name "Jordan";                                 owl:sameAs dbr:Jordan.
+leak:country-JPN a leak:Country; leak:code "JPN"; leak:name "Japan";                                  owl:sameAs dbr:Japan.
+leak:country-KAZ a leak:Country; leak:code "KAZ"; leak:name "Kazakhstan";                             owl:sameAs dbr:Kazakhstan.
+leak:country-KEN a leak:Country; leak:code "KEN"; leak:name "Kenya";                                  owl:sameAs dbr:Kenya.
+leak:country-KGZ a leak:Country; leak:code "KGZ"; leak:name "Kyrgyzstan";                             owl:sameAs dbr:Kyrgyzstan.
+leak:country-KHM a leak:Country; leak:code "KHM"; leak:name "Cambodia";                               owl:sameAs dbr:Cambodia.
+leak:country-KNA a leak:Country; leak:code "KNA"; leak:name "Saint Kitts and Nevis";                  owl:sameAs dbr:Saint_Kitts_and_Nevis.
+leak:country-KOR a leak:Country; leak:code "KOR"; leak:name "Korea, Republic of";                     owl:sameAs <http://dbpedia.org/resource/Korea_(Republic_of)>.
+leak:country-KWT a leak:Country; leak:code "KWT"; leak:name "Kuwait";                                 owl:sameAs dbr:Kuwait.
+leak:country-LAO a leak:Country; leak:code "LAO"; leak:name "Lao People's Democratic Republic";       owl:sameAs <http://dbpedia.org/resource/Lao_People's_Democratic_Republic>.
+leak:country-LBN a leak:Country; leak:code "LBN"; leak:name "Lebanon";                                owl:sameAs dbr:Lebanon.
+leak:country-LBR a leak:Country; leak:code "LBR"; leak:name "Liberia";                                owl:sameAs dbr:Liberia.
+leak:country-LBY a leak:Country; leak:code "LBY"; leak:name "Libya";                                  owl:sameAs dbr:Libya.
+leak:country-LCA a leak:Country; leak:code "LCA"; leak:name "Saint Lucia";                            owl:sameAs dbr:Saint_Lucia.
+leak:country-LIE a leak:Country; leak:code "LIE"; leak:name "Liechtenstein";                          owl:sameAs dbr:Liechtenstein.
+leak:country-LKA a leak:Country; leak:code "LKA"; leak:name "Sri Lanka";                              owl:sameAs dbr:Sri_Lanka.
+leak:country-LSO a leak:Country; leak:code "LSO"; leak:name "Lesotho";                                owl:sameAs dbr:Lesotho.
+leak:country-LTU a leak:Country; leak:code "LTU"; leak:name "Lithuania";                              owl:sameAs dbr:Lithuania.
+leak:country-LUX a leak:Country; leak:code "LUX"; leak:name "Luxembourg";                             owl:sameAs dbr:Luxembourg.
+leak:country-LVA a leak:Country; leak:code "LVA"; leak:name "Latvia";                                 owl:sameAs dbr:Latvia.
+leak:country-MAC a leak:Country; leak:code "MAC"; leak:name "Macao";                                  owl:sameAs dbr:Macao.
+leak:country-MAF a leak:Country; leak:code "MAF"; leak:name "Saint Martin (French part)";             owl:sameAs <http://dbpedia.org/resource/Saint_Martin_(French_part)>.
+leak:country-MAR a leak:Country; leak:code "MAR"; leak:name "Morocco";                                owl:sameAs dbr:Morocco.
+leak:country-MCO a leak:Country; leak:code "MCO"; leak:name "Monaco";                                 owl:sameAs dbr:Monaco.
+leak:country-MDA a leak:Country; leak:code "MDA"; leak:name "Moldova, Republic of";                   owl:sameAs <http://dbpedia.org/resource/Moldova_(Republic_of)>.
+leak:country-MDG a leak:Country; leak:code "MDG"; leak:name "Madagascar";                             owl:sameAs dbr:Madagascar.
+leak:country-MDV a leak:Country; leak:code "MDV"; leak:name "Maldives";                               owl:sameAs dbr:Maldives.
+leak:country-MEX a leak:Country; leak:code "MEX"; leak:name "Mexico";                                 owl:sameAs dbr:Mexico.
+leak:country-MHL a leak:Country; leak:code "MHL"; leak:name "Marshall Islands";                       owl:sameAs dbr:Marshall_Islands.
+leak:country-MKD a leak:Country; leak:code "MKD"; leak:name "Macedonia, the Former Yugoslav Republic oowl:sameAs dbr:Republic_of_Macedonia.
+leak:country-MLI a leak:Country; leak:code "MLI"; leak:name "Mali";                                   owl:sameAs dbr:Mali.
+leak:country-MLT a leak:Country; leak:code "MLT"; leak:name "Malta";                                  owl:sameAs dbr:Malta.
+leak:country-MMR a leak:Country; leak:code "MMR"; leak:name "Myanmar";                                owl:sameAs dbr:Myanmar.
+leak:country-MNE a leak:Country; leak:code "MNE"; leak:name "Montenegro";                             owl:sameAs dbr:Montenegro.
+leak:country-MNG a leak:Country; leak:code "MNG"; leak:name "Mongolia";                               owl:sameAs dbr:Mongolia.
+leak:country-MNP a leak:Country; leak:code "MNP"; leak:name "Northern Mariana Islands";               owl:sameAs dbr:Northern_Mariana_Islands.
+leak:country-MOZ a leak:Country; leak:code "MOZ"; leak:name "Mozambique";                             owl:sameAs dbr:Mozambique.
+leak:country-MTQ a leak:Country; leak:code "MTQ"; leak:name "Martinique";                             owl:sameAs dbr:Martinique.
+leak:country-MUS a leak:Country; leak:code "MUS"; leak:name "Mauritius";                              owl:sameAs dbr:Mauritius.
+leak:country-MWI a leak:Country; leak:code "MWI"; leak:name "Malawi";                                 owl:sameAs dbr:Malawi.
+leak:country-MYS a leak:Country; leak:code "MYS"; leak:name "Malaysia";                               owl:sameAs dbr:Malaysia.
+leak:country-NAM a leak:Country; leak:code "NAM"; leak:name "Namibia";                                owl:sameAs dbr:Namibia.
+leak:country-NER a leak:Country; leak:code "NER"; leak:name "Niger";                                  owl:sameAs dbr:Niger.
+leak:country-NFK a leak:Country; leak:code "NFK"; leak:name "Norfolk Island";                         owl:sameAs dbr:Norfolk_Island.
+leak:country-NGA a leak:Country; leak:code "NGA"; leak:name "Nigeria";                                owl:sameAs dbr:Nigeria.
+leak:country-NIC a leak:Country; leak:code "NIC"; leak:name "Nicaragua";                              owl:sameAs dbr:Nicaragua.
+leak:country-NIU a leak:Country; leak:code "NIU"; leak:name "Niue";                                   owl:sameAs dbr:Niue.
+leak:country-NLD a leak:Country; leak:code "NLD"; leak:name "Netherlands";                            owl:sameAs dbr:Netherlands.
+leak:country-NOR a leak:Country; leak:code "NOR"; leak:name "Norway";                                 owl:sameAs dbr:Norway.
+leak:country-NPL a leak:Country; leak:code "NPL"; leak:name "Nepal";                                  owl:sameAs dbr:Nepal.
+leak:country-NRU a leak:Country; leak:code "NRU"; leak:name "Nauru";                                  owl:sameAs dbr:Nauru.
+leak:country-NZL a leak:Country; leak:code "NZL"; leak:name "New Zealand";                            owl:sameAs dbr:New_Zealand.
+leak:country-OMN a leak:Country; leak:code "OMN"; leak:name "Oman";                                   owl:sameAs dbr:Oman.
+leak:country-PAK a leak:Country; leak:code "PAK"; leak:name "Pakistan";                               owl:sameAs dbr:Pakistan.
+leak:country-PAN a leak:Country; leak:code "PAN"; leak:name "Panama";                                 owl:sameAs dbr:Panama.
+leak:country-PER a leak:Country; leak:code "PER"; leak:name "Peru";                                   owl:sameAs dbr:Peru.
+leak:country-PHL a leak:Country; leak:code "PHL"; leak:name "Philippines";                            owl:sameAs dbr:Philippines.
+leak:country-PNG a leak:Country; leak:code "PNG"; leak:name "Papua New Guinea";                       owl:sameAs dbr:Papua_New_Guinea.
+leak:country-POL a leak:Country; leak:code "POL"; leak:name "Poland";                                 owl:sameAs dbr:Poland.
+leak:country-PRI a leak:Country; leak:code "PRI"; leak:name "Puerto Rico";                            owl:sameAs dbr:Puerto_Rico.
+leak:country-PRK a leak:Country; leak:code "PRK"; leak:name "Korea, Democratic People's Republic of"; owl:sameAs dbr:North_Korea.
+leak:country-PRT a leak:Country; leak:code "PRT"; leak:name "Portugal";                               owl:sameAs dbr:Portugal.
+leak:country-PRY a leak:Country; leak:code "PRY"; leak:name "Paraguay";                               owl:sameAs dbr:Paraguay.
+leak:country-PSE a leak:Country; leak:code "PSE"; leak:name "Palestine, State of";                    owl:sameAs dbr:State_of_Palestine.
+leak:country-PYF a leak:Country; leak:code "PYF"; leak:name "French Polynesia";                       owl:sameAs dbr:French_Polynesia.
+leak:country-QAT a leak:Country; leak:code "QAT"; leak:name "Qatar";                                  owl:sameAs dbr:Qatar.
+leak:country-REU a leak:Country; leak:code "REU"; leak:name "Reunion";                                owl:sameAs dbr:Réunion.
+leak:country-ROU a leak:Country; leak:code "ROU"; leak:name "Romania";                                owl:sameAs dbr:Romania.
+leak:country-RUS a leak:Country; leak:code "RUS"; leak:name "Russian Federation";                     owl:sameAs dbr:Russian_Federation.
+leak:country-RWA a leak:Country; leak:code "RWA"; leak:name "Rwanda";                                 owl:sameAs dbr:Rwanda.
+leak:country-SAU a leak:Country; leak:code "SAU"; leak:name "Saudi Arabia";                           owl:sameAs dbr:Saudi_Arabia.
+leak:country-SDN a leak:Country; leak:code "SDN"; leak:name "Sudan";                                  owl:sameAs dbr:Sudan.
+leak:country-SEN a leak:Country; leak:code "SEN"; leak:name "Senegal";                                owl:sameAs dbr:Senegal.
+leak:country-SGP a leak:Country; leak:code "SGP"; leak:name "Singapore";                              owl:sameAs dbr:Singapore.
+leak:country-SLB a leak:Country; leak:code "SLB"; leak:name "Solomon Islands";                        owl:sameAs dbr:Solomon_Islands.
+leak:country-SLE a leak:Country; leak:code "SLE"; leak:name "Sierra Leone";                           owl:sameAs dbr:Sierra_Leone.
+leak:country-SLV a leak:Country; leak:code "SLV"; leak:name "El Salvador";                            owl:sameAs dbr:El_Salvador.
+leak:country-SMR a leak:Country; leak:code "SMR"; leak:name "San Marino";                             owl:sameAs dbr:San_Marino.
+leak:country-SOM a leak:Country; leak:code "SOM"; leak:name "Somalia";                                owl:sameAs dbr:Somalia.
+leak:country-SRB a leak:Country; leak:code "SRB"; leak:name "Serbia";                                 owl:sameAs dbr:Serbia.
+leak:country-SUR a leak:Country; leak:code "SUR"; leak:name "Suriname";                               owl:sameAs dbr:Suriname.
+leak:country-SVK a leak:Country; leak:code "SVK"; leak:name "Slovakia";                               owl:sameAs dbr:Slovakia.
+leak:country-SVN a leak:Country; leak:code "SVN"; leak:name "Slovenia";                               owl:sameAs dbr:Slovenia.
+leak:country-SWE a leak:Country; leak:code "SWE"; leak:name "Sweden";                                 owl:sameAs dbr:Sweden.
+leak:country-SWZ a leak:Country; leak:code "SWZ"; leak:name "Swaziland";                              owl:sameAs dbr:Swaziland.
+leak:country-SXM a leak:Country; leak:code "SXM"; leak:name "Sint Maarten (Dutch part)";              owl:sameAs <http://dbpedia.org/resource/Sint_Maarten_(Dutch_part)>.
+leak:country-SYC a leak:Country; leak:code "SYC"; leak:name "Seychelles";                             owl:sameAs dbr:Seychelles.
+leak:country-SYR a leak:Country; leak:code "SYR"; leak:name "Syrian Arab Republic";                   owl:sameAs dbr:Syrian_Arab_Republic.
+leak:country-TCA a leak:Country; leak:code "TCA"; leak:name "Turks and Caicos Islands";               owl:sameAs dbr:Turks_and_Caicos_Islands.
+leak:country-TCD a leak:Country; leak:code "TCD"; leak:name "Chad";                                   owl:sameAs dbr:Chad.
+leak:country-TGO a leak:Country; leak:code "TGO"; leak:name "Togo";                                   owl:sameAs dbr:Togo.
+leak:country-THA a leak:Country; leak:code "THA"; leak:name "Thailand";                               owl:sameAs dbr:Thailand.
+leak:country-TJK a leak:Country; leak:code "TJK"; leak:name "Tajikistan";                             owl:sameAs dbr:Tajikistan.
+leak:country-TKM a leak:Country; leak:code "TKM"; leak:name "Turkmenistan";                           owl:sameAs dbr:Turkmenistan.
+leak:country-TON a leak:Country; leak:code "TON"; leak:name "Tonga";                                  owl:sameAs dbr:Tonga.
+leak:country-TTO a leak:Country; leak:code "TTO"; leak:name "Trinidad and Tobago";                    owl:sameAs dbr:Trinidad_and_Tobago.
+leak:country-TUN a leak:Country; leak:code "TUN"; leak:name "Tunisia";                                owl:sameAs dbr:Tunisia.
+leak:country-TUR a leak:Country; leak:code "TUR"; leak:name "Turkey";                                 owl:sameAs dbr:Turkey.
+leak:country-TWN a leak:Country; leak:code "TWN"; leak:name "Taiwan, Province of China";              owl:sameAs <http://dbpedia.org/resource/Taiwan,_Province_of_China>.
+leak:country-TZA a leak:Country; leak:code "TZA"; leak:name "Tanzania, United Republic of";           owl:sameAs <http://dbpedia.org/resource/Tanzania,_United_Republic_of>.
+leak:country-UGA a leak:Country; leak:code "UGA"; leak:name "Uganda";                                 owl:sameAs dbr:Uganda.
+leak:country-UKR a leak:Country; leak:code "UKR"; leak:name "Ukraine";                                owl:sameAs dbr:Ukraine.
+leak:country-URY a leak:Country; leak:code "URY"; leak:name "Uruguay";                                owl:sameAs dbr:Uruguay.
+leak:country-USA a leak:Country; leak:code "USA"; leak:name "United States";                          owl:sameAs dbr:United_States_of_America.
+leak:country-UZB a leak:Country; leak:code "UZB"; leak:name "Uzbekistan";                             owl:sameAs dbr:Uzbekistan.
+leak:country-VCT a leak:Country; leak:code "VCT"; leak:name "Saint Vincent and the Grenadines";       owl:sameAs dbr:Saint_Vincent_and_the_Grenadines.
+leak:country-VEN a leak:Country; leak:code "VEN"; leak:name "Venezuela, Bolivarian Republic of";      owl:sameAs <http://dbpedia.org/resource/Venezuela_(Bolivarian_Republic_of)>.
+leak:country-VGB a leak:Country; leak:code "VGB"; leak:name "Virgin Islands, British";                owl:sameAs dbr:British_Virgin_Islands.
+leak:country-VIR a leak:Country; leak:code "VIR"; leak:name "Virgin Islands, U.S.";                   owl:sameAs dbr:United_States_Virgin_Islands.
+leak:country-VNM a leak:Country; leak:code "VNM"; leak:name "Viet Nam";                               owl:sameAs dbr:Viet_Nam.
+leak:country-VUT a leak:Country; leak:code "VUT"; leak:name "Vanuatu";                                owl:sameAs dbr:Vanuatu.
+leak:country-WSM a leak:Country; leak:code "WSM"; leak:name "Samoa";                                  owl:sameAs dbr:Samoa.
+leak:country-XXX a leak:Country; leak:code "XXX"; leak:name "Not identified";                         owl:sameAs dbr:Undefined.
+leak:country-YEM a leak:Country; leak:code "YEM"; leak:name "Yemen";                                  owl:sameAs dbr:Yemen.
+leak:country-ZAF a leak:Country; leak:code "ZAF"; leak:name "South Africa";                           owl:sameAs dbr:South_Africa.
+leak:country-ZMB a leak:Country; leak:code "ZMB"; leak:name "Zambia";                                 owl:sameAs dbr:Zambia.
+leak:country-ZWE a leak:Country; leak:code "ZWE"; leak:name "Zimbabwe";                               owl:sameAs dbr:Zimbabwe.
