@@ -60,16 +60,16 @@
 
 <http://data.ontotext.com/resource/leaks/country-(country_code1)> a leak:Country;
   leak:name "(country1)";
-  leak:code "(country_code1)";
+  leak:countryCode "(country_code1)";
   owl:sameAs <http://dbpedia.org/resource/(country1)>.
 
 <http://data.ontotext.com/resource/leaks/country-(country_code2)> a leak:Country;
   leak:name "(country2)";
-  leak:code "(country_code2)";
+  leak:countryCode "(country_code2)";
   owl:sameAs <http://dbpedia.org/resource/(country2)>.
 
 <http://data.ontotext.com/resource/leaks/offshore-(jurisdiction)> a leak:OffshoreJurisdiction;
-    leak:code "(jurisdiction)";
+    leak:countryCode "(jurisdiction)";
     leak:name "(jurisdiction_description)".
     
 # Edges
