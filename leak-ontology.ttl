@@ -416,61 +416,95 @@ leak:OWNER a owl:ObjectProperty;
   rdfs:range leak:Node;
   rdfs:comment "Any owner, shareholder or beneficiary of an entity".
 
+leak:REAL_OWNER a owl:ObjectProperty;
+  rdfs:isDefinedBy leak:;
+  rdfs:label "REAL OWNER";
+  rdfs:domain leak:Node;
+  rdfs:range leak:Node;
+  rdfs:comment "Real owner, shareholder or beneficiary of an entity".  
+
 leak:DIRECTOR a owl:ObjectProperty;
   rdfs:isDefinedBy leak:;
   rdfs:label "DIRECTOR";
   rdfs:domain leak:Node;
   rdfs:range leak:Node;
-  rdfs:comment "Any director, chairman, board member, custodian, president, signatory, trustee, power of attorney, settlor of an entity".
+  rdfs:comment "Any director, chairman, board member, custodian of an entity".
+
+leak:EXECUTIVE a owl:ObjectProperty;
+  rdfs:isDefinedBy leak:;
+  rdfs:label "EXECUTIVE";
+  rdfs:domain leak:Node;
+  rdfs:range leak:Node;
+  rdfs:comment "Any president, vice-president, executive officer or trustee".
+
+leak:AUTHORIZED_REPRESENTATIVE a owl:ObjectProperty;
+  rdfs:isDefinedBy leak:;
+  rdfs:label "AUTHORIZED REPRESENTATIVE";
+  rdfs:domain leak:Node;
+  rdfs:range leak:Node;
+  rdfs:comment "Any power of attorney, authorized signatory, etc.".
 
 leak:NOMINEE a owl:ObjectProperty;
   rdfs:isDefinedBy leak:;
   rdfs:label "NOMINEE";
   rdfs:domain leak:Node;
   rdfs:range leak:Node;
-  rdfs:comment "Nominated officer of an entity, e.g. Nominal Shareholder. As opposed to Real".
+  rdfs:comment "Nominated officer, director or other function, e.g. Nominal Shareholder. As opposed to Real".
 
 leak:OFFICER a owl:ObjectProperty;
   rdfs:isDefinedBy leak:;
   rdfs:label "OFFICER";
   rdfs:domain leak:Node;
   rdfs:range leak:Node;
-  rdfs:comment "Any OWNER, DIRECTOR, or other officer of an entity".
-leak:OFFICER rdfs:subPropertyOf leak:OWNER, leak:DIRECTOR.
+  rdfs:comment "Any other officer of an entity".
 
 leak:SERVICE_PROVIDER a owl:ObjectProperty;
   rdfs:isDefinedBy leak:;
   rdfs:label "SERVICE PROVIDER";
   rdfs:domain leak:Node;
   rdfs:range leak:Node;
-  rdfs:comment "Any accountant, advisor, registrar of an entity".
+  rdfs:comment "Any accountant, advisor, registrar of an entity, settlor".
 
 leak:AGENT_OF a owl:ObjectProperty;
   rdfs:isDefinedBy leak:;
   rdfs:label "AGENT OF";
   rdfs:domain leak:Node;
   rdfs:range leak:Node;
-  rdfs:comment "Any OWNER, DIRECTOR, OFFICER, or SERVICE PROVIDER of an entity; whether NOMINATED or real".
+  rdfs:comment "Any DIRECTOR, OFFICER, or SERVICE PROVIDER of an entity; whether NOMINATED or real".
+
+leak:REAL_OWNER                 rdfs:subPropertyOf leak:OWNER    
+  
+leak:OFFICER                    rdfs:subPropertyOf leak:AGENT_OF  
+leak:SERVICE_PROVIDER           rdfs:subPropertyOf leak:AGENT_OF  
+leak:DIRECTOR                   rdfs:subPropertyOf leak:AGENT_OF  
+leak:NOMINEE                    rdfs:subPropertyOf leak:AGENT_OF  
+
+leak:AUTHORIZED_REPRESENTATIVE  rdfs:subPropertyOf leak:SERVICE_PROVIDER    
+leak:EXECUTIVE                  rdfs:subPropertyOf leak:OFFICER    
+
+leak:OWNER                      rdfs:subPropertyOf leak:RELATED_AGENT          
+leak:AGENT_OF                   rdfs:subPropertyOf leak:RELATED_AGENT          
+
 
 #### source relations contribute to the derived relations
 
 leak:isAlternateDirectorOf                   rdfs:subPropertyOf leak:DIRECTOR.
-leak:isAppointorOf                           rdfs:subPropertyOf leak:OFFICER.
-leak:isAssistantSecretaryOf                  rdfs:subPropertyOf leak:OFFICER.
-leak:isAuditorOf                             rdfs:subPropertyOf leak:OFFICER.
-leak:isAuthRepresentativeOf                  rdfs:subPropertyOf leak:DIRECTOR.
-leak:isAuthorisedPersonSignatoryOf           rdfs:subPropertyOf leak:DIRECTOR.
-leak:isAuthorizedSignatoryOf                 rdfs:subPropertyOf leak:DIRECTOR.
-leak:isBankSignatoryOf                       rdfs:subPropertyOf leak:DIRECTOR.
+leak:isAppointorOf                           rdfs:subPropertyOf leak:SERVICE_PROVIDER.
+leak:isAssistantSecretaryOf                  rdfs:subPropertyOf leak:SERVICE_PROVIDER.
+leak:isAuditorOf                             rdfs:subPropertyOf leak:SERVICE_PROVIDER.
+leak:isAuthRepresentativeOf                  rdfs:subPropertyOf leak:AUTHORIZED_REPRESENTATIVE.
+leak:isAuthorisedPersonSignatoryOf           rdfs:subPropertyOf leak:AUTHORIZED_REPRESENTATIVE.
+leak:isAuthorizedSignatoryOf                 rdfs:subPropertyOf leak:AUTHORIZED_REPRESENTATIVE.
+leak:isBankSignatoryOf                       rdfs:subPropertyOf leak:AUTHORIZED_REPRESENTATIVE.
 leak:isBeneficialOwnerOf                     rdfs:subPropertyOf leak:OWNER.
 leak:isBeneficiaryOf                         rdfs:subPropertyOf leak:OWNER.
 leak:isBeneficiaryShareholderAndDirectorOf   rdfs:subPropertyOf leak:OWNER, leak:DIRECTOR.
 leak:isBoardRepresentativeOf                 rdfs:subPropertyOf leak:DIRECTOR.
 leak:isChairmanOf                            rdfs:subPropertyOf leak:DIRECTOR.
-leak:isCo-TrusteeOfTrustOf                   rdfs:subPropertyOf leak:DIRECTOR.
-leak:isConnectedOf                           rdfs:subPropertyOf leak:OFFICER. # TODO maybe should be RELATED
-leak:isCorrespondentAddrOf                   rdfs:subPropertyOf leak:OFFICER.
-leak:isCustodianOf                           rdfs:subPropertyOf leak:DIRECTOR.
+leak:isCo-TrusteeOfTrustOf                   rdfs:subPropertyOf leak:EXECUTIVE.
+leak:isConnectedOf                           rdfs:subPropertyOf leak:RELATED_AGENT.
+leak:isCorrespondentAddrOf                   rdfs:subPropertyOf leak:SERVICE_PROVIDER.
+leak:isCustodianOf                           rdfs:subPropertyOf leak:SERVICE_PROVIDER.
 leak:isDirectorAndShareholderOf              rdfs:subPropertyOf leak:OWNER, leak:DIRECTOR.
 leak:isDirectorBeneficialOwnerOf             rdfs:subPropertyOf leak:OWNER, leak:DIRECTOR.
 leak:isDirectorOf                            rdfs:subPropertyOf leak:DIRECTOR.
@@ -478,10 +512,10 @@ leak:isDirectorShareholderBeneficialOwnerOf  rdfs:subPropertyOf leak:OWNER, leak
 leak:isDirectorShareholderOf                 rdfs:subPropertyOf leak:OWNER, leak:DIRECTOR.
 leak:isDirector_RamiMakhlouf_Of              rdfs:subPropertyOf leak:DIRECTOR.
 leak:isFirstBeneficiaryOf                    rdfs:subPropertyOf leak:OWNER.
-leak:isGeneralAccountantOf                   rdfs:subPropertyOf leak:OFFICER.
+leak:isGeneralAccountantOf                   rdfs:subPropertyOf leak:SERVICE_PROVIDER.
 leak:isGranteeOfAMortgageOf                  rdfs:subPropertyOf leak:SERVICE_PROVIDER.
 leak:isInvestmentAdvisorOf                   rdfs:subPropertyOf leak:SERVICE_PROVIDER.
-leak:isJointSettlorOf                        rdfs:subPropertyOf leak:DIRECTOR.
+leak:isJointSettlorOf                        rdfs:subPropertyOf leak:SERVICE_PROVIDER.
 leak:isLegalAdvisorOf                        rdfs:subPropertyOf leak:SERVICE_PROVIDER.
 leak:isMemberOfFoundationCouncilOf           rdfs:subPropertyOf leak:DIRECTOR.
 leak:isMemberShareholderOf                   rdfs:subPropertyOf leak:OWNER.
@@ -491,22 +525,22 @@ leak:isNomineeBeneficiaryOf                  rdfs:subPropertyOf leak:NOMINEE, le
 leak:isNomineeDirectorOf                     rdfs:subPropertyOf leak:NOMINEE, leak:DIRECTOR.
 leak:isNomineeInvestmentAdvisorOf            rdfs:subPropertyOf leak:NOMINEE, leak:SERVICE_PROVIDER.
 leak:isNomineeNameOf                         rdfs:subPropertyOf leak:NOMINEE.
-leak:isNomineeProtectorOf                    rdfs:subPropertyOf leak:NOMINEE, leak:OFFICER.
-leak:isNomineeSecretaryOf                    rdfs:subPropertyOf leak:NOMINEE, leak:OFFICER.
+leak:isNomineeProtectorOf                    rdfs:subPropertyOf leak:NOMINEE, leak:SERVICE_PROVIDER.
+leak:isNomineeSecretaryOf                    rdfs:subPropertyOf leak:NOMINEE, leak:SERVICE_PROVIDER.
 leak:isNomineeShareholderOf                  rdfs:subPropertyOf leak:NOMINEE, leak:OWNER.
-leak:isNomineeTrustSettlorOf                 rdfs:subPropertyOf leak:NOMINEE, leak:DIRECTOR.
+leak:isNomineeTrustSettlorOf                 rdfs:subPropertyOf leak:NOMINEE, leak:SERVICE_PROVIDER.
 leak:isOfficerOf                             rdfs:subPropertyOf leak:OFFICER.
 leak:isOwnerDirectorAndShareholderOf         rdfs:subPropertyOf leak:OWNER, leak:DIRECTOR.
 leak:isOwnerOf                               rdfs:subPropertyOf leak:OWNER.
 leak:isPartnerOf                             rdfs:subPropertyOf leak:OWNER.
 leak:isPersonalDirectorshipOf                rdfs:subPropertyOf leak:DIRECTOR.
-leak:isPowerOfAttorneyOf                     rdfs:subPropertyOf leak:DIRECTOR.
-leak:isPowerOfAttorneyShareholderOf          rdfs:subPropertyOf leak:OWNER, leak:DIRECTOR.
-leak:isPresident-DirectorOf                  rdfs:subPropertyOf leak:DIRECTOR.
-leak:isPresidentAndDirectorOf                rdfs:subPropertyOf leak:DIRECTOR.
-leak:isPresidentOf                           rdfs:subPropertyOf leak:DIRECTOR.
+leak:isPowerOfAttorneyOf                     rdfs:subPropertyOf leak:AUTHORIZED_REPRESENTATIVE.
+leak:isPowerOfAttorneyShareholderOf          rdfs:subPropertyOf leak:OWNER, leak:AUTHORIZED_REPRESENTATIVE.
+leak:isPresident-DirectorOf                  rdfs:subPropertyOf leak:DIRECTOR, leak:EXECUTIVE.
+leak:isPresidentAndDirectorOf                rdfs:subPropertyOf leak:DIRECTOR, leak:EXECUTIVE.
+leak:isPresidentOf                           rdfs:subPropertyOf leak:EXECUTIVE.
 leak:isPrincipalBeneficiaryOf                rdfs:subPropertyOf leak:OWNER.
-leak:isProtectorOf                           rdfs:subPropertyOf leak:DIRECTOR.
+leak:isProtectorOf                           rdfs:subPropertyOf leak:SERVICE_PROVIDER.
 leak:isRecordsAndRegistersOf                 rdfs:subPropertyOf leak:SERVICE_PROVIDER.
 leak:isRegisterOfDirectorOf                  rdfs:subPropertyOf leak:SERVICE_PROVIDER.
 leak:isRegisterOfShareholderOf               rdfs:subPropertyOf leak:SERVICE_PROVIDER.
@@ -516,15 +550,15 @@ leak:isSafekeepingOf                         rdfs:subPropertyOf leak:SERVICE_PRO
 leak:isSecretaryOf                           rdfs:subPropertyOf leak:SERVICE_PROVIDER.
 leak:isShareholderOf                         rdfs:subPropertyOf leak:OWNER.
 leak:isShareholder_ThroughJulexFoundation_Of rdfs:subPropertyOf leak:OWNER.
-leak:isSignatoryOf                           rdfs:subPropertyOf leak:DIRECTOR.
-leak:isSoleShareholderOf                     rdfs:subPropertyOf leak:OWNER.
-leak:isSoleSignatoryBeneficialOwnerOf        rdfs:subPropertyOf leak:OWNER, leak:DIRECTOR.
-leak:isSoleSignatoryOf                       rdfs:subPropertyOf leak:OWNER.
+leak:isSignatoryOf                           rdfs:subPropertyOf leak:AUTHORIZED_REPRESENTATIVE.
+leak:isSoleShareholderOf                     rdfs:subPropertyOf leak:AUTHORIZED_REPRESENTATIVE.
+leak:isSoleSignatoryBeneficialOwnerOf        rdfs:subPropertyOf leak:OWNER, leak:AUTHORIZED_REPRESENTATIVE.
+leak:isSoleSignatoryOf                       rdfs:subPropertyOf leak:AUTHORIZED_REPRESENTATIVE.
 leak:isStockbrokerOf                         rdfs:subPropertyOf leak:SERVICE_PROVIDER.
-leak:isSuccessorProtectorOf                  rdfs:subPropertyOf leak:DIRECTOR.
+leak:isSuccessorProtectorOf                  rdfs:subPropertyOf leak:SERVICE_PROVIDER.
 leak:isTaxAdvisorOf                          rdfs:subPropertyOf leak:SERVICE_PROVIDER.
 leak:isTreasurerOf                           rdfs:subPropertyOf leak:SERVICE_PROVIDER.
-leak:isTrustSettlorOf                        rdfs:subPropertyOf leak:DIRECTOR.
-leak:isTrusteeOfTrustOf                      rdfs:subPropertyOf leak:DIRECTOR.
+leak:isTrustSettlorOf                        rdfs:subPropertyOf leak:SERVICE_PROVIDER.
+leak:isTrusteeOfTrustOf                      rdfs:subPropertyOf leak:EXECUTIVE.
 leak:isUnitTrustRegisterOf                   rdfs:subPropertyOf leak:SERVICE_PROVIDER.
-leak:isVicePresidentOf                       rdfs:subPropertyOf leak:DIRECTOR.
+leak:isVicePresidentOf                       rdfs:subPropertyOf leak:EXECUTIVE.
