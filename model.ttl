@@ -69,7 +69,7 @@
   owl:sameAs <http://dbpedia.org/resource/(country2)>.
 
 <http://data.ontotext.com/resource/leaks/offshore-(jurisdiction)> a leak:OffshoreJurisdiction;
-    leak:countryCode "(jurisdiction)";
+    leak:jurisdictionCode "(jurisdiction)";
     leak:name "(jurisdiction_description)".
     
 # Edges
