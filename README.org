@@ -19,7 +19,7 @@ Day 1: <2016-05-12 Thu>
 - Chat to us on Gitter: https://gitter.im/Ontotext-AD/leaks
 - Ontology: https://raw.githubusercontent.com/Ontotext-AD/leaks/master/leak-ontology.ttl
 - Ontology documentation: [[http://ontorule-project.eu/parrot/parrot?documentUri%3Dhttps%3A%2F%2Fraw.githubusercontent.com%2FOntotext-AD%2Fleaks%2Fmaster%2Fleak-ontology.ttl&mimetype%3Dtext%2Fturtle&profile%3Dtechnical&language%3Den&customizeCssUrl][Parrot Report]]
-- Data model: [[*Data model]]
+- Data model: sec [[*Data Model]]
 
 ** Offshore Links
 The [[https://offshoreleaks.icij.org/][Offshore Leaks]] database of The International Consortium of Investigative Journalists (ICIJ)
@@ -423,7 +423,7 @@ And looked Onto upon the land, and saw that it was good:
 - tarql worketh fastly and loseth nearly nought data (0.08%)
 - 760 million ducats of RDF spilt forth
 - Prefixes unified and registered as http://prefix.cc/leak
-- Ontology described by the [[https://www.w3.org/TR/void/][VOID]], and shalt be registered in the [[http://lov.okfn.org/][LOV]]
+- Ontology described by the [[https://www.w3.org/TR/void/][VOID]], and shalt be registered in the [[http://lov.okfn.org/][LOV]] (see [[https://plus.google.com/115593825497938381443/posts/7SaKJW3sanm][LOV announcement]])
 - Data model lucid and clear
 - Countries and Offshores hast connexion to DBpedia
 Go forth and queriest! Whence did money came from, and whither did it flow?
