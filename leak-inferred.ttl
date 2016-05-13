@@ -53,7 +53,7 @@ leak:targetNode a owl:ObjectProperty;
 ## "cooked" Relations
 
 # Address: leak:hasRegisteredAddress
-# Intermediary: leak:isIntermediaryOf                           
+# Intermediary: leak:isIntermediaryOf
 
 ### Related
 
