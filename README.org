@@ -219,7 +219,9 @@ we also define:
 @prefix leaks: <http://data.ontotext.com/resource/leaks/> . # data
 #+END_SRC
 
-We made an ontology [[./leak.ttl]] that has 4 parts:
+We made an ontology [[./leak.ttl]]. We prepend the prefixes to make a standalone version:
+: cat prefixes.ttl leak.ttl > leak-ontology.ttl
+It has 4 parts:
 - A header that describes the ontology itself:
 #+BEGIN_SRC Turtle
 leak: a owl:Ontology;
@@ -394,6 +396,10 @@ See "Making True RDF Diagrams With rdfpuml": [[http://vladimiralexiev.github.io/
 
 We made a sample [[./model.ttl]] that describes a few entities, Edges between them, and the associated Countries and Offshore jurisdictions.
 We generated the following diagram directly from it:
+#+BEGIN_COMMENT
+This currently works only on Vlado's
+: perl -S rdfpuml.pl model.ttl ; puml.bat model.puml
+#+END_COMMENT
 
 [[./model.png]]
 
