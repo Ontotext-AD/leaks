@@ -70,7 +70,8 @@
 
 <http://data.ontotext.com/resource/leaks/offshore-(jurisdiction)> a leak:OffshoreJurisdiction;
     leak:jurisdictionCode "(jurisdiction)";
-    leak:name "(jurisdiction_description)".
+    leak:name "(jurisdiction_description)";
+    skos:exactMatch <http://dbpedia.org/resource/(jurisdiction)>.
     
 # Edges
 
@@ -103,4 +104,5 @@
 <http://data.ontotext.com/resource/leaks/officer-(node5)> leak:isShareholderOf <http://data.ontotext.com/resource/leaks/entity-(node2)>.
 
 ############
-owl:sameAs puml:arrow puml:dashed-none.
+owl:sameAs      a puml:InlineProperty. # or puml:arrow puml:dashed-none.
+skos:exactMatch a puml:InlineProperty. 
