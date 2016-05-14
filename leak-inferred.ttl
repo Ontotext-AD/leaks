@@ -6,12 +6,14 @@
 ## Explicit linking and structuring classes
 
 leak:Country a owl:Class;
+  rdfs:subClassOf owl:Class;  
   rdfs:isDefinedBy leak:;
   rdfs:label "Country";
   rdfs:comment "Country identified by its ISO alpha3 code";
   skos:example "leaks:country-VGB, which is owl:sameAs dbr:British_Virgin_Islands".
 
 leak:OffshoreJurisdiction a owl:Class;
+  rdfs:subClassOf owl:Class;  
   rdfs:isDefinedBy leak:;
   rdfs:label "Offshore jurisdiction";
   rdfs:comment "Offshore jurisdiction identified by a special code (*not* ISO alpha3)";

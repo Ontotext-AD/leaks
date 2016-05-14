@@ -60,6 +60,7 @@ leak:Officer a owl:Class;
   rdfs:comment "Agent (person, group of people, company) that serves as company officer and/or beneficiary, either formal and real".
 
 leak:Edge a owl:Class;
+  rdfs:subClassOf owl:Class;  
   rdfs:isDefinedBy leak:;
   rdfs:label "Edge";
   rdfs:comment "Relation between two Nodes. Since node_id is unique across node types, there's no need to mention the entity types".
@@ -319,12 +320,14 @@ leak:similarNameAndAddressAs                 a owl:ObjectProperty; rdfs:isDefine
 ## Explicit linking and structuring classes
 
 leak:Country a owl:Class;
+  rdfs:subClassOf owl:Class;  
   rdfs:isDefinedBy leak:;
   rdfs:label "Country";
   rdfs:comment "Country identified by its ISO alpha3 code";
   skos:example "leaks:country-VGB, which is owl:sameAs dbr:British_Virgin_Islands".
 
 leak:OffshoreJurisdiction a owl:Class;
+  rdfs:subClassOf owl:Class;  
   rdfs:isDefinedBy leak:;
   rdfs:label "Offshore jurisdiction";
   rdfs:comment "Offshore jurisdiction identified by a special code (*not* ISO alpha3)";
