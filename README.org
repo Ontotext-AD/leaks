@@ -17,6 +17,7 @@ Day 1: <2016-05-12 Thu>
 - Source repository: https://github.com/Ontotext-AD/leaks/
 - SPARQL endpoint: http://data.ontotext.com/resource/leaks
 - RDF download: ftp://ftp.ontotext.com/pub/leaks/rdf/
+  - Zipped at ftp://ftp.ontotext.com/pub/leaks/rdf/rdf.zip
 - Post an issue on Github: https://github.com/Ontotext-AD/leaks/issues
 - Chat to us on Gitter: https://gitter.im/Ontotext-AD/leaks
 - Ontology: https://raw.githubusercontent.com/Ontotext-AD/leaks/master/leak-ontology.ttl
