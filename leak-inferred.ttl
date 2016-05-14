@@ -91,10 +91,10 @@ leak:RELATED a owl:ObjectProperty, owl:SymmetricProperty;
   rdfs:range leak:Node;
   rdfs:comment "Related entities, symmetric".
 
-leak:SAME          rdfs:subPropertyOf leak:RELATED.
-leak:relatedEntity rdfs:subPropertyOf leak:RELATED.
-leak:sameAddressAs                 rdfs:subPropertyOf leak:RELATED.
-leak:similarNameAndAddressAs       rdfs:subPropertyOf leak:RELATED.
+leak:SAME                    rdfs:subPropertyOf leak:RELATED.
+leak:relatedEntity           rdfs:subPropertyOf leak:RELATED.
+leak:sameAddressAs           rdfs:subPropertyOf leak:RELATED.
+leak:similarNameAndAddressAs rdfs:subPropertyOf leak:RELATED.
 
 ### Officers/Agents
 

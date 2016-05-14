@@ -3,6 +3,43 @@ hide empty methods
 hide empty attributes
 hide circle
 skinparam classAttributeIconSize 0
+class leaks_country__country_code1_ as "leaks:country-(country_code1)"
+leaks_country__country_code1_ : a leak:Country, dbo:Country
+class dbr__continent_ as "dbr:(continent)"
+leaks_country__country_code1_ --> dbr__continent_ : gn:parentFeature
+leaks_country__country_code1_ : dbo:abstract "[abstract1]"
+leaks_country__country_code1_ : gn:featureCode gn:A.PCLI # independent political entity
+leaks_country__country_code1_ : gn:name "[official name1]"
+leaks_country__country_code1_ : leak:countryCode "[country_code1]"
+leaks_country__country_code1_ : leak:name "[country1]"
+leaks_country__country_code1_ : owl:sameAs dbr:[country1]
+leaks_country__country_code1_ : wgs:lat 1.23
+leaks_country__country_code1_ : wgs:long 20.34
+class leaks_edge__uuid1_ as "leaks:edge-(uuid1)"
+leaks_edge__uuid1_ : a leak:Edge
+leaks_edge__uuid1_ : leak:node_1 "[node2]"
+leaks_edge__uuid1_ : leak:node_2 "[node1]"
+leaks_edge__uuid1_ : leak:rel_type "registered address"
+dbr__continent_ : a dbo:Continent
+dbr__continent_ : gn:featureCode gn:L.CONT # continent
+dbr__continent_ : gn:name "[continent]"
+dbr__continent_ : wgs:lat 12.3
+dbr__continent_ : wgs:long 4.56
+class leaks_edge__uuid3_ as "leaks:edge-(uuid3)"
+leaks_edge__uuid3_ : a leak:Edge
+leaks_edge__uuid3_ : leak:node_1 "[node5]"
+leaks_edge__uuid3_ : leak:node_2 "[node2]"
+leaks_edge__uuid3_ : leak:rel_type "Owner, director and shareholder of"
+class leaks_address__node1_ as "leaks:address-(node1)"
+leaks_address__node1_ : a leak:Address
+leaks_address__node1_ --> leaks_country__country_code1_ : leak:hasCountry
+leaks_address__node1_ : leak:address "[address]"
+leaks_address__node1_ : leak:countries "[country1]"
+leaks_address__node1_ : leak:country_codes "[country_code1]"
+leaks_address__node1_ : leak:icij_id "[icij_id]"
+leaks_address__node1_ : leak:node_id "[node1]"
+leaks_address__node1_ : leak:sourceID "[sourceID]"
+leaks_address__node1_ : leak:valid_until "[valid_until]"
 class leaks_intermediary__node4_ as "leaks:intermediary-(node4)"
 leaks_intermediary__node4_ : a leak:Intermediary
 class leaks_country__country_code2_ as "leaks:country-(country_code2)"
@@ -18,39 +55,17 @@ leaks_intermediary__node4_ : leak:node_id "[node3]"
 leaks_intermediary__node4_ : leak:sourceID "[sourceID]"
 leaks_intermediary__node4_ : leak:status "[status]"
 leaks_intermediary__node4_ : leak:valid_until "[valid_until]"
-class leaks_edge__uuid1_ as "leaks:edge-(uuid1)"
-leaks_edge__uuid1_ : a leak:Edge
-leaks_edge__uuid1_ : leak:node_1 "[node2]"
-leaks_edge__uuid1_ : leak:node_2 "[node1]"
-leaks_edge__uuid1_ : leak:rel_type "registered address"
 class leaks_edge__uuid2_ as "leaks:edge-(uuid2)"
 leaks_edge__uuid2_ : a leak:Edge
 leaks_edge__uuid2_ : leak:node_1 "[node4]"
 leaks_edge__uuid2_ : leak:node_2 "[node2]"
 leaks_edge__uuid2_ : leak:rel_type "intermediary of"
-class leaks_officer__node5_ as "leaks:officer-(node5)"
-leaks_officer__node5_ : a leak:Officer
-leaks_officer__node5_ --> leaks_entity__node2_ : leak:isOfficerOf\nleak:isOwnerOf\nleak:isShareholderOf\nleak:isDirectorOf
-class leaks_country__country_code1_ as "leaks:country-(country_code1)"
-leaks_officer__node5_ --> leaks_country__country_code1_ : leak:hasCountry
-leaks_officer__node5_ : leak:countries "[country1]"
-leaks_officer__node5_ : leak:country_codes "[country_code1]"
-leaks_officer__node5_ : leak:icij_id "[icij_id]"
-leaks_officer__node5_ : leak:name "[name]"
-leaks_officer__node5_ : leak:node_id "[node5]"
-leaks_officer__node5_ : leak:sourceID "[sourceID]"
-leaks_officer__node5_ : leak:valid_until "[valid_until]"
-leaks_country__country_code1_ : a leak:Country
-leaks_country__country_code1_ : leak:countryCode "[country_code1]"
-leaks_country__country_code1_ : leak:name "[country1]"
-leaks_country__country_code1_ : owl:sameAs dbr:[country1]
 leaks_entity__node2_ : a leak:Entity
-leaks_entity__node2_ --> leaks_country__country_code2_ : leak:hasCountry
+leaks_entity__node2_ --> leaks_country__country_code1_ : leak:hasCountry
 class leaks_offshore__jurisdiction_ as "leaks:offshore-(jurisdiction)"
 leaks_entity__node2_ --> leaks_offshore__jurisdiction_ : leak:hasJurisdiction
-class leaks_address__node1_ as "leaks:address-(node1)"
 leaks_entity__node2_ --> leaks_address__node1_ : leak:hasRegisteredAddress
-leaks_entity__node2_ --> leaks_country__country_code1_ : leak:hasCountry
+leaks_entity__node2_ --> leaks_country__country_code2_ : leak:hasCountry
 leaks_entity__node2_ : leak:address "[address]"
 leaks_entity__node2_ : leak:company_type "[company_type]"
 leaks_entity__node2_ : leak:countries "[country1;country2]"
@@ -72,35 +87,38 @@ leaks_entity__node2_ : leak:sourceID "[sourceID]"
 leaks_entity__node2_ : leak:status "[status]"
 leaks_entity__node2_ : leak:struck_off_date "[struck_off_date]"
 leaks_entity__node2_ : leak:valid_until "[valid_until]"
-class leaks_edge__uuid3_ as "leaks:edge-(uuid3)"
-leaks_edge__uuid3_ : a leak:Edge
-leaks_edge__uuid3_ : leak:node_1 "[node5]"
-leaks_edge__uuid3_ : leak:node_2 "[node2]"
-leaks_edge__uuid3_ : leak:rel_type "Owner, director and shareholder of"
+class leaks_officer__node5_ as "leaks:officer-(node5)"
+leaks_officer__node5_ : a leak:Officer
+leaks_officer__node5_ --> leaks_entity__node2_ : leak:isShareholderOf\nleak:isOwnerOf\nleak:isOfficerOf\nleak:isDirectorOf
+leaks_officer__node5_ --> leaks_country__country_code1_ : leak:hasCountry
+leaks_officer__node5_ : leak:countries "[country1]"
+leaks_officer__node5_ : leak:country_codes "[country_code1]"
+leaks_officer__node5_ : leak:icij_id "[icij_id]"
+leaks_officer__node5_ : leak:name "[name]"
+leaks_officer__node5_ : leak:node_id "[node5]"
+leaks_officer__node5_ : leak:sourceID "[sourceID]"
+leaks_officer__node5_ : leak:valid_until "[valid_until]"
 leaks_offshore__jurisdiction_ : a leak:OffshoreJurisdiction
 leaks_offshore__jurisdiction_ : leak:jurisdictionCode "[jurisdiction]"
 leaks_offshore__jurisdiction_ : leak:name "[jurisdiction_description]"
 leaks_offshore__jurisdiction_ : skos:exactMatch dbr:[jurisdiction]
-leaks_country__country_code2_ : a leak:Country
+leaks_country__country_code2_ : a dbo:Country, leak:Country
+leaks_country__country_code2_ --> dbr__continent_ : gn:parentFeature
+leaks_country__country_code2_ : dbo:abstract "[abstract2]"
+leaks_country__country_code2_ : gn:featureCode gn:A.PCLI # independent political entity
+leaks_country__country_code2_ : gn:name "[official name2]"
 leaks_country__country_code2_ : leak:countryCode "[country_code2]"
 leaks_country__country_code2_ : leak:name "[country2]"
 leaks_country__country_code2_ : owl:sameAs dbr:[country2]
-leaks_address__node1_ : a leak:Address
-leaks_address__node1_ --> leaks_country__country_code1_ : leak:hasCountry
-leaks_address__node1_ : leak:address "[address]"
-leaks_address__node1_ : leak:countries "[country1]"
-leaks_address__node1_ : leak:country_codes "[country_code1]"
-leaks_address__node1_ : leak:icij_id "[icij_id]"
-leaks_address__node1_ : leak:node_id "[node1]"
-leaks_address__node1_ : leak:sourceID "[sourceID]"
-leaks_address__node1_ : leak:valid_until "[valid_until]"
+leaks_country__country_code2_ : wgs:lat 54.7
+leaks_country__country_code2_ : wgs:long 8.90
 (leaks_intermediary__node4_, leaks_entity__node2_) . leaks_edge__uuid2_
 leaks_edge__uuid2_ : ↑ leak:hasSource leaks:intermediary-[node4]
 leaks_edge__uuid2_ : ↓ leak:hasTarget leaks:entity-[node2]
-(leaks_entity__node2_, leaks_address__node1_) . leaks_edge__uuid1_
-leaks_edge__uuid1_ : ↑ leak:hasSource leaks:entity-[node2]
-leaks_edge__uuid1_ : ↓ leak:hasTarget leaks:address-[node1]
 (leaks_officer__node5_, leaks_entity__node2_) . leaks_edge__uuid3_
 leaks_edge__uuid3_ : ↑ leak:hasSource leaks:officer-[node5]
 leaks_edge__uuid3_ : ↓ leak:hasTarget leaks:entity-[node2]
+(leaks_entity__node2_, leaks_address__node1_) . leaks_edge__uuid1_
+leaks_edge__uuid1_ : ↑ leak:hasSource leaks:entity-[node2]
+leaks_edge__uuid1_ : ↓ leak:hasTarget leaks:address-[node1]
 @enduml

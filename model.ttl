@@ -58,15 +58,30 @@
 
 # Countries
 
-<http://data.ontotext.com/resource/leaks/country-(country_code1)> a leak:Country;
-  leak:name "(country1)";
+<http://data.ontotext.com/resource/leaks/country-(country_code1)> a leak:Country, dbo:Country;
   leak:countryCode "(country_code1)";
+  leak:name "(country1)";
+  gn:name "(official name1)";
+  dbo:abstract "(abstract1)";
+  gn:featureCode gn:A.PCLI;
+  wgs:lat 1.23; wgs:long 20.34;
+  gn:parentFeature <http://dbpedia.org/resource/(continent)>;
   owl:sameAs <http://dbpedia.org/resource/(country1)>.
 
-<http://data.ontotext.com/resource/leaks/country-(country_code2)> a leak:Country;
-  leak:name "(country2)";
+<http://data.ontotext.com/resource/leaks/country-(country_code2)> a leak:Country, dbo:Country;
   leak:countryCode "(country_code2)";
+  leak:name "(country2)";
+  gn:name "(official name2)";
+  dbo:abstract "(abstract2)";
+  gn:featureCode gn:A.PCLI;
+  wgs:lat 54.7; wgs:long 8.90;
+  gn:parentFeature <http://dbpedia.org/resource/(continent)>;
   owl:sameAs <http://dbpedia.org/resource/(country2)>.
+
+<http://dbpedia.org/resource/(continent)> a dbo:Continent;
+  gn:name "(continent)";
+  gn:featureCode gn:L.CONT;
+  wgs:lat 12.3; wgs:long 4.56.
 
 <http://data.ontotext.com/resource/leaks/offshore-(jurisdiction)> a leak:OffshoreJurisdiction;
     leak:jurisdictionCode "(jurisdiction)";
@@ -106,3 +121,5 @@
 ############
 owl:sameAs      a puml:InlineProperty. # or puml:arrow puml:dashed-none.
 skos:exactMatch a puml:InlineProperty. 
+gn:A.PCLI a puml:Inline; skos:prefLabel "independent political entity".
+gn:L.CONT a puml:Inline; skos:prefLabel "continent".

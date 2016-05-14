@@ -1,0 +1,1218 @@
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:wgs="http://www.w3.org/2003/01/geo/wgs84_pos#"
+    xmlns:dbo="http://dbpedia.org/ontology/"
+    xmlns:dbr="http://dbpedia.org/resource/"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:gn="http://www.geonames.org/ontology#"
+    xmlns:void="http://rdfs.org/ns/void#"
+    xmlns:dct="http://purl.org/dc/terms/"
+    xmlns:geodata="http://sws.geonames.org/"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:puml="http://plantuml.com/ontology#"
+    xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+    xmlns:leak="http://data.ontotext.com/resource/leak/"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns:leaks="http://data.ontotext.com/resource/leaks/">
+  <owl:Ontology rdf:about="http://data.ontotext.com/resource/leak/">
+    <dct:creator rdf:resource="http://www.ontotext.com"/>
+    <rdfs:seeAlso rdf:resource="http://data.ontotext.com/resource/leaks"/>
+    <rdfs:seeAlso rdf:resource="https://github.com/Ontotext-AD/leaks"/>
+    <dct:subject rdf:resource="http://dbpedia.org/resource/Tax_evasion"/>
+    <rdfs:comment>Describes the ICIJ Offshore Leaks database released on 2016-05-10</rdfs:comment>
+    <dct:source rdf:resource="https://offshoreleaks.icij.org/pages/database"/>
+    <dct:subject rdf:resource="http://dbpedia.org/resource/Money_laundering"/>
+    <rdfs:label>Offshore Leaks ontology</rdfs:label>
+    <rdfs:seeAlso rdf:resource="https://offshoreleaks.icij.org/"/>
+    <void:sparqlEndpoint rdf:resource="http://data.ontotext.com/sparql"/>
+    <dct:subject rdf:resource="http://dbpedia.org/resource/Offshore_company"/>
+    <dct:created rdf:datatype="http://www.w3.org/2001/XMLSchema#date"
+    >2016-05-12</dct:created>
+  </owl:Ontology>
+  <owl:Class rdf:about="http://data.ontotext.com/resource/leak/Edge">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:label>Edge</rdfs:label>
+    <rdfs:comment>Relation between two Nodes. Since node_id is unique across node types, there's no need to mention the entity types</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:about="http://data.ontotext.com/resource/leak/Officer">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://data.ontotext.com/resource/leak/Node"/>
+    </rdfs:subClassOf>
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:label>Officer</rdfs:label>
+    <rdfs:comment>Agent (person, group of people, company) that serves as company officer and/or beneficiary, either formal and real</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:about="http://data.ontotext.com/resource/leak/Entity">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://data.ontotext.com/resource/leak/Node"/>
+    </rdfs:subClassOf>
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:label>Entity</rdfs:label>
+    <rdfs:comment>Legal body such as company, foundation, trust...</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:about="http://data.ontotext.com/resource/leak/Country">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:label>Country</rdfs:label>
+    <rdfs:comment>Country identified by its ISO alpha3 code</rdfs:comment>
+    <skos:example>leaks:country-VGB, which is owl:sameAs dbr:British_Virgin_Islands</skos:example>
+  </owl:Class>
+  <owl:Class rdf:about="http://data.ontotext.com/resource/leak/OffshoreJurisdiction">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:label>Offshore jurisdiction</rdfs:label>
+    <rdfs:comment>Offshore jurisdiction identified by a special code (*not* ISO alpha3)</rdfs:comment>
+    <skos:example>leaks:offshore-BVI, which is British Virgin Islands</skos:example>
+  </owl:Class>
+  <owl:Class rdf:about="http://data.ontotext.com/resource/leak/Intermediary">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="http://data.ontotext.com/resource/leak/Node"/>
+    </rdfs:subClassOf>
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:label>Intermediary</rdfs:label>
+    <rdfs:comment>Agent that helps beneficiaries setup or manage offshore companies</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:about="http://data.ontotext.com/resource/leak/Node">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:label>Node</rdfs:label>
+    <rdfs:comment>Any kind of node</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:about="http://data.ontotext.com/resource/leak/Address">
+    <rdfs:subClassOf rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:label>Address</rdfs:label>
+    <rdfs:comment>Address of an entity, intermediary or officer</rdfs:comment>
+  </owl:Class>
+  <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/isRegisterOfDirectorOf">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:range rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:label>Register of Director of</rdfs:label>
+    <leak:count rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >48</leak:count>
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/SERVICE_PROVIDER"/>
+    </rdfs:subPropertyOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/hasRegisteredAddress">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:range rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:label>registered address</rdfs:label>
+    <leak:count rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >316472</leak:count>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/isShareholderOf">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:range rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:label>shareholder of</rdfs:label>
+    <leak:count rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >382788</leak:count>
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/OWNER"/>
+    </rdfs:subPropertyOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/SAME">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#SymmetricProperty"/>
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:label>SAME</rdfs:label>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:range rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:comment>Two entities are likely the same. Symmetric.</rdfs:comment>
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/RELATED"/>
+    </rdfs:subPropertyOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/isPresident-DirectorOf">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:range rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:label>President - Director of</rdfs:label>
+    <leak:count rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >1</leak:count>
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/DIRECTOR"/>
+    </rdfs:subPropertyOf>
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/EXECUTIVE"/>
+    </rdfs:subPropertyOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/EXECUTIVE">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:label>EXECUTIVE</rdfs:label>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:range rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:comment>Any president, vice-president, executive officer or trustee</rdfs:comment>
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/OFFICER"/>
+    </rdfs:subPropertyOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/sameAddressAs">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:range rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:label>same address as</rdfs:label>
+    <leak:count rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >960</leak:count>
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/RELATED"/>
+    </rdfs:subPropertyOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/isNomineeBeneficiaryOf">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:range rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:label>Nominee Beneficiary of</rdfs:label>
+    <leak:count rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >2</leak:count>
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/NOMINEE"/>
+    </rdfs:subPropertyOf>
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/OWNER"/>
+    </rdfs:subPropertyOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/isChairmanOf">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:range rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:label>Chairman of</rdfs:label>
+    <leak:count rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >4</leak:count>
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/DIRECTOR"/>
+    </rdfs:subPropertyOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/isCorrespondentAddrOf">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:range rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:label>Correspondent Addr. of</rdfs:label>
+    <leak:count rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >173</leak:count>
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/SERVICE_PROVIDER"/>
+    </rdfs:subPropertyOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/isPersonalDirectorshipOf">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:range rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:label>Personal Directorship of</rdfs:label>
+    <leak:count rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >9</leak:count>
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/DIRECTOR"/>
+    </rdfs:subPropertyOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/isDirectorAndShareholderOf">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:range rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:label>Director and shareholder of</rdfs:label>
+    <leak:count rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >1</leak:count>
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/OWNER"/>
+    </rdfs:subPropertyOf>
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/DIRECTOR"/>
+    </rdfs:subPropertyOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/isUnitTrustRegisterOf">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:range rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:label>Unit Trust Register of</rdfs:label>
+    <leak:count rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >18</leak:count>
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/SERVICE_PROVIDER"/>
+    </rdfs:subPropertyOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/similarNameAndAddressAs">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:range rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:label>similar name and address as</rdfs:label>
+    <leak:count rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >46761</leak:count>
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/RELATED"/>
+    </rdfs:subPropertyOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/isTreasurerOf">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:range rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:label>Treasurer of</rdfs:label>
+    <leak:count rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >18</leak:count>
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/SERVICE_PROVIDER"/>
+    </rdfs:subPropertyOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/isSoleShareholderOf">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:range rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:label>Sole shareholder of</rdfs:label>
+    <leak:count rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >4</leak:count>
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/AUTHORIZED_REPRESENTATIVE"/>
+    </rdfs:subPropertyOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/isTrustSettlorOf">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:range rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:label>Trust Settlor of</rdfs:label>
+    <leak:count rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >1234</leak:count>
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/SERVICE_PROVIDER"/>
+    </rdfs:subPropertyOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/hasJurisdiction">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:label>hasJurisdiction</rdfs:label>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Entity"/>
+    <rdfs:range rdf:resource="http://data.ontotext.com/resource/leak/OffshoreJurisdiction"/>
+    <rdfs:comment>OffshoreJurisdiction of an Entity</rdfs:comment>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/AGENT_OF">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:label>AGENT OF</rdfs:label>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:range rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:comment>Any DIRECTOR, OFFICER, or SERVICE PROVIDER who serves the entity; whether NOMINATED or real</rdfs:comment>
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/RELATED_AGENT"/>
+    </rdfs:subPropertyOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/isResidentDirectorOf">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:range rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:label>Resident Director of</rdfs:label>
+    <leak:count rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >272</leak:count>
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/DIRECTOR"/>
+    </rdfs:subPropertyOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/isStockbrokerOf">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:range rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:label>Stockbroker of</rdfs:label>
+    <leak:count rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >11</leak:count>
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/SERVICE_PROVIDER"/>
+    </rdfs:subPropertyOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/isBeneficiaryOf">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:range rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:label>beneficiary of</rdfs:label>
+    <leak:count rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >19182</leak:count>
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/OWNER"/>
+    </rdfs:subPropertyOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/isDirector_RamiMakhlouf_Of">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:range rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:label>Director (Rami Makhlouf) of</rdfs:label>
+    <leak:count rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >2</leak:count>
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/DIRECTOR"/>
+    </rdfs:subPropertyOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/isTaxAdvisorOf">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:range rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:label>Tax Advisor of</rdfs:label>
+    <leak:count rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >14</leak:count>
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/SERVICE_PROVIDER"/>
+    </rdfs:subPropertyOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/isAuthorizedSignatoryOf">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:range rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:label>Authorized signatory of</rdfs:label>
+    <leak:count rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >1</leak:count>
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/AUTHORIZED_REPRESENTATIVE"/>
+    </rdfs:subPropertyOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/targetNode">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:label>targetNode</rdfs:label>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Edge"/>
+    <rdfs:range rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:comment>Target node of a relation (edge)</rdfs:comment>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/isSafekeepingOf">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:range rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:label>Safekeeping of</rdfs:label>
+    <leak:count rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >8</leak:count>
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/SERVICE_PROVIDER"/>
+    </rdfs:subPropertyOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/isPartnerOf">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:range rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:label>Partner of</rdfs:label>
+    <leak:count rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >7</leak:count>
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/OWNER"/>
+    </rdfs:subPropertyOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/relatedEntity">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:range rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:label>related entity</rdfs:label>
+    <leak:count rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >622</leak:count>
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/RELATED"/>
+    </rdfs:subPropertyOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/isBoardRepresentativeOf">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:range rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:label>Board Representative of</rdfs:label>
+    <leak:count rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >2</leak:count>
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/DIRECTOR"/>
+    </rdfs:subPropertyOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/sourceNode">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:label>sourceNode</rdfs:label>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Edge"/>
+    <rdfs:range rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:comment>Source node of a relation (edge)</rdfs:comment>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/SERVICE_PROVIDER">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:label>SERVICE PROVIDER</rdfs:label>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:range rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:comment>Any accountant, advisor, registrar of an entity, settlor</rdfs:comment>
+    <rdfs:subPropertyOf rdf:resource="http://data.ontotext.com/resource/leak/AGENT_OF"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/isAlternateDirectorOf">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:range rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:label>Alternate Director of</rdfs:label>
+    <leak:count rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >409</leak:count>
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/DIRECTOR"/>
+    </rdfs:subPropertyOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/isOwnerOf">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:range rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:label>Owner of</rdfs:label>
+    <leak:count rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >16</leak:count>
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/OWNER"/>
+    </rdfs:subPropertyOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/isAppointorOf">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:range rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:label>Appointor of</rdfs:label>
+    <leak:count rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >32</leak:count>
+    <rdfs:subPropertyOf rdf:resource="http://data.ontotext.com/resource/leak/SERVICE_PROVIDER"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/isJointSettlorOf">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:range rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:label>Joint Settlor of</rdfs:label>
+    <leak:count rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >41</leak:count>
+    <rdfs:subPropertyOf rdf:resource="http://data.ontotext.com/resource/leak/SERVICE_PROVIDER"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/isOwnerDirectorAndShareholderOf">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:range rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:label>Owner, director and shareholder of</rdfs:label>
+    <leak:count rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >28</leak:count>
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/OWNER"/>
+    </rdfs:subPropertyOf>
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/DIRECTOR"/>
+    </rdfs:subPropertyOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/isNomineeNameOf">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:range rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:label>Nominee Name of</rdfs:label>
+    <leak:count rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >1</leak:count>
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/NOMINEE"/>
+    </rdfs:subPropertyOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/AUTHORIZED_REPRESENTATIVE">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:label>AUTHORIZED REPRESENTATIVE</rdfs:label>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:range rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:comment>Any power of attorney, authorized signatory, etc.</rdfs:comment>
+    <rdfs:subPropertyOf rdf:resource="http://data.ontotext.com/resource/leak/SERVICE_PROVIDER"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/isTrusteeOfTrustOf">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:range rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:label>Trustee of Trust of</rdfs:label>
+    <leak:count rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >1418</leak:count>
+    <rdfs:subPropertyOf rdf:resource="http://data.ontotext.com/resource/leak/EXECUTIVE"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/isNomineeShareholderOf">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:range rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:label>Nominee Shareholder of</rdfs:label>
+    <leak:count rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >1130</leak:count>
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/NOMINEE"/>
+    </rdfs:subPropertyOf>
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/OWNER"/>
+    </rdfs:subPropertyOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/isNomineeBeneficialOwnerOf">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:range rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:label>Nominee Beneficial Owner of</rdfs:label>
+    <leak:count rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >4</leak:count>
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/NOMINEE"/>
+    </rdfs:subPropertyOf>
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/OWNER"/>
+    </rdfs:subPropertyOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/isAuthorisedPersonSignatoryOf">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:range rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:label>Authorised Person / Signatory of</rdfs:label>
+    <leak:count rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >1229</leak:count>
+    <rdfs:subPropertyOf rdf:resource="http://data.ontotext.com/resource/leak/AUTHORIZED_REPRESENTATIVE"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/isShareholder_ThroughJulexFoundation_Of">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:range rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:label>Shareholder (through Julex Foundation) of</rdfs:label>
+    <leak:count rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >1</leak:count>
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/OWNER"/>
+    </rdfs:subPropertyOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/isConnectedOf">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:range rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:label>Connected of</rdfs:label>
+    <leak:count rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >3</leak:count>
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/RELATED_AGENT"/>
+    </rdfs:subPropertyOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/isNomineeProtectorOf">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:range rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:label>Nominee Protector of</rdfs:label>
+    <leak:count rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >8</leak:count>
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/NOMINEE"/>
+    </rdfs:subPropertyOf>
+    <rdfs:subPropertyOf rdf:resource="http://data.ontotext.com/resource/leak/SERVICE_PROVIDER"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/OFFICER">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:label>OFFICER</rdfs:label>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:range rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:comment>Any other officer of an entity</rdfs:comment>
+    <rdfs:subPropertyOf rdf:resource="http://data.ontotext.com/resource/leak/AGENT_OF"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/isRecordsAndRegistersOf">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:range rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:label>Records &amp; Registers of</rdfs:label>
+    <leak:count rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >36318</leak:count>
+    <rdfs:subPropertyOf rdf:resource="http://data.ontotext.com/resource/leak/SERVICE_PROVIDER"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/isPresidentAndDirectorOf">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:range rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:label>President and director of</rdfs:label>
+    <leak:count rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >1</leak:count>
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/DIRECTOR"/>
+    </rdfs:subPropertyOf>
+    <rdfs:subPropertyOf rdf:resource="http://data.ontotext.com/resource/leak/EXECUTIVE"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/isNomineeInvestmentAdvisorOf">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:range rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:label>Nominee Investment Advisor of</rdfs:label>
+    <leak:count rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >1</leak:count>
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/NOMINEE"/>
+    </rdfs:subPropertyOf>
+    <rdfs:subPropertyOf rdf:resource="http://data.ontotext.com/resource/leak/SERVICE_PROVIDER"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/isNomineeSecretaryOf">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:range rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:label>Nominee Secretary of</rdfs:label>
+    <leak:count rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >5</leak:count>
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/NOMINEE"/>
+    </rdfs:subPropertyOf>
+    <rdfs:subPropertyOf rdf:resource="http://data.ontotext.com/resource/leak/SERVICE_PROVIDER"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/DIRECTOR">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:label>DIRECTOR</rdfs:label>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:range rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:comment>Any director, chairman, board member, custodian of an entity</rdfs:comment>
+    <rdfs:subPropertyOf rdf:resource="http://data.ontotext.com/resource/leak/AGENT_OF"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/isProtectorOf">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:range rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:label>Protector of</rdfs:label>
+    <leak:count rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >1198</leak:count>
+    <rdfs:subPropertyOf rdf:resource="http://data.ontotext.com/resource/leak/SERVICE_PROVIDER"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/isLegalAdvisorOf">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:range rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:label>Legal Advisor of</rdfs:label>
+    <leak:count rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >89</leak:count>
+    <rdfs:subPropertyOf rdf:resource="http://data.ontotext.com/resource/leak/SERVICE_PROVIDER"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/isMemberOfFoundationCouncilOf">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:range rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:label>Member of Foundation Council of</rdfs:label>
+    <leak:count rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >3</leak:count>
+    <rdfs:subPropertyOf rdf:resource="http://data.ontotext.com/resource/leak/DIRECTOR"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/isBeneficiaryShareholderAndDirectorOf">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:range rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:label>Beneficiary, shareholder and director of</rdfs:label>
+    <leak:count rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >6</leak:count>
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/OWNER"/>
+    </rdfs:subPropertyOf>
+    <rdfs:subPropertyOf rdf:resource="http://data.ontotext.com/resource/leak/DIRECTOR"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/isFirstBeneficiaryOf">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:range rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:label>First beneficiary of</rdfs:label>
+    <leak:count rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >1</leak:count>
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/OWNER"/>
+    </rdfs:subPropertyOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/isInvestmentAdvisorOf">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:range rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:label>Investment Advisor of</rdfs:label>
+    <leak:count rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >65</leak:count>
+    <rdfs:subPropertyOf rdf:resource="http://data.ontotext.com/resource/leak/SERVICE_PROVIDER"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/hasCountry">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:label>hasCountry</rdfs:label>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:range rdf:resource="http://data.ontotext.com/resource/leak/Country"/>
+    <rdfs:comment>Country (Countries) of Address, Entity, Intermediary or Officer</rdfs:comment>
+    <skos:scopeNote>Obtained by splitting country_codes on ';' and linking</skos:scopeNote>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/NOMINEE">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:label>NOMINEE</rdfs:label>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:range rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:comment>Nominated officer, director or other function, e.g. Nominal Shareholder. As opposed to Real</rdfs:comment>
+    <rdfs:subPropertyOf rdf:resource="http://data.ontotext.com/resource/leak/AGENT_OF"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/isSoleSignatoryBeneficialOwnerOf">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:range rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:label>Sole signatory / Beneficial owner of</rdfs:label>
+    <leak:count rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >1</leak:count>
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/OWNER"/>
+    </rdfs:subPropertyOf>
+    <rdfs:subPropertyOf rdf:resource="http://data.ontotext.com/resource/leak/AUTHORIZED_REPRESENTATIVE"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/isCustodianOf">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:range rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:label>Custodian of</rdfs:label>
+    <leak:count rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >14</leak:count>
+    <rdfs:subPropertyOf rdf:resource="http://data.ontotext.com/resource/leak/SERVICE_PROVIDER"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/isGeneralAccountantOf">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:range rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:label>General Accountant of</rdfs:label>
+    <leak:count rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >120</leak:count>
+    <rdfs:subPropertyOf rdf:resource="http://data.ontotext.com/resource/leak/SERVICE_PROVIDER"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/isCo-TrusteeOfTrustOf">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:range rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:label>Co-Trustee of Trust of</rdfs:label>
+    <leak:count rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >320</leak:count>
+    <rdfs:subPropertyOf rdf:resource="http://data.ontotext.com/resource/leak/EXECUTIVE"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/isIntermediaryOf">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:range rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:label>intermediary of</rdfs:label>
+    <leak:count rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >319121</leak:count>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/isSecretaryOf">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:range rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:label>Secretary of</rdfs:label>
+    <leak:count rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >14351</leak:count>
+    <rdfs:subPropertyOf rdf:resource="http://data.ontotext.com/resource/leak/SERVICE_PROVIDER"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/isSuccessorProtectorOf">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:range rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:label>Successor Protector of</rdfs:label>
+    <leak:count rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >13</leak:count>
+    <rdfs:subPropertyOf rdf:resource="http://data.ontotext.com/resource/leak/SERVICE_PROVIDER"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/isNomineeTrustSettlorOf">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:range rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:label>Nominee Trust Settlor of</rdfs:label>
+    <leak:count rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >24</leak:count>
+    <rdfs:subPropertyOf rdf:resource="http://data.ontotext.com/resource/leak/NOMINEE"/>
+    <rdfs:subPropertyOf rdf:resource="http://data.ontotext.com/resource/leak/SERVICE_PROVIDER"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/isSignatoryOf">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:range rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:label>Signatory of</rdfs:label>
+    <leak:count rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >2</leak:count>
+    <rdfs:subPropertyOf rdf:resource="http://data.ontotext.com/resource/leak/AUTHORIZED_REPRESENTATIVE"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/isBeneficialOwnerOf">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:range rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:label>Beneficial Owner of</rdfs:label>
+    <leak:count rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >1872</leak:count>
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/OWNER"/>
+    </rdfs:subPropertyOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/isAuthRepresentativeOf">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:range rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:label>Auth. Representative of</rdfs:label>
+    <leak:count rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >32</leak:count>
+    <rdfs:subPropertyOf rdf:resource="http://data.ontotext.com/resource/leak/AUTHORIZED_REPRESENTATIVE"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/isDirectorOf">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:range rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:label>Director of</rdfs:label>
+    <leak:count rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >118589</leak:count>
+    <rdfs:subPropertyOf rdf:resource="http://data.ontotext.com/resource/leak/DIRECTOR"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/REAL_OWNER">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:label>REAL OWNER</rdfs:label>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:range rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:comment>Real owner, shareholder or beneficiary of an entity</rdfs:comment>
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/OWNER"/>
+    </rdfs:subPropertyOf>
+    <rdfs:subPropertyOf>
+      <owl:TransitiveProperty rdf:about="http://data.ontotext.com/resource/leak/REAL_OWNER_TRANSITIVE"/>
+    </rdfs:subPropertyOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/isOfficerOf">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:range rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:label>Officer of</rdfs:label>
+    <leak:count rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >281</leak:count>
+    <rdfs:subPropertyOf rdf:resource="http://data.ontotext.com/resource/leak/OFFICER"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/isNominatedPersonOf">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:range rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:label>Nominated Person of</rdfs:label>
+    <leak:count rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >101</leak:count>
+    <rdfs:subPropertyOf rdf:resource="http://data.ontotext.com/resource/leak/NOMINEE"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/isMemberShareholderOf">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:range rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:label>Member / Shareholder of</rdfs:label>
+    <leak:count rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >1</leak:count>
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/OWNER"/>
+    </rdfs:subPropertyOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/isVicePresidentOf">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:range rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:label>Vice President of</rdfs:label>
+    <leak:count rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >7</leak:count>
+    <rdfs:subPropertyOf rdf:resource="http://data.ontotext.com/resource/leak/EXECUTIVE"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/isPowerOfAttorneyOf">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:range rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:label>Power of Attorney of</rdfs:label>
+    <leak:count rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >29</leak:count>
+    <rdfs:subPropertyOf rdf:resource="http://data.ontotext.com/resource/leak/AUTHORIZED_REPRESENTATIVE"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/isPresidentOf">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:range rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:label>President of</rdfs:label>
+    <leak:count rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >40</leak:count>
+    <rdfs:subPropertyOf rdf:resource="http://data.ontotext.com/resource/leak/EXECUTIVE"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/isPowerOfAttorneyShareholderOf">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:range rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:label>Power of Attorney / Shareholder of</rdfs:label>
+    <leak:count rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >1</leak:count>
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/OWNER"/>
+    </rdfs:subPropertyOf>
+    <rdfs:subPropertyOf rdf:resource="http://data.ontotext.com/resource/leak/AUTHORIZED_REPRESENTATIVE"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/isAssistantSecretaryOf">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:range rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:label>Assistant Secretary of</rdfs:label>
+    <leak:count rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >583</leak:count>
+    <rdfs:subPropertyOf rdf:resource="http://data.ontotext.com/resource/leak/SERVICE_PROVIDER"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/isDirectorShareholderBeneficialOwnerOf">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:range rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:label>Director / Shareholder / Beneficial Owner of</rdfs:label>
+    <leak:count rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >2</leak:count>
+    <rdfs:subPropertyOf>
+      <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/OWNER"/>
+    </rdfs:subPropertyOf>
+    <rdfs:subPropertyOf rdf:resource="http://data.ontotext.com/resource/leak/DIRECTOR"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/isSoleSignatoryOf">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:range rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:label>Sole signatory of</rdfs:label>
+    <leak:count rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >2</leak:count>
+    <rdfs:subPropertyOf rdf:resource="http://data.ontotext.com/resource/leak/AUTHORIZED_REPRESENTATIVE"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/isNomineeDirectorOf">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:range rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:label>Nominee Director of</rdfs:label>
+    <leak:count rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >64</leak:count>
+    <rdfs:subPropertyOf rdf:resource="http://data.ontotext.com/resource/leak/NOMINEE"/>
+    <rdfs:subPropertyOf rdf:resource="http://data.ontotext.com/resource/leak/DIRECTOR"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/RELATED_AGENT">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:label>RELATED AGENT</rdfs:label>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:range rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:comment>Any sort of agent related to an entity, including OWNER, DIRECTOR, OFFICER, or SERVICE PROVIDER; whether NOMINATED or real</rdfs:comment>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/RELATED">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#SymmetricProperty"/>
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:label>RELATED</rdfs:label>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:range rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:comment>Related entities, symmetric</rdfs:comment>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/isRegisterOfShareholderOf">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:range rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:label>Register of Shareholder of</rdfs:label>
+    <leak:count rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >41</leak:count>
+    <rdfs:subPropertyOf rdf:resource="http://data.ontotext.com/resource/leak/SERVICE_PROVIDER"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/OWNER">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:label>OWNER</rdfs:label>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:range rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:comment>Any owner, shareholder or beneficiary of an entity</rdfs:comment>
+    <rdfs:subPropertyOf rdf:resource="http://data.ontotext.com/resource/leak/RELATED_AGENT"/>
+    <rdfs:subPropertyOf>
+      <owl:TransitiveProperty rdf:about="http://data.ontotext.com/resource/leak/OWNER_TRANSITIVE"/>
+    </rdfs:subPropertyOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/isDirectorBeneficialOwnerOf">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:range rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:label>Director / Beneficial Owner of</rdfs:label>
+    <leak:count rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >4</leak:count>
+    <rdfs:subPropertyOf rdf:resource="http://data.ontotext.com/resource/leak/OWNER"/>
+    <rdfs:subPropertyOf rdf:resource="http://data.ontotext.com/resource/leak/DIRECTOR"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/isBankSignatoryOf">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:range rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:label>Bank Signatory of</rdfs:label>
+    <leak:count rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >123</leak:count>
+    <rdfs:subPropertyOf rdf:resource="http://data.ontotext.com/resource/leak/AUTHORIZED_REPRESENTATIVE"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/sameNameAndRegistrationDateAs">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:range rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:label>same name and registration date as</rdfs:label>
+    <leak:count rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >3146</leak:count>
+    <rdfs:subPropertyOf rdf:resource="http://data.ontotext.com/resource/leak/SAME"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/isGranteeOfAMortgageOf">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:range rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:label>Grantee of a mortgage of</rdfs:label>
+    <leak:count rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >1</leak:count>
+    <rdfs:subPropertyOf rdf:resource="http://data.ontotext.com/resource/leak/SERVICE_PROVIDER"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/isAuditorOf">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:range rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:label>Auditor of</rdfs:label>
+    <leak:count rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >207</leak:count>
+    <rdfs:subPropertyOf rdf:resource="http://data.ontotext.com/resource/leak/SERVICE_PROVIDER"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/isReserveDirectorOf">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:range rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:label>Reserve Director of</rdfs:label>
+    <leak:count rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >74</leak:count>
+    <rdfs:subPropertyOf rdf:resource="http://data.ontotext.com/resource/leak/DIRECTOR"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/isPrincipalBeneficiaryOf">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:range rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:label>Principal beneficiary of</rdfs:label>
+    <leak:count rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >3</leak:count>
+    <rdfs:subPropertyOf rdf:resource="http://data.ontotext.com/resource/leak/OWNER"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="http://data.ontotext.com/resource/leak/isDirectorShareholderOf">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:range rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:label>Director / Shareholder of</rdfs:label>
+    <leak:count rdf:datatype="http://www.w3.org/2001/XMLSchema#integer"
+    >6</leak:count>
+    <rdfs:subPropertyOf rdf:resource="http://data.ontotext.com/resource/leak/OWNER"/>
+    <rdfs:subPropertyOf rdf:resource="http://data.ontotext.com/resource/leak/DIRECTOR"/>
+  </owl:ObjectProperty>
+  <owl:DatatypeProperty rdf:about="http://data.ontotext.com/resource/leak/address">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:label>address</rdfs:label>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:comment>Textual address</rdfs:comment>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://data.ontotext.com/resource/leak/dorm_date">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:label>dorm_date</rdfs:label>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Entity"/>
+    <rdfs:comment>When entity became dormant</rdfs:comment>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://data.ontotext.com/resource/leak/countryCode">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:label>country code</rdfs:label>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Country"/>
+    <rdfs:comment>Country code, e.g. ISO alpha3</rdfs:comment>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://data.ontotext.com/resource/leak/rel_type">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:label>rel_type</rdfs:label>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Edge"/>
+    <rdfs:comment>Relation type</rdfs:comment>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://data.ontotext.com/resource/leak/incorporation_date">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:label>incorporation_date</rdfs:label>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Entity"/>
+    <rdfs:comment>When entity was created</rdfs:comment>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://data.ontotext.com/resource/leak/sourceID">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:label>sourceID</rdfs:label>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:comment> "Panama Papers" or "Offshore Leaks" </rdfs:comment>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://data.ontotext.com/resource/leak/status">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:label>status</rdfs:label>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:comment>Different value lists for Intermediary and Entity</rdfs:comment>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://data.ontotext.com/resource/leak/name">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:label>name</rdfs:label>
+    <rdfs:comment>Name</rdfs:comment>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://data.ontotext.com/resource/leak/node_1">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:label>node_1</rdfs:label>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Edge"/>
+    <rdfs:comment>Source node_id</rdfs:comment>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://data.ontotext.com/resource/leak/service_provider">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:label>service_provider</rdfs:label>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Entity"/>
+    <rdfs:comment> "Mossack Fonseca", "Portcullis Trustnet" or "Commonwealth Trust Limited" </rdfs:comment>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://data.ontotext.com/resource/leak/countries">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:label>countries</rdfs:label>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:comment>Semicolon-separated list of countries</rdfs:comment>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://data.ontotext.com/resource/leak/ibcRUC">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:label>ibcRUC</rdfs:label>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Entity"/>
+    <rdfs:comment>???</rdfs:comment>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://data.ontotext.com/resource/leak/note">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:label>note</rdfs:label>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:comment>Note (currently only for Entities, often empty)</rdfs:comment>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://data.ontotext.com/resource/leak/icij_id">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:label>icij_id</rdfs:label>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:comment>ICIJ identifier</rdfs:comment>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://data.ontotext.com/resource/leak/former_name">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:label>former_name</rdfs:label>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Entity"/>
+    <rdfs:comment>Former name</rdfs:comment>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://data.ontotext.com/resource/leak/internal_id">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:label>internal_id</rdfs:label>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:comment>???</rdfs:comment>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://data.ontotext.com/resource/leak/jurisdiction_description">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:label>jurisdiction_description</rdfs:label>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Entity"/>
+    <rdfs:comment>Semicolon-separated list of offshore destination names</rdfs:comment>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://data.ontotext.com/resource/leak/original_name">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:label>original_name</rdfs:label>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Entity"/>
+    <rdfs:comment>Official entity name</rdfs:comment>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://data.ontotext.com/resource/leak/struck_off_date">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:label>struck_off_date</rdfs:label>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Entity"/>
+    <rdfs:comment>When entity was removed from register</rdfs:comment>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://data.ontotext.com/resource/leak/node_id">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:label>node_id</rdfs:label>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:comment>Unique amongst all node types</rdfs:comment>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://data.ontotext.com/resource/leak/valid_until">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:label>valid_until</rdfs:label>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:comment>Fixed statement, eg "The Panama Papers data is current through 2015".</rdfs:comment>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://data.ontotext.com/resource/leak/inactivation_date">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:label>inactivation_date</rdfs:label>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Entity"/>
+    <rdfs:comment>When entity was deactivated</rdfs:comment>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://data.ontotext.com/resource/leak/node_2">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:label>node_2</rdfs:label>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Edge"/>
+    <rdfs:comment>Target node_id</rdfs:comment>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://data.ontotext.com/resource/leak/country_codes">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:label>country_codes</rdfs:label>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Node"/>
+    <rdfs:comment>Semicolon-separated list of ISO alpha3 country codes</rdfs:comment>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://data.ontotext.com/resource/leak/company_type">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:label>company_type</rdfs:label>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Entity"/>
+    <rdfs:comment>Formal company type</rdfs:comment>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://data.ontotext.com/resource/leak/jurisdiction">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:label>jurisdiction</rdfs:label>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/Entity"/>
+    <rdfs:comment>Semicolon-separated list of offshore destination codes (*not* alpha3)</rdfs:comment>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="http://data.ontotext.com/resource/leak/jurisdictionCode">
+    <rdfs:isDefinedBy rdf:resource="http://data.ontotext.com/resource/leak/"/>
+    <rdfs:label>jurisdiction code</rdfs:label>
+    <rdfs:domain rdf:resource="http://data.ontotext.com/resource/leak/OffshoreJurisdiction"/>
+    <rdfs:comment>Code for jurisdiction</rdfs:comment>
+  </owl:DatatypeProperty>
+</rdf:RDF>
