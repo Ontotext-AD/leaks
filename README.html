@@ -165,14 +165,24 @@ for the JavaScript code in this tag.
 <li><a href="#sec-2-3-3">2.3.3. Running tarql</a></li>
 </ul>
 </li>
-<li><a href="#sec-2-4">2.4. <span class="todo TODO">TODO</span> Geonames and DBpedia Geography</a></li>
-<li><a href="#sec-2-5">2.5. Country Codes</a></li>
-<li><a href="#sec-2-6">2.6. Offshore Jurisdictions</a></li>
-<li><a href="#sec-2-7">2.7. Data Model</a></li>
-<li><a href="#sec-2-8">2.8. Day1 Recap</a></li>
+<li><a href="#sec-2-4">2.4. Country Codes</a></li>
+<li><a href="#sec-2-5">2.5. Offshore Jurisdictions</a></li>
+<li><a href="#sec-2-6">2.6. Data Model</a></li>
+<li><a href="#sec-2-7">2.7. Day1 Recap</a></li>
 </ul>
 </li>
-<li><a href="#sec-3">3. Inferencing</a></li>
+<li><a href="#sec-3">3. Inferencing</a>
+<ul>
+<li><a href="#sec-3-1">3.1. Linking Countries and Offshore Jurisdictions</a></li>
+<li><a href="#sec-3-2">3.2. Linking Entities</a></li>
+<li><a href="#sec-3-3">3.3. Relation Hierarchy</a></li>
+<li><a href="#sec-3-4">3.4. Geonames Place Hierarchy</a></li>
+<li><a href="#sec-3-5">3.5. Geonames Data</a></li>
+<li><a href="#sec-3-6">3.6. Linking to Source</a></li>
+<li><a href="#sec-3-7">3.7. Day2 Recap</a></li>
+</ul>
+</li>
+<li><a href="#sec-4">4. <span class="todo TODO">TODO</span> Further Ideas</a></li>
 </ul>
 </div>
 </div>
@@ -196,7 +206,7 @@ Day 1: <span class="timestamp-wrapper"><span class="timestamp">&lt;2016-05-12 Th
 </li>
 <li>Ontology documentation: <a href="http://ontorule-project.eu/parrot/parrot?documentUri=https://raw.githubusercontent.com/Ontotext-AD/leaks/master/leak-ontology.ttl&mimetype=text/turtle&profile=technical&language=en&customizeCssUrl">Parrot Report</a>
 </li>
-<li>Data model: sec <a href="#sec-2-7">2.7</a>
+<li>Data model: sec <a href="#sec-2-6">2.6</a>
 </li>
 </ul>
 </div>
@@ -212,7 +222,7 @@ It includes two sources:
 <ul class="org-ul">
 <li><a href="https://panamapapers.icij.org">Panama Papers</a>
 </li>
-<li><a href="https://www.icij.org/offshore">Offshore Leaks</a> (but seemingly excluding Luxembourg Leaks, see sec <a href="#sec-2-6">2.6</a>)
+<li><a href="https://www.icij.org/offshore">Offshore Leaks</a> (but seemingly excluding Luxembourg Leaks, see sec <a href="#sec-2-5">2.5</a>)
 </li>
 </ul>
 
@@ -369,13 +379,13 @@ Legal bodies such as companies, foundations, trusts&#x2026;
 <tr>
 <td class="left">jurisdiction</td>
 <td class="left">where registered (<b>not</b> alpha3 code)</td>
-<td class="left">SAM</td>
+<td class="left">CAYMN</td>
 </tr>
 
 <tr>
 <td class="left">jurisdiction_description</td>
 <td class="left">where registered (country, US state, &#x2026;)</td>
-<td class="left">Samoa</td>
+<td class="left">Cayman</td>
 </tr>
 
 <tr>
@@ -1148,15 +1158,17 @@ we also define:
 </p>
 <div class="org-src-container">
 
-<pre class="src src-Turtle"><span style="color: #a020f0;">@prefix</span> <span style="color: #228b22;">leak:</span><span style="color: #008b8b;"> </span> <span style="color: #0000ff;">&lt;http://data.ontotext.com/resource/leaks#&gt;</span><span style="color: #b22222;">.  # ontology</span>
+<pre class="src src-Turtle"><span style="color: #a020f0;">@prefix</span> <span style="color: #228b22;">leak:</span><span style="color: #008b8b;"> </span> <span style="color: #0000ff;">&lt;http://data.ontotext.com/resource/leak/&gt;</span>.   <span style="color: #b22222;"># ontology</span>
 <span style="color: #a020f0;">@prefix</span> <span style="color: #228b22;">leaks:</span><span style="color: #008b8b;"> </span><span style="color: #0000ff;">&lt;http://data.ontotext.com/resource/leaks/&gt;</span> . <span style="color: #b22222;"># dat</span><span style="color: #a020f0;">a</span>
 </pre>
 </div>
 
 <p>
-We made an ontology <a href="./leak.ttl">./leak.ttl</a>. It has 4 parts:
+We made an ontology <a href="./leak-ontology.ttl">./leak-ontology.ttl</a>. It has these parts:
 </p>
 <ul class="org-ul">
+<li>The prefixes described above
+</li>
 <li>A header that describes the ontology itself:
 </li>
 </ul>
@@ -1177,7 +1189,7 @@ We made an ontology <a href="./leak.ttl">./leak.ttl</a>. It has 4 parts:
 </pre>
 </div>
 <ul class="org-ul">
-<li>"raw" classes and properties derived directly from the CSVs, eg:
+<li>"Raw" classes and data properties derived directly from the CSVs, eg:
 </li>
 </ul>
 <div class="org-src-container">
@@ -1191,35 +1203,49 @@ We made an ontology <a href="./leak.ttl">./leak.ttl</a>. It has 4 parts:
   <span style="color: #228b22;">rdfs:</span><span style="color: #008b8b;">subClassOf</span> <span style="color: #228b22;">leak:</span><span style="color: #008b8b;">Node</span>;
   <span style="color: #228b22;">rdfs:</span><span style="color: #008b8b;">isDefinedBy</span> <span style="color: #228b22;">leak:</span>;
   <span style="color: #228b22;">rdfs:</span><span style="color: #008b8b;">label</span> <span style="color: #8b2252;">"Address"</span>;
-  <span style="color: #228b22;">rdfs:</span><span style="color: #008b8b;">comment</span> <span style="color: #8b2252;">"Address of an entity, intermediary or officer"</span>.
+  <span style="color: #228b22;">rdfs:</span><span style="color: #008b8b;">comment</span> <span style="color: #8b2252;">"Address of an entity, intermediary or officer"</span><span style="color: #228b22;">.</span>
+
+<span style="color: #228b22;">leak:</span><span style="color: #008b8b;">address</span> <span style="color: #a020f0;">a</span> <span style="color: #228b22;">owl:</span><span style="color: #008b8b;">DatatypeProperty</span>;
+  <span style="color: #228b22;">rdfs:</span><span style="color: #008b8b;">isDefinedBy</span> <span style="color: #228b22;">leak:</span>;
+  <span style="color: #228b22;">rdfs:</span><span style="color: #008b8b;">label</span> <span style="color: #8b2252;">"address"</span>;
+  <span style="color: #228b22;">rdfs:</span><span style="color: #008b8b;">domain</span> <span style="color: #228b22;">leak:</span><span style="color: #008b8b;">Node</span>;
+  <span style="color: #228b22;">rdfs:</span><span style="color: #008b8b;">comment</span> <span style="color: #8b2252;">"Textual address"</span>.
 </pre>
 </div>
 <ul class="org-ul">
-<li>"Cooked" classes and properties, inferred from the raw data, eg (we'll be adding more):
+<li>Explicit linking and structuring object properties, eg
 </li>
 </ul>
 <div class="org-src-container">
 
-<pre class="src src-Turtle"><span style="color: #228b22;">leak:</span><span style="color: #008b8b;">Country</span> <span style="color: #a020f0;">a</span> <span style="color: #228b22;">owl:</span><span style="color: #008b8b;">Class</span>;
-  <span style="color: #228b22;">rdfs:</span><span style="color: #008b8b;">isDefinedBy</span> <span style="color: #228b22;">leak:</span>;
-  <span style="color: #228b22;">rdfs:</span><span style="color: #008b8b;">label</span> <span style="color: #8b2252;">"Country"</span>;
-  <span style="color: #228b22;">rdfs:</span><span style="color: #008b8b;">comment</span> <span style="color: #8b2252;">"Country identified by its ISO alpha3 code"</span>;
-  <span style="color: #228b22;">skos:</span><span style="color: #008b8b;">example</span> <span style="color: #8b2252;">"leaks:country-VGB, which is owl:sameAs dbr:British_Virgin_Islands"</span><span style="color: #228b22;">.</span>
-
-<span style="color: #228b22;">leak:</span><span style="color: #008b8b;">hasCountry</span> <span style="color: #a020f0;">a</span> <span style="color: #228b22;">owl:</span><span style="color: #008b8b;">ObjectProperty</span>;
+<pre class="src src-Turtle"><span style="color: #228b22;">leak:</span><span style="color: #008b8b;">hasCountry</span> <span style="color: #a020f0;">a</span> <span style="color: #228b22;">owl:</span><span style="color: #008b8b;">ObjectProperty</span>;
   <span style="color: #228b22;">rdfs:</span><span style="color: #008b8b;">isDefinedBy</span> <span style="color: #228b22;">leak:</span>;
   <span style="color: #228b22;">rdfs:</span><span style="color: #008b8b;">label</span> <span style="color: #8b2252;">"hasCountry"</span>;
   <span style="color: #228b22;">rdfs:</span><span style="color: #008b8b;">domain</span> <span style="color: #228b22;">leak:</span><span style="color: #008b8b;">Node</span>;
   <span style="color: #228b22;">rdfs:</span><span style="color: #008b8b;">range</span> <span style="color: #228b22;">leak:</span><span style="color: #008b8b;">Country</span>;
-  <span style="color: #228b22;">rdfs:</span><span style="color: #008b8b;">comment</span> <span style="color: #8b2252;">"Obtained by splitting country_codes on ';' and linking"</span>.
+  <span style="color: #228b22;">rdfs:</span><span style="color: #008b8b;">comment</span> <span style="color: #8b2252;">"Country (Countries) of Address, Entity, Intermediary or Officer"</span>;
+  <span style="color: #228b22;">skos:</span><span style="color: #008b8b;">scopeNote</span> <span style="color: #8b2252;">"Obtained by splitting country_codes on ';' and linking"</span><span style="color: #228b22;">.</span>
+
+<span style="color: #228b22;">leak:</span><span style="color: #008b8b;">hasJurisdiction</span> <span style="color: #a020f0;">a</span> <span style="color: #228b22;">owl:</span><span style="color: #008b8b;">ObjectProperty</span>;
+  <span style="color: #228b22;">rdfs:</span><span style="color: #008b8b;">isDefinedBy</span> <span style="color: #228b22;">leak:</span>;
+  <span style="color: #228b22;">rdfs:</span><span style="color: #008b8b;">label</span> <span style="color: #8b2252;">"hasJurisdiction"</span>;
+  <span style="color: #228b22;">rdfs:</span><span style="color: #008b8b;">domain</span> <span style="color: #228b22;">leak:</span><span style="color: #008b8b;">Entity</span>;
+  <span style="color: #228b22;">rdfs:</span><span style="color: #008b8b;">range</span> <span style="color: #228b22;">leak:</span><span style="color: #008b8b;">OffshoreJurisdiction</span>;
+  <span style="color: #228b22;">rdfs:</span><span style="color: #008b8b;">comment</span> <span style="color: #8b2252;">"OffshoreJurisdiction of an Entity"</span>.
 </pre>
 </div>
+<ul class="org-ul">
+<li>interpretation object properties, not explicitly present in the CSV files
+They are meant to layer further structure based on
+implicit semantics and inferencing (property generalization)
+</li>
+</ul>
 
 <p>
-<a href="./leak-ontology.ttl">./leak-ontology.ttl</a>: standalone version (prefixes prepended)
+We make it by concatenating these parts:
 </p>
 <pre class="example">
-cat prefixes.ttl leak.ttl &gt; leak-ontology.ttl
+cat prefixes.ttl leak.ttl leak-inferred.ttl &gt; leak-ontology.ttl
 </pre>
 </div>
 </div>
@@ -1289,7 +1315,7 @@ The  <a href="./addresses.rq">./addresses.rq</a> query produces Turtle RDF data 
 </pre>
 </div>
 <p>
-The other files are similar. Only edges are a bit different: they use UUIDs, because 
+The other files are similar. Only edges are a bit different: they use UUIDs, because
 </p>
 <ul class="org-ul">
 <li>the same pair &lt;node_1, node_2&gt; may be connected by several edges,
@@ -1348,17 +1374,8 @@ Eg 319150 entities.ttl vs 319421 Entities.csv, or a loss of 0.08%
 </div>
 
 <div id="outline-container-sec-2-4" class="outline-3">
-<h3 id="sec-2-4"><span class="section-number-3">2.4</span> <span class="todo TODO">TODO</span> Geonames and DBpedia Geography</h3>
+<h3 id="sec-2-4"><span class="section-number-3">2.4</span> Country Codes</h3>
 <div class="outline-text-3" id="text-2-4">
-<p>
-We want to correlate countries to Geonames and DBpedia, in order to use the <code>gn:parentFeature</code> hierarchy to group countries by region (eg Eastern Europe) and continent (eg Europe).
-</p>
-</div>
-</div>
-
-<div id="outline-container-sec-2-5" class="outline-3">
-<h3 id="sec-2-5"><span class="section-number-3">2.5</span> Country Codes</h3>
-<div class="outline-text-3" id="text-2-5">
 <p>
 Since the data uses ISO alpha3 country codes, we have to use that to correlate to DBpedia.
 </p>
@@ -1423,9 +1440,9 @@ It only has coreference to DBpedia that may be useful in the future, eg:
 </div>
 </div>
 
-<div id="outline-container-sec-2-6" class="outline-3">
-<h3 id="sec-2-6"><span class="section-number-3">2.6</span> Offshore Jurisdictions</h3>
-<div class="outline-text-3" id="text-2-6">
+<div id="outline-container-sec-2-5" class="outline-3">
+<h3 id="sec-2-5"><span class="section-number-3">2.5</span> Offshore Jurisdictions</h3>
+<div class="outline-text-3" id="text-2-5">
 <p>
 <a href="./jurisdictions.ttl">./jurisdictions.ttl</a> includes data about the Offshore Jurisdictions
 </p>
@@ -1465,11 +1482,11 @@ Notably, Luxembourg is missing from the list (see <a href="https://www.icij.org/
 </div>
 </div>
 
-<div id="outline-container-sec-2-7" class="outline-3">
-<h3 id="sec-2-7"><span class="section-number-3">2.7</span> Data Model</h3>
-<div class="outline-text-3" id="text-2-7">
+<div id="outline-container-sec-2-6" class="outline-3">
+<h3 id="sec-2-6"><span class="section-number-3">2.6</span> Data Model</h3>
+<div class="outline-text-3" id="text-2-6">
 <p>
-To enrich and use the RDF data efficiently, it's important to understand how it is laid out, i.e. the data model 
+To enrich and use the RDF data efficiently, it's important to understand how it is laid out, i.e. the data model
 (or as is currently called, <a href="https://www.w3.org/2014/data-shapes">RDF Shape</a>).
 </p>
 
@@ -1494,9 +1511,9 @@ We'll keep enriching the diagram as we add more inferences. Stay tuned.
 </div>
 </div>
 
-<div id="outline-container-sec-2-8" class="outline-3">
-<h3 id="sec-2-8"><span class="section-number-3">2.8</span> Day1 Recap</h3>
-<div class="outline-text-3" id="text-2-8">
+<div id="outline-container-sec-2-7" class="outline-3">
+<h3 id="sec-2-7"><span class="section-number-3">2.7</span> Day1 Recap</h3>
+<div class="outline-text-3" id="text-2-7">
 <p>
 And looked Onto upon the land, and saw that it was good:
 </p>
@@ -1518,9 +1535,6 @@ And looked Onto upon the land, and saw that it was good:
 <li>Countries and Offshores hast connexion to DBpedia
 </li>
 </ul>
-<p>
-Go forth and queriest! Whence did money came from, and whither did it flow?
-</p>
 
 <p>
 And there was evening (actually well past midnight), and there was morning&#x2013;the first day.
@@ -1534,17 +1548,362 @@ And there was evening (actually well past midnight), and there was morning&#x201
 <div class="outline-text-2" id="text-3">
 <p>
 Day 2: <span class="timestamp-wrapper"><span class="timestamp">&lt;2016-05-13 Fri&gt;</span></span>
-What shalt we do today? How about inferring some new data from the basic RDF.
+What shall we do today? How about inferring some new data from the basic RDF.
+</p>
+</div>
+
+<div id="outline-container-sec-3-1" class="outline-3">
+<h3 id="sec-3-1"><span class="section-number-3">3.1</span> Linking Countries and Offshore Jurisdictions</h3>
+<div class="outline-text-3" id="text-3-1">
+<p>
+In the original data, countries and jurisdictions are represented with codes
+(eg "AUS;BLZ" for 2 countries and "CAYMN" for 1 offshore destination).
+It's easier to query the data if these are made into explicit links,
+especially if one wants to explore hierarchical links (eg Entities active in Eastern Europe countries).
 </p>
 
 <p>
-Thou can direct us in our endeavours: <a href="https://github.com/Ontotext-AD/leaks/issues">hither on Github</a> or <a href="https://gitter.im/Ontotext-AD/leaks">thither on Gitter</a>
+So we created UPDATE queries <a href="./countries-link.ru">./countries-link.ru</a>, <a href="./jurisdictions-link.ru">./jurisdictions-link.ru</a>
+to make links <code>hasCountry</code> and <code>hasJurisdiction</code> respectively.
+The first query is more complex since there can be several codes in <code>country_codes</code> (separated with <code>;</code>):
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sparql"><span style="color: #a020f0;">insert</span> {
+  <span style="color: #a020f0;">graph</span> leaks:countries-link {
+    <span style="color: #a0522d;">?node</span> leak:hasCountry <span style="color: #a0522d;">?country</span>
+  }
+} <span style="color: #a020f0;">where</span> {
+  <span style="color: #a0522d;">?node</span> leak:country_codes <span style="color: #a0522d;">?codes</span>.
+  <span style="color: #a0522d;">?country</span> a leak:Country; leak:countryCode <span style="color: #a0522d;">?code</span>.
+  <span style="color: #a020f0;">filter</span>(contains(<span style="color: #a0522d;">?codes</span>,<span style="color: #a0522d;">?code</span>))
+}
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-3-2" class="outline-3">
+<h3 id="sec-3-2"><span class="section-number-3">3.2</span> Linking Entities</h3>
+<div class="outline-text-3" id="text-3-2">
+<p>
+The INSERT query <a href="./edges-link.ru">./edges-link.ru</a> makes explicit connections <code>hasSource</code> and <code>hasTarget</code> for every <code>Edge</code>:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sparql"><span style="color: #a020f0;">insert</span> {
+    <span style="color: #a020f0;">graph</span> leaks:edges-link {
+      <span style="color: #a0522d;">?edge</span> leak:hasSource <span style="color: #a0522d;">?src</span>; leak:hasTarget <span style="color: #a0522d;">?trg</span>
+    }
+} <span style="color: #a020f0;">where</span> {
+  <span style="color: #a0522d;">?edge</span> leak:node_1 <span style="color: #a0522d;">?src_id</span>;
+        leak:node_2 <span style="color: #a0522d;">?trg_id</span>.
+  <span style="color: #a0522d;">?src</span> leak:node_id <span style="color: #a0522d;">?src_id</span>.
+  <span style="color: #a0522d;">?trg</span> leak:node_id <span style="color: #a0522d;">?trg_id</span>.
+}
+</pre>
+</div>
+
+<p>
+We also made another INSERT query <a href="./edges-specific.ru">./edges-specific.ru</a> that converts
+the <code>rel_type</code> literals listed in sec <a href="#sec-1-8">1.8</a> into similarly-named relations:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sparql"><span style="color: #a020f0;">insert</span> {
+  <span style="color: #a020f0;">graph</span> leaks:specific-relations {
+    <span style="color: #a0522d;">?src</span> <span style="color: #a0522d;">?rel</span> <span style="color: #a0522d;">?trg</span>
+  }
+} <span style="color: #a020f0;">where</span> {
+  <span style="color: #a020f0;">values</span> (<span style="color: #a0522d;">?rel_type</span> <span style="color: #a0522d;">?rel</span>) {
+    (<span style="color: #8b2252;">"Alternate Director of"</span>  leak:isAlternateDirectorOf)
+    (<span style="color: #8b2252;">"Appointor of"</span>           leak:isAppointorOf)
+    (<span style="color: #8b2252;">"Assistant Secretary of"</span> leak:isAssistantSecretaryOf)
+    ...
+  }
+  <span style="color: #a0522d;">?edge</span> leak:hasSource <span style="color: #a0522d;">?src</span>;
+        leak:hasTarget <span style="color: #a0522d;">?trg</span>;
+        leak:rel_type  <span style="color: #a0522d;">?rel_type</span> .
+}
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-3-3" class="outline-3">
+<h3 id="sec-3-3"><span class="section-number-3">3.3</span> Relation Hierarchy</h3>
+<div class="outline-text-3" id="text-3-3">
+<p>
+The raw <code>rel_types</code> mentioned in the previous section are hard to understand or query:
+</p>
+<ul class="org-ul">
+<li>There are a lot of them (84)
+</li>
+<li>Some are very similar, eg "Shareholder (through Julex Foundation) of" and "Shareholder of"
+</li>
+<li>Some combine several roles in one raw relation, eg "Director / Shareholder / Beneficial Owner of"
+</li>
+</ul>
+<p>
+We have therefore created a hierarchy of properties in <a href="./leak-ontology.ttl">./leak-ontology.ttl</a> 
+that group similar relations into groups, allowing easier querying.
+</p>
+
+<p>
+Raw relations are in camelCase and inferred ("cooked") relations are in UPPERCASE.
+The hierarchy goes something like this, and is subject to change.
+<code>...</code> indicates there are more raw relations that are skipped for brevity:
+</p>
+<pre class="example">
+hasRegisteredAddress
+isIntermediaryOf
+RELATED
+  relatedEntity
+  similarNameAndAddressAs ...
+  SAME
+    sameNameAndRegistrationDateAs
+RELATED_AGENT
+  OWNER
+    isBeneficialOwnerOf
+    isNomineeBeneficialOwnerOf
+    isBeneficiaryShareholderAndDirectorOf (1) ...
+    REAL_OWNER (3)
+  AGENT_OF
+    OFFICER
+      isOfficerOf
+      EXECUTIVE
+        isPresidentOf
+        isVicePresidentOf
+        isPresidentAndDirectorOf
+        isTrusteeOfTrustOf
+        isCo-TrusteeOfTrustOf ...
+    SERVICE_PROVIDER
+      isAppointorOf
+      isAuditorOf
+      isSecretaryOf
+      isGranteeOfAMortgageOf
+      AUTHORIZED_REPRESENTATIVE
+        isAuthRepresentativeOf
+        isAuthorisedPersonSignatoryOf
+        isBankSignatoryOf ...
+    DIRECTOR
+      isDirectorOf
+      isBeneficiaryShareholderAndDirectorOf (1)
+      isDirectorAndShareholderOf
+      isMemberOfFoundationCouncilOf
+      isNomineeDirectorOf (2) ...
+    NOMINEE
+      isNominatedPersonOf
+      isNomineeDirectorOf
+      isNomineeBeneficialOwnerOf (2) ...
+</pre>
+<p>
+Notes:
+</p>
+<ol class="org-ol">
+<li>Combined raw relations (eg isDirectorShareholderBeneficialOwnerOf) 
+appear in several branches, thus contributing to several cooked relations 
+(eg in this case  DIRECTOR, OWNER)
+</li>
+<li>NOMINEE is a sort of flag, eg a DIRECTOR can be a real director, or NOMINEE director
+</li>
+<li>Although we distinguish REAL_OWNER as a sub-prop of OWNER,
+we don't yet have any instances of it.
+Indeed the essence of investigative work is to find out the real owner.
+</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-sec-3-4" class="outline-3">
+<h3 id="sec-3-4"><span class="section-number-3">3.4</span> Geonames Place Hierarchy</h3>
+<div class="outline-text-3" id="text-3-4">
+<p>
+We want to correlate countries to Geonames (in addition to DBpedia), in order to:
+use the <code>gn:parentFeature</code> hierarchy to group countries 
+by region (eg Eastern Europe) and continent (eg Europe).
+</p>
+
+<p>
+We use the Ontotext endpoint <a href="http://ff-news.ontotext.com/sparql">http://ff-news.ontotext.com/sparql</a> that has
+DBpedia and Geonames integrated with owl:sameAs statements between these datasets.
+The following query returns the places (<code>gn:Feature</code>) above country (<code>gn:A.PCLI</code>):
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sparql"><span style="color: #a020f0;">PREFIX</span> gn: <span style="color: #008b8b;">&lt;http://www.geonames.org/ontology#&gt;</span>
+<span style="color: #a020f0;">PREFIX</span> onto: <span style="color: #008b8b;">&lt;http://www.ontotext.com/&gt;</span>
+<span style="color: #a020f0;">PREFIX</span> dbo: <span style="color: #008b8b;">&lt;http://dbpedia.org/ontology/&gt;</span>
+<span style="color: #a020f0;">PREFIX</span> rdfs: <span style="color: #008b8b;">&lt;http://www.w3.org/2000/01/rdf-schema#&gt;</span>
+
+<span style="color: #a020f0;">select</span> * <span style="color: #a020f0;">from</span> onto:disable-sameAs {
+    <span style="color: #a0522d;">?x</span> a gn:Feature; rdfs:label <span style="color: #a0522d;">?name</span>; gn:featureCode <span style="color: #a0522d;">?feat</span>.
+    <span style="color: #a020f0;">filter</span> <span style="color: #a020f0;">not</span> <span style="color: #a020f0;">exists</span> {<span style="color: #a0522d;">?x</span> gn:featureCode gn:A.PCLI}
+    <span style="color: #a020f0;">filter</span> <span style="color: #a020f0;">exists</span> {<span style="color: #a0522d;">?y</span> gn:featureCode gn:A.PCLI; gn:parentFeature <span style="color: #a0522d;">?x</span>}
+} <span style="color: #a020f0;">group</span> <span style="color: #a020f0;">by</span> <span style="color: #a0522d;">?x</span>
+</pre>
+</div>
+<p>
+We filter <code>gn:A.PCLI</code> itself, because there are some mistakes (eg <code>dbr:Barbados</code> is parent of itself).
+</p>
+
+<p>
+The result is as follows:
+</p>
+<pre class="example">
+dbr:Africa
+dbr:Arabian_Peninsula
+dbr:Asia
+dbr:Australia_and_New_Zealand
+dbr:Caribbean
+dbr:Central_Asia
+dbr:Earth
+dbr:Eastern_Africa
+dbr:Eastern_Asia
+dbr:Eastern_Europe
+dbr:Europe
+dbr:European_Free_Trade_Association
+dbr:La_Habana_Province
+dbr:Maghreb
+dbr:Melanesia
+dbr:Micronesia
+dbr:Middle_Africa
+dbr:North_America
+dbr:Northern_Africa
+dbr:Northern_Europe
+dbr:Oceania
+dbr:Polynesia
+dbr:South_Eastern_Asia
+dbr:Southern_Africa
+dbr:Southern_Asia
+dbr:Southern_Europe
+dbr:W_National_Park
+dbr:Western_Africa
+dbr:Western_Europe
+</pre>
+<ul class="org-ul">
+<li>Mahgreb is a region of Northwest Africa that includes: Algeria, Morocco, Tunisia
+</li>
+<li>W_National_Park is a major trans-national park in West Africa that includes areas of: Niger, Benin, Burkina Faso
+</li>
+<li>La_Habana_Province is a mistake in Geonames: the small village America in that province
+is made parent of South_America and North_America: we've replaced it with <code>dbr:Americas</code>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-3-5" class="outline-3">
+<h3 id="sec-3-5"><span class="section-number-3">3.5</span> Geonames Data</h3>
+<div class="outline-text-3" id="text-3-5">
+<p>
+We use the following query <a href="./geonames-top-level.rq">./geonames-top-level.rq</a> to extract places at the level of country or above,
+and the following attributes (<code>geonames-top-level.ttl</code>):
+</p>
+<ul class="org-ul">
+<li>URL in the dbr: namespace, eg dbr:Europe
+</li>
+<li>gn:name: official name
+</li>
+<li>dbo:abstract: description
+</li>
+<li>gn:featureCode: place type(s), eg A.PCLI (independent country), L.CONT (continent), L.RGN (region)
+</li>
+<li>gn:parentFeature: ancestor places
+</li>
+<li>wgs:lat, wgs:long: geographic coordinates
+</li>
+</ul>
+<div class="org-src-container">
+
+<pre class="src src-sparql"><span style="color: #ff0000; font-weight: bold;">TODO</span> geonames-top-level.rq
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-3-6" class="outline-3">
+<h3 id="sec-3-6"><span class="section-number-3">3.6</span> Linking to Source</h3>
+<div class="outline-text-3" id="text-3-6">
+<p>
+We make links back to the source (<a href="https://offshoreleaks.icij.org">https://offshoreleaks.icij.org</a>) 
+in order to give credit where credit is due, 
+and to allow easy inspection of the ICIJ interactive graphs (<a href="./seeAlso.ru">./seeAlso.ru</a>):
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sparql"><span style="color: #a020f0;">insert</span> {
+  <span style="color: #a020f0;">graph</span>:seeAlso {
+    <span style="color: #a0522d;">?node</span> rdfs:seeAlso <span style="color: #a0522d;">?icij_org</span>
+  }
+} <span style="color: #a020f0;">where</span> {
+  <span style="color: #a0522d;">?node</span> leak:node_id <span style="color: #a0522d;">?node_id</span>
+  <span style="color: #a020f0;">bind</span>(iri(concat(<span style="color: #8b2252;">"https://offshoreleaks.icij.org/nodes/"</span>,<span style="color: #a0522d;">?node_id</span>)) <span style="color: #a020f0;">as</span> <span style="color: #a0522d;">?icij_org</span>)
+}
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-3-7" class="outline-3">
+<h3 id="sec-3-7"><span class="section-number-3">3.7</span> Day2 Recap</h3>
+<div class="outline-text-3" id="text-3-7">
+<p>
+Brushed Onto the sweat from its weary brow, and looketh at the fruit of its day's work:
+</p>
+<ul class="org-ul">
+<li>Relations between Nodes made
+</li>
+<li>Relations of entities grouped in an interpretive hierarchy
+</li>
+<li>Links back to the source (<a href="https://offshoreleaks.icij.org">https://offshoreleaks.icij.org</a>) added
+</li>
+<li>Hierarchy above countries obtained from Geonames
+</li>
+</ul>
+
+<p>
+A Leaks dataset is borne.
+Go forth and queriest! 
+Whence did money came from, and whither did it flow?
+</p>
+
+<p>
+And there was evening, and there was morning&#x2013;the second day.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4"><span class="section-number-2">4</span> <span class="todo TODO">TODO</span> Further Ideas</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+This is a parking place for stuff to do in the future:
+</p>
+<ul class="org-ul">
+<li>Network analysis
+</li>
+<li>leak:Officer including the word "BEARER" (and variations) should be marked specially as "bearer shares".
+These are essentially anonymous shareholders or beneficiaries, often used for money laundering.
+Most countries have banned registration of Entities with bearer shares
+</li>
+<li>Addresses: there are literals <code>Entity.address</code> and <code>Intermediary.address</code>,
+and also link <code>hasRegisteredAddress</code> to the separate class <code>Address</code>, which has literal <code>Address.address</code>.
+What nodes have <code>hasRegisteredAddress</code>? What is the relation between these
+</li>
+<li>Look for Entities in the FIBO LEI database?
+</li>
+</ul>
+
+<p>
+You can also suggest what we should do: <a href="https://github.com/Ontotext-AD/leaks/issues">hither on Github</a> or <a href="https://gitter.im/Ontotext-AD/leaks">thither on Gitter</a>
 </p>
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">&lt;2016-05-13&gt;</span></span></p>
+<p class="date">Date: <span class="timestamp-wrapper"><span class="timestamp">&lt;2016-05-14&gt;</span></span></p>
 <p class="author">Author: Ontotext</p>
 <p class="creator">Emacs 25.0.50.1 (Org mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>

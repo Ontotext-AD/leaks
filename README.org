@@ -1,5 +1,5 @@
 #+TITLE: Offshore Leaks as LOD
-#+DATE: <2016-05-13>
+#+DATE: <2016-05-14>
 #+AUTHOR: Ontotext
 #+OPTIONS: ':nil *:t -:t ::t <:t H:5 \n:nil ^:{} arch:headline author:t c:nil
 #+OPTIONS: creator:comment d:(not "LOGBOOK") date:t e:t email:nil f:t inline:t num:t
@@ -26,7 +26,7 @@ The [[https://offshoreleaks.icij.org/][Offshore Leaks]] database of The Internat
 is a wonderful resource that allows you to explore the murky world of high-flyer finance and offshore destinations.
 It includes two sources:
 - [[https://panamapapers.icij.org][Panama Papers]]
-- [[https://www.icij.org/offshore][Offshore Leaks]] (but seemingly excluding Luxembourg Leaks, see sec [[* Offshore Jurisdictions]])
+- [[https://www.icij.org/offshore][Offshore Leaks]] (but seemingly excluding Luxembourg Leaks, see sec [[*Offshore Jurisdictions]])
 
 [[https://offshoreleaks.icij.org/pages/database][The database]] was released on May 10 (please download it from their torrent link)
 and on May 12 we decided to explore it using Linked Open Data (LOD).
@@ -57,7 +57,7 @@ As we analyze the data, we'll add more in-depth notes.
 | country_codes | ISO alpha3 code         | SGP                                              |
 | countries     | country name            | Singapore                                        |
 | node_id       | unique across all files | 14000015                                         |
-| sourceID      | source name             | "Panama Papers" or "Offshorshuckaks"              |
+| sourceID      | source name             | "Panama Papers" or "Offshorshuckaks"             |
 
 ** Entities.csv
 Legal bodies such as companies, foundations, trusts...
@@ -65,8 +65,8 @@ Legal bodies such as companies, foundations, trusts...
 | name                     | company name                                | CHEM D-T Corp.                                                                                                              |
 | original_name            | official name                               | CHEM D-T Corp. EX-CHEM DT Corp.                                                                                             |
 | former_name              | former name (often empty)                   | CHEM DT Corp.                                                                                                               |
-| jurisdiction             | where registered (*not* alpha3 code)        | SAM                                                                                                                         |
-| jurisdiction_description | where registered (country, US state, ...)   | Samoa                                                                                                                       |
+| jurisdiction             | where registered (*not* alpha3 code)        | CAYMN                                                                                                                       |
+| jurisdiction_description | where registered (country, US state, ...)   | Cayman                                                                                                                      |
 | company_type             | formal type                                 | "Standard International Company", "BVI Trust"...                                                                            |
 | address                  | formal address                              | GO SHINE MANAGEMENT CO.; LTD. ROOM B; 5F.; NO. 92; SEC. 1NANJING E. RD.; JHONGSHAN DISTRICT; TAIPEI CITY 104; TAIPEI TAIWAN |
 | internal_id              | ???                                         | 1000094                                                                                                                     |
@@ -219,11 +219,12 @@ First we define all prefixes we use in a single file [[./prefixes.ttl]], so we w
 In addition to standard prefixes (that you can get from http://prefix.cc/dbr,dbo,dct,rdf,rdfs,skos,owl,xsd.ttl),
 we also define:
 #+BEGIN_SRC Turtle
-@prefix leak:  <http://data.ontotext.com/resource/leaks#>.  # ontology
+@prefix leak:  <http://data.ontotext.com/resource/leak/>.   # ontology
 @prefix leaks: <http://data.ontotext.com/resource/leaks/> . # data
 #+END_SRC
 
-We made an ontology [[./leak.ttl]]. It has 4 parts:
+We made an ontology [[./leak-ontology.ttl]]. It has these parts:
+- The prefixes described above
 - A header that describes the ontology itself:
 #+BEGIN_SRC Turtle
 leak: a owl:Ontology;
@@ -239,7 +240,7 @@ leak: a owl:Ontology;
   dct:creator <http://www.ontotext.com>;
   void:sparqlEndpoint <http://data.ontotext.com/sparql>.
 #+END_SRC
-- "raw" classes and properties derived directly from the CSVs, eg:
+- "Raw" classes and data properties derived directly from the CSVs, eg:
 #+BEGIN_SRC Turtle
 leak:Node a owl:Class;
   rdfs:isDefinedBy leak:;
@@ -251,25 +252,36 @@ leak:Address a owl:Class;
   rdfs:isDefinedBy leak:;
   rdfs:label "Address";
   rdfs:comment "Address of an entity, intermediary or officer".
-#+END_SRC
-- "Cooked" classes and properties, inferred from the raw data, eg (we'll be adding more):
-#+BEGIN_SRC Turtle
-leak:Country a owl:Class;
-  rdfs:isDefinedBy leak:;
-  rdfs:label "Country";
-  rdfs:comment "Country identified by its ISO alpha3 code";
-  skos:example "leaks:country-VGB, which is owl:sameAs dbr:British_Virgin_Islands".
 
+leak:address a owl:DatatypeProperty;
+  rdfs:isDefinedBy leak:;
+  rdfs:label "address";
+  rdfs:domain leak:Node;
+  rdfs:comment "Textual address".
+#+END_SRC
+- Explicit linking and structuring object properties, eg
+#+BEGIN_SRC Turtle
 leak:hasCountry a owl:ObjectProperty;
   rdfs:isDefinedBy leak:;
   rdfs:label "hasCountry";
   rdfs:domain leak:Node;
   rdfs:range leak:Country;
-  rdfs:comment "Obtained by splitting country_codes on ';' and linking".
-#+END_SRC
+  rdfs:comment "Country (Countries) of Address, Entity, Intermediary or Officer";
+  skos:scopeNote "Obtained by splitting country_codes on ';' and linking".
 
-[[./leak-ontology.ttl]]: standalone version (prefixes prepended)
-: cat prefixes.ttl leak.ttl > leak-ontology.ttl
+leak:hasJurisdiction a owl:ObjectProperty;
+  rdfs:isDefinedBy leak:;
+  rdfs:label "hasJurisdiction";
+  rdfs:domain leak:Entity;
+  rdfs:range leak:OffshoreJurisdiction;
+  rdfs:comment "OffshoreJurisdiction of an Entity".
+#+END_SRC
+- interpretation object properties, not explicitly present in the CSV files
+  They are meant to layer further structure based on
+  implicit semantics and inferencing (property generalization)
+
+We make it by concatenating these parts:
+: cat prefixes.ttl leak.ttl leak-inferred.ttl > leak-ontology.ttl
 
 ** tarql
 We use [[https://github.com/tarql/tarql][tarql]] (SPARQL processor for Tables) to convert from CSV to Turtle.
@@ -314,7 +326,7 @@ leaks:address-14000003
         leak:node_id        "14000003" ;
         leak:sourceID       "Panama Papers" .
 #+END_SRC
-The other files are similar. Only edges are a bit different: they use UUIDs, because 
+The other files are similar. Only edges are a bit different: they use UUIDs, because
 - the same pair <node_1, node_2> may be connected by several edges,
 - yet edges don't have a unique ID themselves, and ~tarql~'s special variable ~?ROWNUM~ doesn't work:
 #+BEGIN_SRC Turtle
@@ -345,9 +357,6 @@ This easily makes 760Mb of RDF data, so you better have a fast disk (SSD). Voila
 
 ~tarql~ skips some rows (unexplained), but the loss is very small.
 Eg 319150 entities.ttl vs 319421 Entities.csv, or a loss of 0.08%
-
-** TODO Geonames and DBpedia Geography
-We want to correlate countries to Geonames and DBpedia, in order to use the ~gn:parentFeature~ hierarchy to group countries by region (eg Eastern Europe) and continent (eg Europe).
 
 ** Country Codes
 Since the data uses ISO alpha3 country codes, we have to use that to correlate to DBpedia.
@@ -405,7 +414,7 @@ leaks:offshore-RAK    a leak:OffshoreJurisdiction; leak:code "RAK";   leak:name 
 Notably, Luxembourg is missing from the list (see [[https://www.icij.org/project/luxembourg-leaks][Luxembourg Leaks]])
 
 ** Data Model
-To enrich and use the RDF data efficiently, it's important to understand how it is laid out, i.e. the data model 
+To enrich and use the RDF data efficiently, it's important to understand how it is laid out, i.e. the data model
 (or as is currently called, [[https://www.w3.org/2014/data-shapes][RDF Shape]]).
 
 Ontotext has developed a tool *rdfpuml* that creates precise diagrams from actual Turtle.
@@ -438,12 +447,241 @@ And looked Onto upon the land, and saw that it was good:
 - Ontology described by the [[https://www.w3.org/TR/void/][VOID]], and shalt be registered in the [[http://lov.okfn.org/][LOV]] (see [[https://plus.google.com/115593825497938381443/posts/7SaKJW3sanm][LOV announcement]])
 - Data model lucid and clear
 - Countries and Offshores hast connexion to DBpedia
-Go forth and queriest! Whence did money came from, and whither did it flow?
 
 And there was evening (actually well past midnight), and there was morning--the first day.
 
 * Inferencing
 Day 2: <2016-05-13 Fri>
-What shalt we do today? How about inferring some new data from the basic RDF.
+What shall we do today? How about inferring some new data from the basic RDF.
 
-Thou can direct us in our endeavours: [[https://github.com/Ontotext-AD/leaks/issues][hither on Github]] or [[https://gitter.im/Ontotext-AD/leaks][thither on Gitter]]
+** Linking Countries and Offshore Jurisdictions
+In the original data, countries and jurisdictions are represented with codes
+(eg "AUS;BLZ" for 2 countries and "CAYMN" for 1 offshore destination).
+It's easier to query the data if these are made into explicit links,
+especially if one wants to explore hierarchical links (eg Entities active in Eastern Europe countries).
+
+So we created UPDATE queries [[./countries-link.ru]], [[./jurisdictions-link.ru]]
+to make links ~hasCountry~ and ~hasJurisdiction~ respectively.
+The first query is more complex since there can be several codes in ~country_codes~ (separated with ~;~):
+#+BEGIN_SRC sparql
+insert {
+  graph leaks:countries-link {
+    ?node leak:hasCountry ?country
+  }
+} where {
+  ?node leak:country_codes ?codes.
+  ?country a leak:Country; leak:countryCode ?code.
+  filter(contains(?codes,?code))
+}
+#+END_SRC
+
+** Linking Entities
+The INSERT query [[./edges-link.ru]] makes explicit connections ~hasSource~ and ~hasTarget~ for every ~Edge~:
+#+BEGIN_SRC sparql
+insert {
+    graph leaks:edges-link {
+      ?edge leak:hasSource ?src; leak:hasTarget ?trg
+    }
+} where {
+  ?edge leak:node_1 ?src_id;
+        leak:node_2 ?trg_id.
+  ?src leak:node_id ?src_id.
+  ?trg leak:node_id ?trg_id.
+}
+#+END_SRC
+
+We also made another INSERT query [[./edges-specific.ru]] that converts
+the ~rel_type~ literals listed in sec [[*rel_type]] into similarly-named relations:
+#+BEGIN_SRC sparql
+insert {
+  graph leaks:specific-relations {
+    ?src ?rel ?trg
+  }
+} where {
+  values (?rel_type ?rel) {
+    ("Alternate Director of"  leak:isAlternateDirectorOf)
+    ("Appointor of"           leak:isAppointorOf)
+    ("Assistant Secretary of" leak:isAssistantSecretaryOf)
+    ...
+  }
+  ?edge leak:hasSource ?src;
+        leak:hasTarget ?trg;
+        leak:rel_type  ?rel_type .
+}
+#+END_SRC
+
+** Relation Hierarchy
+The raw ~rel_types~ mentioned in the previous section are hard to understand or query:
+- There are a lot of them (84)
+- Some are very similar, eg "Shareholder (through Julex Foundation) of" and "Shareholder of"
+- Some combine several roles in one raw relation, eg "Director / Shareholder / Beneficial Owner of"
+We have therefore created a hierarchy of properties in [[./leak-ontology.ttl]] 
+that group similar relations into groups, allowing easier querying.
+
+Raw relations are in camelCase and inferred ("cooked") relations are in UPPERCASE.
+The hierarchy goes something like this, and is subject to change.
+~...~ indicates there are more raw relations that are skipped for brevity:
+#+BEGIN_EXAMPLE  
+hasRegisteredAddress
+isIntermediaryOf
+RELATED
+  relatedEntity
+  similarNameAndAddressAs ...
+  SAME
+    sameNameAndRegistrationDateAs
+RELATED_AGENT
+  OWNER
+    isBeneficialOwnerOf
+    isNomineeBeneficialOwnerOf
+    isBeneficiaryShareholderAndDirectorOf (1) ...
+    REAL_OWNER (3)
+  AGENT_OF
+    OFFICER
+      isOfficerOf
+      EXECUTIVE
+        isPresidentOf
+        isVicePresidentOf
+        isPresidentAndDirectorOf
+        isTrusteeOfTrustOf
+        isCo-TrusteeOfTrustOf ...
+    SERVICE_PROVIDER
+      isAppointorOf
+      isAuditorOf
+      isSecretaryOf
+      isGranteeOfAMortgageOf
+      AUTHORIZED_REPRESENTATIVE
+        isAuthRepresentativeOf
+        isAuthorisedPersonSignatoryOf
+        isBankSignatoryOf ...
+    DIRECTOR
+      isDirectorOf
+      isBeneficiaryShareholderAndDirectorOf (1)
+      isDirectorAndShareholderOf
+      isMemberOfFoundationCouncilOf
+      isNomineeDirectorOf (2) ...
+    NOMINEE
+      isNominatedPersonOf
+      isNomineeDirectorOf
+      isNomineeBeneficialOwnerOf (2) ...
+#+END_EXAMPLE
+Notes:
+1. Combined raw relations (eg isDirectorShareholderBeneficialOwnerOf) 
+   appear in several branches, thus contributing to several cooked relations 
+   (eg in this case  DIRECTOR, OWNER)
+2. NOMINEE is a sort of flag, eg a DIRECTOR can be a real director, or NOMINEE director
+3. Although we distinguish REAL_OWNER as a sub-prop of OWNER,
+   we don't yet have any instances of it.
+   Indeed the essence of investigative work is to find out the real owner.
+
+** Geonames Place Hierarchy
+We want to correlate countries to Geonames (in addition to DBpedia), in order to:
+use the ~gn:parentFeature~ hierarchy to group countries 
+by region (eg Eastern Europe) and continent (eg Europe).
+
+We use the Ontotext endpoint [[http://ff-news.ontotext.com/sparql]] that has
+DBpedia and Geonames integrated with owl:sameAs statements between these datasets.
+The following query returns the places (~gn:Feature~) above country (~gn:A.PCLI~):
+#+BEGIN_SRC sparql
+PREFIX gn: <http://www.geonames.org/ontology#>
+PREFIX onto: <http://www.ontotext.com/>
+PREFIX dbo: <http://dbpedia.org/ontology/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+select * from onto:disable-sameAs {
+    ?x a gn:Feature; rdfs:label ?name; gn:featureCode ?feat.
+    filter not exists {?x gn:featureCode gn:A.PCLI}
+    filter exists {?y gn:featureCode gn:A.PCLI; gn:parentFeature ?x}
+} group by ?x
+#+END_SRC
+We filter ~gn:A.PCLI~ itself, because there are some mistakes (eg ~dbr:Barbados~ is parent of itself).
+
+The result is as follows:
+#+BEGIN_EXAMPLE
+dbr:Africa
+dbr:Arabian_Peninsula
+dbr:Asia
+dbr:Australia_and_New_Zealand
+dbr:Caribbean
+dbr:Central_Asia
+dbr:Earth
+dbr:Eastern_Africa
+dbr:Eastern_Asia
+dbr:Eastern_Europe
+dbr:Europe
+dbr:European_Free_Trade_Association
+dbr:La_Habana_Province
+dbr:Maghreb
+dbr:Melanesia
+dbr:Micronesia
+dbr:Middle_Africa
+dbr:North_America
+dbr:Northern_Africa
+dbr:Northern_Europe
+dbr:Oceania
+dbr:Polynesia
+dbr:South_Eastern_Asia
+dbr:Southern_Africa
+dbr:Southern_Asia
+dbr:Southern_Europe
+dbr:W_National_Park
+dbr:Western_Africa
+dbr:Western_Europe
+#+END_EXAMPLE
+- Mahgreb is a region of Northwest Africa that includes: Algeria, Morocco, Tunisia
+- W_National_Park is a major trans-national park in West Africa that includes areas of: Niger, Benin, Burkina Faso
+- La_Habana_Province is a mistake in Geonames: the small village America in that province
+  is made parent of South_America and North_America: we've replaced it with ~dbr:Americas~
+
+** Geonames Data
+We use the following query [[./geonames-top-level.rq]] to extract places at the level of country or above,
+and the following attributes (~geonames-top-level.ttl~):
+- URL in the dbr: namespace, eg dbr:Europe
+- gn:name: official name
+- dbo:abstract: description
+- gn:featureCode: place type(s), eg A.PCLI (independent country), L.CONT (continent), L.RGN (region)
+- gn:parentFeature: ancestor places
+- wgs:lat, wgs:long: geographic coordinates
+#+BEGIN_SRC sparql
+TODO geonames-top-level.rq
+#+END_SRC
+
+** Linking to Source
+We make links back to the source (https://offshoreleaks.icij.org) 
+in order to give credit where credit is due, 
+and to allow easy inspection of the ICIJ interactive graphs ([[./seeAlso.ru]]):
+#+BEGIN_SRC sparql
+insert {
+  graph leaks:seeAlso {
+    ?node rdfs:seeAlso ?icij_org
+  }
+} where {
+  ?node leak:node_id ?node_id
+  bind(iri(concat("https://offshoreleaks.icij.org/nodes/",?node_id)) as ?icij_org)
+}
+#+END_SRC
+
+** Day2 Recap
+Brushed Onto the sweat from its weary brow, and looketh at the fruit of its day's work:
+- Relations between Nodes made
+- Relations of entities grouped in an interpretive hierarchy
+- Links back to the source (https://offshoreleaks.icij.org) added
+- Hierarchy above countries obtained from Geonames
+
+A Leaks dataset is borne.
+Go forth and queriest! 
+Whence did money came from, and whither did it flow?
+
+And there was evening, and there was morning--the second day.
+
+* TODO Further Ideas
+This is a parking place for stuff to do in the future:
+- Network analysis
+- leak:Officer including the word "BEARER" (and variations) should be marked specially as "bearer shares".
+  These are essentially anonymous shareholders or beneficiaries, often used for money laundering.
+  Most countries have banned registration of Entities with bearer shares
+- Addresses: there are literals ~Entity.address~ and ~Intermediary.address~,
+  and also link ~hasRegisteredAddress~ to the separate class ~Address~, which has literal ~Address.address~.
+  What nodes have ~hasRegisteredAddress~? What is the relation between these
+- Look for Entities in the FIBO LEI database?
+
+You can also suggest what we should do: [[https://github.com/Ontotext-AD/leaks/issues][hither on Github]] or [[https://gitter.im/Ontotext-AD/leaks][thither on Gitter]]
