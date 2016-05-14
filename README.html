@@ -198,6 +198,10 @@ Day 1: <span class="timestamp-wrapper"><span class="timestamp">&lt;2016-05-12 Th
 </li>
 <li>Source repository: <a href="https://github.com/Ontotext-AD/leaks/">https://github.com/Ontotext-AD/leaks/</a>
 </li>
+<li>SPARQL endpoint: <a href="http://data.ontotext.com/resource/leaks">http://data.ontotext.com/resource/leaks</a>
+</li>
+<li>RDF download: <a href="ftp://ftp.ontotext.com/pub/leaks/rdf/">ftp://ftp.ontotext.com/pub/leaks/rdf/</a>
+</li>
 <li>Post an issue on Github: <a href="https://github.com/Ontotext-AD/leaks/issues">https://github.com/Ontotext-AD/leaks/issues</a>
 </li>
 <li>Chat to us on Gitter: <a href="https://gitter.im/Ontotext-AD/leaks">https://gitter.im/Ontotext-AD/leaks</a>
@@ -1833,7 +1837,7 @@ and to allow easy inspection of the ICIJ interactive graphs (<a href="./seeAlso.
 <div class="org-src-container">
 
 <pre class="src src-sparql"><span style="color: #a020f0;">insert</span> {
-  <span style="color: #a020f0;">graph</span>:seeAlso {
+  <span style="color: #a020f0;">graph</span> leaks:seeAlso {
     <span style="color: #a0522d;">?node</span> rdfs:seeAlso <span style="color: #a0522d;">?icij_org</span>
   }
 } <span style="color: #a020f0;">where</span> {
