@@ -48,7 +48,7 @@ leak:Officer a owl:Class;
   rdfs:comment "Agent (person, group of people, company) that serves as company officer and/or beneficiary, either formal and real".
 
 leak:Edge a owl:Class;
-  rdfs:subClassOf owl:Class;  
+#  rdfs:subClassOf owl:Class;  
   rdfs:isDefinedBy leak:;
   rdfs:label "Edge";
   rdfs:comment "Relation between two Nodes. Since node_id is unique across node types, there's no need to mention the entity types".
