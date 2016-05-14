@@ -20,7 +20,7 @@ Day 1: <2016-05-12 Thu>
 - Post an issue on Github: https://github.com/Ontotext-AD/leaks/issues
 - Chat to us on Gitter: https://gitter.im/Ontotext-AD/leaks
 - Ontology: https://raw.githubusercontent.com/Ontotext-AD/leaks/master/leak-ontology.ttl
-- Ontology documentation: [[http://ontorule-project.eu/parrot/parrot?documentUri%3Dhttps://raw.githubusercontent.com/Ontotext-AD/leaks/master/leak-ontology.rdf&mimetype%3Dapplication/rdf%2Bxml&profile%3Dtechnical&language%3Den&customizeCssUrl][Parrot Report]]
+- Ontology documentation: [[http://ontorule-project.eu/parrot/parrot?documentUri%3Dhttps://raw.githubusercontent.com/Ontotext-AD/leaks/master/leak-ontology.rdf&mimetype%3Dapplication/rdf%252bxml&profile%3Dtechnical&language%3Den&customizeCssUrl][Parrot Report]]
 - Data model: sec [[*Data Model]]
 
 ** Offshore Links
