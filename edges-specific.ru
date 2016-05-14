@@ -1,5 +1,7 @@
-construct {
-  ?src ?rel ?trg
+insert {
+  graph leaks:specific-relations {
+    ?src ?rel ?trg
+  }
 } where {
   values (?rel_type ?rel) {
     ("Alternate Director of"                                leak:isAlternateDirectorOf)                      #      409
@@ -89,5 +91,5 @@ construct {
   }
   ?edge leak:hasSource ?src;
         leak:hasTarget ?trg;
-        leak:rel_type  ?rel_type
+        leak:rel_type  ?rel_type .
 }
