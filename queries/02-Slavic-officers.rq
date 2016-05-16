@@ -1,0 +1,4 @@
+select * {
+  ?s a leak:Officer; leak:name ?name
+  filter(regex(?name,"(v|va|ff)$"))        
+} limit 100

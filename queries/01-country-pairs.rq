@@ -1,0 +1,7 @@
+select ?owner_country ?entity_country (count(*) as ?count) from onto:disable-sameAs {
+     ?owner leak:OWNER ?entity .
+     ?owner leak:hasCountry ?owner_country .
+     ?entity leak:hasCountry ?entity_country .
+}
+group by ?owner_country ?entity_country
+order by desc(?count)
