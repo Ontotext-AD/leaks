@@ -1,4 +1,4 @@
-@prefix leak:  <http://data.ontotext.com/resource/leaks#>.  # ontology
+@prefix leak:    <http://data.ontotext.com/resource/leak/>.   # ontology
 @prefix leaks: <http://data.ontotext.com/resource/leaks/> . # data
 @prefix dbr:   <http://dbpedia.org/resource/>.
 @prefix owl:   <http://www.w3.org/2002/07/owl#>. 
